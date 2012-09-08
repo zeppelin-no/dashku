@@ -11,6 +11,12 @@ Enjoy.
 
 Anephenix, 7th September 2012
 
+Site & Demo
+---
+
+[Site](http:/dashku.com)
+[YouTube video](http://youtu.be/cxf8f9AQBgM)
+
 Dependencies
 ---
 
