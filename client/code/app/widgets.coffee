@@ -164,7 +164,7 @@ ss.event.on 'widgetPositionsUpdated', (data, channelName) ->
   for widget in dashboard.widgets
     widget.position = data.positions[widget._id]
 
-  if dashboard.selected._id is data._id
+  if Dashboard.selected._id is data._id
     for widget in Widget.all
       # A sneaky way of updating the items in the collection without triggering a reload
       # TODO - find a better way
