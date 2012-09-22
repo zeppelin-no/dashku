@@ -48,11 +48,11 @@ test = (callback) ->
   Mocha = new mocha
   for file in files
     Mocha.addFile "test/#{file.replace('.coffee','_test.coffee')}"
-  Mocha.run()
-  callback() if callback?
+  Mocha.run ->
+    callback() if callback?
 
 task 'test', 'run unit tests for the project', ->
-  test()
+  test process.exit
 
 task 'regenerateApiKeyDb', 'Compiles the SocketStream assets, and copies them to a fixed path', ->
   regenerateApiKeyDb()
