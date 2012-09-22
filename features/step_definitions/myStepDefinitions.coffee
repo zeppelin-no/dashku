@@ -406,3 +406,38 @@ module.exports = ->
 
   @Given /^the widget on the page should contain "([^"]*)" in its html$/, (content, callback) ->
     wrap @browser.chain.assertElementPresent("//div[@id=\"message\" and contains(text(),'#{content}')]"), callback
+
+  @Given /^I type some special javascript into the editor$/, (callback) ->
+    specialJavascript = "
+\n(function () {
+\n  var widget = this.widget
+\n    , data = [1,2,3]
+\n    , self = this
+\n
+\n  self.on('load', function () {
+\n    head.js('javascripts/d3.v2.min.js')
+\n    head.ready(function () {
+\n
+\n      widget.html('let the games begin')
+\n
+\n      self.on('transmission', function (newData) {
+\n        data.shift()
+\n        data.push(newData.data)
+\n        update()
+\n      })
+\n
+\n      function update () {
+\n        widget.html(data.toString())
+\n      }
+\n    })
+\n
+\n  })
+\n}.call(this))"
+    wrap @browser.chain.focus("//textarea").type("//textarea",specialJavascript), callback
+
+  @Given /^I type some special json into the editor$/, (callback) ->
+    json  = "{\"data\":\"4\"}"
+    wrap @browser.chain.focus("//textarea").type("//textarea",json), callback
+
+  @Given /^the special widget on the page should contain "([^"]*)" in its html$/, (content, callback) ->
+    wrap @browser.chain.assertElementPresent("//div[@class=\"content\" and contains(text(),'#{content}')]"), callback

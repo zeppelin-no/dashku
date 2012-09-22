@@ -87,6 +87,7 @@ Feature: Widgets
     And I fill in "password" with "123456"
     And I press "Login"
     And I wait for a few seconds
+    And I wait for a few seconds
     And I click on the "edit widget" button
     And the "edit widget" modal should appear
     And I click on the "html" tab
@@ -107,6 +108,7 @@ Feature: Widgets
     And I fill in "identifier" with "paulbjensen@gmail.com"
     And I fill in "password" with "123456"
     And I press "Login"
+    And I wait for a few seconds
     And I wait for a few seconds
     And I click on the "edit widget" button
     And the "edit widget" modal should appear
@@ -129,6 +131,7 @@ Feature: Widgets
     And I fill in "password" with "123456"
     And I press "Login"
     And I wait for a few seconds
+    And I wait for a few seconds
     And I click on the "edit widget" button
     And the "edit widget" modal should appear
     And I click on the "script" tab
@@ -149,6 +152,7 @@ Feature: Widgets
     And I fill in "identifier" with "paulbjensen@gmail.com"
     And I fill in "password" with "123456"
     And I press "Login"
+    And I wait for a few seconds
     And I wait for a few seconds
     And I click on the "edit widget" button
     And the "edit widget" modal should appear
@@ -179,6 +183,7 @@ Feature: Widgets
     Then widget with name "Widget 1" should have a position of "1"
     And widget with name "Widget 2" should have a position of "0"
 
+  @wip
   Scenario: Switch between JavaScript and CoffeeScript
     Given a user exists with username "paulbjensen" and email "paulbjensen@gmail.com" and password "123456"
     And a dashboard exists with name "Your Dashboard" for user "paulbjensen"
@@ -190,6 +195,7 @@ Feature: Widgets
     And I fill in "password" with "123456"
     And I press "Login"
     And I wait for a few seconds
+    And I wait for a few seconds
     And I click on the "edit widget" button
     And the "edit widget" modal should appear
     And I click on the "script" tab
@@ -199,6 +205,7 @@ Feature: Widgets
     And I type in some coffeescript for the widget
     And I wait for a few seconds    
     And I click on the "close editor" button
+    And I wait for a few seconds    
     And I wait for a few seconds    
     And The widget for dashboard "Your Dashboard" should have the script type set to "coffeescript"
     And The widget for dashboard "Your Dashboard" should have the coffeescript as its script
@@ -235,3 +242,40 @@ Feature: Widgets
     And I wait for a few seconds
     And I wait for a few seconds
     And the widget on the page should contain "2" in its html
+
+  Scenario: Try out the Widget's load and transmit feature, with JS state persistence.
+    Given a user exists with username "paulbjensen" and email "paulbjensen@gmail.com" and password "123456"
+    And a dashboard exists with name "Your Dashboard" for user "paulbjensen"
+    And a widget exists with name "Widget 1" for dashboard "Your Dashboard"
+    And I am on the homepage
+    And I follow "Login"
+    And the "login" modal should appear
+    And I fill in "identifier" with "paulbjensen@gmail.com"
+    And I fill in "password" with "123456"
+    And I press "Login"
+    And I wait for a few seconds
+    And I click on the "edit widget" button
+    And the "edit widget" modal should appear
+    And I click on the "json" tab
+    And I wait for a few seconds
+    And I clear the editor
+    And I wait for a few seconds
+    And I type some special json into the editor
+    And I wait for a few seconds
+    And I click on the "script" tab
+    And I clear the editor
+    And I type some special javascript into the editor
+    And I wait for a few seconds    
+    And I wait for a few seconds
+    And I click on the "test load" button
+    And I wait for a few seconds
+    And I wait for a few seconds
+    And the special widget on the page should contain "let the games begin" in its html
+    And I click on the "test transmission" button
+    And I wait for a few seconds
+    And I wait for a few seconds
+    And the special widget on the page should contain "2,3,4" in its html
+    And I click on the "test transmission" button
+    And I wait for a few seconds
+    And I wait for a few seconds
+    And the special widget on the page should contain "3,4,4" in its html

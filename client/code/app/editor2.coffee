@@ -52,12 +52,13 @@ module.exports =
     @element().find('#load').on 'click', =>
       @liveUpdate 'html', @store.html
       @liveUpdate 'css', @store.css      
-      ee = new EE code: @store.script, id: @widget._id, scriptType: @store.scriptType
+      @ee = new EE code: @store.script, id: @widget._id, scriptType: @store.scriptType
   
     # bind the transmit click event
     @element().find('#transmit').on 'click', =>
-      ee = new EE code: @store.script, id: @widget._id, scriptType: @store.scriptType, loadData: {}, dontEmit: true  
-      ee.emit 'transmission', JSON.parse @store.json
+      if !@ee?
+        @ee = new EE code: @store.script, id: @widget._id, scriptType: @store.scriptType, loadData: {}
+      @ee.emit 'transmission', JSON.parse @store.json
 
     @element().find('#download').on 'click', =>      
       @exit =>
@@ -126,6 +127,7 @@ module.exports =
 
   # removes the editor from the DOM, and saves any changes
   exit: (cb) ->
+    delete @ee
     @identifyChanges (changes) =>
       if _.isEmpty changes
         @wrapItUp(cb)
