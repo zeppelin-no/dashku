@@ -206,13 +206,22 @@ describe "Authentication", ->
 
     describe "if the token is valid", ->
 
-      it "should return a success status"
+      it "should return a success status", (done) ->
+        newToken = uuid.v4()
+        User.findOne {username: "paul"}, (err, user) ->
+          user.changePasswordToken = newToken
+          user.save (err) ->
+            ass.rpc "authentication.loadChangePassword", newToken, (res) ->
+              assert.equal res[0].status, "success"
+              done()
 
     describe "if the token is not valid", ->
 
-      it "should return a failure status"
-
-      it "should explain what went wrong"
+      it "should return a failure status and explain what went wrong", (done) ->
+        ass.rpc "authentication.loadChangePassword", "waa", (res) ->
+          assert.equal res[0].status, "failure"
+          assert.equal res[0].reason, "No user found with that token"
+          done()
 
   describe "#changePassword", ->
 
