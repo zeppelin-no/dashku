@@ -54,7 +54,7 @@ describe "Dashboard", ->
 
     describe "if dashboard is not found", ->
 
-      it "should return a failure status", (done) ->
+      it "should return a failure status and explain what went wrong", (done) ->
         ass.rpc "dashboard.externalGet", "00001", (res) ->
           assert.equal res[0].status, "failure"
           assert.equal res[0].reason, "Dashboard not found"
@@ -80,11 +80,16 @@ describe "Dashboard", ->
 
     describe "if successful", ->
 
-      it "should delete the dashboard"
+      it "should delete the dashboard, and return a success status along with the deleted dashboard's id", (done) ->
+        Dashboard.findOne {}, (err, dashboard) ->
+          ass.rpc "dashboard.delete", dashboard._id, (res) ->
+            assert.equal res[0].status, "success"
+            assert.equal res[0].dashboardId, dashboard._id.toString()
+            Dashboard.findOne {_id: dashboard._id}, (err, dashboardReloaded) ->
+              assert.equal dashboardReloaded, null
+              done()
 
       it "should emit a dashboardDeleted event to the user's channel, with the id of the deleted dashboard"
-
-      it "should return a success status"
 
     describe "if not successful", ->
 
