@@ -91,11 +91,24 @@ describe "Dashboard", ->
 
       it "should emit a dashboardDeleted event to the user's channel, with the id of the deleted dashboard"
 
-    describe "if not successful", ->
 
-      it "should return a failure status"
+    describe "if not successful because only one dashboard remains", ->
 
-      it "should explain what went wrong"
+      it "should return a failure status and explain what went wrong", (done) ->
+        Dashboard.findOne {}, (err, dashboard) ->
+          ass.rpc "dashboard.delete", dashboard._id, (res) ->
+            assert.equal res[0].status, "failure"
+            assert.equal res[0].reason, "You can't delete your last dashboard"
+            done()
+
+    describe "if not successful because dashboard id does not exist", ->
+
+      it "should return a failure status and explain what went wrong", (done) ->
+        ass.rpc "dashboard.create", {name: "YA Dashboard"}, (err, dashboard) ->
+          ass.rpc "dashboard.delete", "00001", (res) ->
+            assert.equal res[0].status, "failure"
+            assert.equal res[0].reason, "Dashboard not found"
+            done()
 
   describe "#updateWidgetPositions", ->
 
