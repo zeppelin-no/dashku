@@ -40,10 +40,11 @@ populateWidgetTemplates = ->
 
 # TODO - figure out a way to automate this
 files = [
-  "server/models/user.coffee",
+  "server/models/user.coffee"
   "server/rpc/authentication.coffee"
   "server/rpc/dashboard.coffee"
   "server/rpc/general.coffee"
+  "server/rpc/widget.coffee"
 ]
 
 test = (callback) ->
