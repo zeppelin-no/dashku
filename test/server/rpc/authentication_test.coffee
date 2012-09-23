@@ -289,6 +289,14 @@ describe "Authentication", ->
 
     describe "if an email address is not provided", ->
 
-      it "should return a failure status"
+      it "should return a failure status", (done) ->
+        ass.rpc "authentication.login", {identifier: "paulbjensen@gmail.com", password: "123456"}, (res) ->
+          assert.equal res[0].status, "success"
+          ass.rpc "authentication.changeEmail", {}, (res) ->
+            assert.equal res[0].status, "failure"
+            done()
 
       it "should explain what went wrong"
+      # Turns out the reason is an object rather than a string. Will need to review what is
+      # best to do here.
+      # TODO - review best way to handle error reporting on responses.
