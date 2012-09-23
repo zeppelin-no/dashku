@@ -45,6 +45,7 @@ files = [
   "server/rpc/dashboard.coffee"
   "server/rpc/general.coffee"
   "server/rpc/widget.coffee"
+  "server/rpc/widgetTemplate.coffee"
 ]
 
 test = (callback) ->
