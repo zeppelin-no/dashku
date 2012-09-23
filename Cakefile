@@ -7,6 +7,7 @@ loadDependencies = ->
   global.config             = require "#{__dirname}/server/config"
   db                        = require "#{__dirname}/server/db"
   global.fs                 = require 'fs'
+  global.ass                = ss.start()
 
 # If you move to a new Redis DB, you may want to run this function
 # to regenerate the API Key database
@@ -37,13 +38,16 @@ populateWidgetTemplates = ->
       console.log "There was an error clearing the WidgetTemplates collection"
       process.exit 1
 
+# TODO - figure out a way to automate this
 files = [
-  "server/models/user.coffee"
+  "server/models/user.coffee",
+  "server/rpc/authentication.coffee"
 ]
 
 test = (callback) ->
   mocha                 = require 'mocha'
   process.env["SS_ENV"] = "test"
+  loadDependencies()
   app                   = require './app.coffee'
   Mocha = new mocha
   for file in files

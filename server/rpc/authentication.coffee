@@ -31,7 +31,7 @@ exports.actions = (req, res, ss) ->
       user = new User username: data.username, email: data.email, password: data.password
       user.save (err,doc) -> 
         if !err
-          Redis.hset "apiKeys", doc.apiKey, doc._id, redis.print
+          Redis.hset "apiKeys", doc.apiKey, doc._id
           user = _id: doc._id, username: doc.username, email: doc.email
           req.session.userId = doc._id
           req.session.save (err) -> 

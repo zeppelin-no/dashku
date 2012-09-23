@@ -18,8 +18,8 @@ hashPassword = (password, cb) ->
 # figure out a better way.
 #
 global.Users = new Schema
-  username            : type: String, set: toLower
-  email               : type: String, set: toLower
+  username            : type: String, set: toLower, required: true, index: {unique: true}
+  email               : type: String, set: toLower, required: true, index: {unique: true}
   password            : String                          
   passwordHash        : String
   passwordSalt        : String
@@ -31,11 +31,14 @@ global.Users = new Schema
 # Clean the password attribute
 Users.pre 'save', (next) ->
   if @isNew
-    hashPassword @password, (hashedPassword) =>
-      @passwordHash = hashedPassword.hash
-      @passwordSalt = hashedPassword.salt
-      @password     = undefined
-      next()
+    if @password is undefined
+      next new Error "Password field is missing"
+    else
+      hashPassword @password, (hashedPassword) =>
+        @passwordHash = hashedPassword.hash
+        @passwordSalt = hashedPassword.salt
+        @password     = undefined
+        next()
   else
     next()
 
