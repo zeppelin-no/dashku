@@ -64,17 +64,24 @@ describe "Dashboard", ->
 
     describe "if successful", ->
 
-      it "should update the dashboard"
+      it "should update the dashboard", (done) ->
+        Dashboard.findOne {}, (err, dashboard) ->
+          ass.rpc "dashboard.update", {_id: dashboard._id, name: "CheeseWin"}, (res) ->
+            assert.equal res[0].status, "success"
+            assert.equal res[0].dashboard.name, "CheeseWin"
+            Dashboard.findOne {_id: dashboard._id}, (err, dashboardReloaded) ->
+              assert.equal dashboardReloaded.name, "CheeseWin"
+              done()
 
       it "should emit a dashboardUpdated event to the user's channel, with the updated dashboard"
 
-      it "should return a success status, and the updated dashboard"
+    describe "if not successful, because the dashboard id does not exist", ->
 
-    describe "if not successful", ->
-
-      it "should return a failure status"
-
-      it "should explain what went wrong"
+      it "should return a failure status and explain what went wrong", (done) ->
+        ass.rpc "dashboard.update", {_id: "000111", name: "Bonobo"}, (res) ->
+          assert.equal res[0].status, "failure"
+          assert.equal res[0].reason, "Dashboard not found"          
+          done()
 
   describe "#delete", ->
 
