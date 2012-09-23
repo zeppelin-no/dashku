@@ -134,17 +134,20 @@ exports.actions = (req, res, ss) ->
   changePassword: (data) ->
     User.findOne {changePasswordToken: data.token}, (err, user) ->
       if !err and user?
-        hashPassword data.password, (hashedPassword) ->
-          user.passwordHash = hashedPassword.hash
-          user.passwordSalt = hashedPassword.salt
-          user.changePasswordToken = uuid.v4()
-          user.save (err) ->
-            if !err
-              res status: 'success'
-            else
-              res status: 'failure', reason: err
+        if data.password is "" or data.password is undefined
+          res status: 'failure', reason: "new password was not supplied"
+        else
+          hashPassword data.password, (hashedPassword) ->
+            user.passwordHash = hashedPassword.hash
+            user.passwordSalt = hashedPassword.salt
+            user.changePasswordToken = uuid.v4()
+            user.save (err) ->
+              if !err
+                res status: 'success'
+              else
+                res status: 'failure', reason: err
       else
-        res status: 'failure', reason: err
+        res status: 'failure', reason: err || "No user found with that token"
 
   # Changes the user's password, from the account page
   changeAccountPassword: (data) ->

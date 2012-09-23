@@ -229,23 +229,38 @@ describe "Authentication", ->
 
       describe "if a password is provided", ->
 
-        it "should change the user's password to the password provided"
-
-        it "should set the change password token to another random value"
-
-        it "should return a success status"
+        it "should change the user's password to the password provided, change the token, and return a success status", (done) ->
+          newToken = uuid.v4()
+          User.findOne {username: "paul"}, (err, user) ->
+            user.changePasswordToken = newToken
+            user.save (err) ->
+              ass.rpc "authentication.changePassword", {token: newToken, password: "poiuyt"}, (res) ->
+                assert.equal res[0].status, "success"
+                ass.rpc "authentication.login", {identifier: "paul", password: "poiuyt"}, (res) ->
+                  assert.equal res[0].status, "success"
+                  User.findOne {username: "paul"}, (err, user) ->
+                    assert.notEqual user.changePasswordToken, newToken
+                    done() 
 
       describe "if a password is not provided", ->
 
-        it "should return a failure status"
-
-        it "should explain what went wrong"
+        it "should return a failure status and explain what went wrong", (done) ->
+          newToken = uuid.v4()
+          User.findOne {username: "paul"}, (err, user) ->
+            user.changePasswordToken = newToken
+            user.save (err) ->
+              ass.rpc "authentication.changePassword", {token: newToken}, (res) ->
+                assert.equal res[0].status, "failure"
+                assert.equal res[0].reason, "new password was not supplied"
+                done()
 
     describe " if the user's token is not valid", ->
 
-      it "should return a failure status"
-
-      it "should explain what went wrong"
+      it "should return a failure status and explain what went wrong", (done) ->
+        ass.rpc "authentication.changePassword", {token: "waa"}, (res) ->
+          assert.equal res[0].status, "failure"
+          assert.equal res[0].reason, "No user found with that token"
+          done()
 
   describe "#changeAccountPassword", ->
 
@@ -255,7 +270,7 @@ describe "Authentication", ->
 
         it "should change the user's password to the password provided", (done) ->
           # We're already logged in as username: paul
-          ass.rpc "authentication.changeAccountPassword", {currentPassword: "123456", newPassword: "qwerty"}, (res) ->
+          ass.rpc "authentication.changeAccountPassword", {currentPassword: "poiuyt", newPassword: "qwerty"}, (res) ->
             assert.equal res[0].status, "success"
             ass.rpc "authentication.login", {identifier: "paul", password: "qwerty"}, (res) ->
               assert.equal res[0].status, "success"
