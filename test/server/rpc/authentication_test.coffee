@@ -105,7 +105,15 @@ describe "Authentication", ->
 
   describe "#signedIn", ->
 
-    it "should return the currently signed-in user"
+    it "should return the currently signed-in user", (done) ->
+      User.findOne {username: "paul"}, (err, user) ->
+        ass.rpc "authentication.login", {identifier: "paul", password: "123456"}, (res) ->
+          assert.equal res[0].user.username, user.username
+          assert.equal res[0].user.email, user.email
+          assert.equal res[0].user._id, user._id.toString()
+          done()
+
+    it "should subscribe the user to their own private channel"
 
   describe "#login", ->
 
