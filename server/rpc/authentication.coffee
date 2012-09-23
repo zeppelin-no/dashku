@@ -151,14 +151,17 @@ exports.actions = (req, res, ss) ->
     fetchUserFromSession req, res, (user) ->
       bcrypt.compare data.currentPassword, user.passwordHash, (err, authenticated) ->
         if authenticated
-          hashPassword data.newPassword, (hashedPassword) ->
-            user.passwordHash = hashedPassword.hash
-            user.passwordSalt = hashedPassword.salt
-            user.save (err) ->
-              if !err
-                res status: 'success'
-              else
-                res status: 'failure', reason: err
+          if data.newPassword is "" or data.newPassword is undefined
+            res status: 'failure', reason: "new password was not supplied"
+          else
+            hashPassword data.newPassword, (hashedPassword) ->
+              user.passwordHash = hashedPassword.hash
+              user.passwordSalt = hashedPassword.salt
+              user.save (err) ->
+                if !err
+                  res status: 'success'
+                else
+                  res status: 'failure', reason: err
         else
           res status: 'failure', reason: "Current password supplied was invalid"
 

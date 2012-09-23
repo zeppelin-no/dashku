@@ -244,21 +244,29 @@ describe "Authentication", ->
 
       describe "if a new password is provided", ->
 
-        it "should change the user's password to the password provided"
-
-        it "should return a success status"
+        it "should change the user's password to the password provided", (done) ->
+          # We're already logged in as username: paul
+          ass.rpc "authentication.changeAccountPassword", {currentPassword: "123456", newPassword: "qwerty"}, (res) ->
+            assert.equal res[0].status, "success"
+            ass.rpc "authentication.login", {identifier: "paul", password: "qwerty"}, (res) ->
+              assert.equal res[0].status, "success"
+              done()
 
       describe "if a new password is not provided", ->
 
-        it "should return a failure status"
-
-        it "should explain what went wrong"
+        it "should return a failure status and explain what went wrong", (done) ->
+          ass.rpc "authentication.changeAccountPassword", {currentPassword: "qwerty"}, (res) ->
+            assert.equal res[0].status, "failure"
+            assert.equal res[0].reason, "new password was not supplied"
+            done()
 
     describe "if the user's password does not match", ->
 
-      it "should return a failure status"
-
-      it "should explain what went wrong"
+      it "should return a failure status and explain what went wrong", (done) ->
+        ass.rpc "authentication.changeAccountPassword", {currentPassword: "cheeseWin", newPassword: "qwerty"}, (res) ->
+          assert.equal res[0].status, "failure"
+          assert.equal res[0].reason, "Current password supplied was invalid"
+          done()
 
   describe "#changeEmail", ->
 
@@ -268,7 +276,7 @@ describe "Authentication", ->
 
         it "should change the user's email address, and return a success status", (done) ->
           User.findOne {username: "paul"}, (err, user) ->
-            ass.rpc "authentication.login", {identifier: "paul@anephenix.com", password: "123456"}, (res) ->
+            ass.rpc "authentication.login", {identifier: "paul@anephenix.com", password: "qwerty"}, (res) ->
               assert.equal res[0].status, "success"
               ass.rpc "authentication.changeEmail", {email: "paulbjensen@gmail.com"}, (res) ->
                 User.findOne {_id: user._id}, (err, userReloaded) ->
@@ -280,7 +288,7 @@ describe "Authentication", ->
 
         it "should return a failure status and explain what went wrong", (done) ->
           new User({username: "johny_bravo", email:"johny@bravo.com", password: "123456"}).save (err, dupUser) ->
-            ass.rpc "authentication.login", {identifier: "paulbjensen@gmail.com", password: "123456"}, (res) ->
+            ass.rpc "authentication.login", {identifier: "paulbjensen@gmail.com", password: "qwerty"}, (res) ->
               assert.equal res[0].status, "success"
               ass.rpc "authentication.changeEmail", {email: "johny@bravo.com"}, (res) ->
                 assert.equal res[0].status, "failure"
@@ -290,7 +298,7 @@ describe "Authentication", ->
     describe "if an email address is not provided", ->
 
       it "should return a failure status", (done) ->
-        ass.rpc "authentication.login", {identifier: "paulbjensen@gmail.com", password: "123456"}, (res) ->
+        ass.rpc "authentication.login", {identifier: "paulbjensen@gmail.com", password: "qwerty"}, (res) ->
           assert.equal res[0].status, "success"
           ass.rpc "authentication.changeEmail", {}, (res) ->
             assert.equal res[0].status, "failure"
