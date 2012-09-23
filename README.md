@@ -1,7 +1,7 @@
 Dashku
 ===
 
-![Dashku Screenshot](dashku-screenshot.png)
+![Dashku Screenshot](https://raw.github.com/Anephenix/dashku/master/dashku-screenshot.png)
 
 Introduction
 ---
