@@ -1,21 +1,12 @@
-Dashku - open source edition (beta)
+Dashku
 ===
 
-Welcome to the open source edition of Dashku.
+![Dashku Screenshot](dashku-screenshot.png)
 
-Dashku is a SocketStream application that let's you build real-time Dashboard and Widgets using HTML, CSS, and JavaScript.
-
-The application was a prototype, and was well-received. We would like to share it with everyone, so we've decided to make it open source.
-
-Enjoy.
-
-Anephenix, 7th September 2012
-
-Site & Demo
+Introduction
 ---
 
-[Site](http:/dashku.com)
-[YouTube video](http://youtu.be/cxf8f9AQBgM)
+Dashku is a web application for creating dashboards and widgets in HTML, CSS, and JavaScript. It is open source, and available to download from Github. There is also a [hosted edition at Dashku.com](https://dashku.com).
 
 Dependencies
 ---
@@ -31,29 +22,32 @@ Installation
     cd dashku
     npm install
 
-Usage
+Booting the application
 ---
 
     mongod &
     redis-server &
     coffee app.coffee
 
+Using Dashku to create dashboards and widgets
+---
+
+Documentation will be coming soon.
+
 Testing
 ---
 
-Dashku has some tests, but not enough. More will be added in the future.
-
-There are also a few unit tests run by Mocha
+To run unit and functional tests:
 
     cake test
 
-To run the integration test suite
+To run the integration tests:
 
     node_modules/.bin/cucumber.js
 
 License & Credits
 ---
 
-&copy;2012 Anephenix Ltd.
+&copy; 2012 Anephenix Ltd. The Nike swoosh is a registered trademark of Nike Inc.
 
 Dashku is licensed under the [MIT license](www.opensource.org/licenses/MIT)
