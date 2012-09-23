@@ -42,6 +42,7 @@ populateWidgetTemplates = ->
 files = [
   "server/models/user.coffee",
   "server/rpc/authentication.coffee"
+  "server/rpc/dashboard.coffee"
 ]
 
 test = (callback) ->
