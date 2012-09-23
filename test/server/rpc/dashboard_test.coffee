@@ -29,23 +29,36 @@ describe "Dashboard", ->
 
   describe "#getAll", ->
 
-    it "should return a success status & the user's dashboards"
-
-    it "should return the user's dashboards in alphabetical order"
+    it "should return a success status & the user's dashboards", (done) ->
+      ass.rpc "dashboard.getAll", (res) ->
+        assert.equal    res[0].status, "success"
+        assert.notEqual res[0].dashboards, undefined
+        assert.equal    res[0].dashboards[0].name, "Nice dashboard"
+        assert.equal    res[0].dashboards[res[0].dashboards.length-1].name, "Your Dashboard"
+        done()
 
   describe "#externalGet", ->
 
     describe "if dashboard is found", ->
 
       it "should subscribe the user to their own private channel"
+      # TODO - find a way to observe channel creation
 
-      it "should return a success status and the dashboard"
+      it "should return a success status and the dashboard", (done) ->
+        Dashboard.findOne {}, (err, dashboard) ->
+          ass.rpc "dashboard.externalGet", dashboard._id, (res) ->
+            assert.equal res[0].status, "success"
+            assert.equal res[0].dashboard.name, dashboard.name
+            assert.equal res[0].dashboard._id, dashboard._id.toString()             
+            done()        
 
     describe "if dashboard is not found", ->
 
-      it "should return a failure status"
-
-      it "should explain what went wrong"
+      it "should return a failure status", (done) ->
+        ass.rpc "dashboard.externalGet", "00001", (res) ->
+          assert.equal res[0].status, "failure"
+          assert.equal res[0].reason, "Dashboard not found"
+          done()
 
   describe "#update", ->
 
