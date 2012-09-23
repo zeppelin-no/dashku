@@ -1,20 +1,31 @@
+assert = require 'assert'
+
 describe "Dashboard", ->
 
   describe "#create", ->
 
     describe "if the name and userId is present", ->
 
-      it "should create the dashboard"
+      it "should create the dashboard, and return a success status along with the dashboard", (done) ->
+        # Assume that we are already logged in from authentication.coffee
+        ass.rpc "dashboard.create", {name: "Nice dashboard"}, (res) ->
+          assert.equal res[0].status, "success"
+          assert.equal res[0].dashboard.name, "Nice dashboard"
+          done()
 
       it "should emit a dashboardCreated event with the dashboard"
-
-      it "should return a success status, and the dashboard"
+      # TODO - find out how to listen on emitted events, I think
+      # there's a gist somewhere for this
 
     describe "if the name is not present", ->
 
-      it "should return a failure status"
+      it "should return a failure status", (done) ->
+        ass.rpc "dashboard.create", {}, (res) ->
+          assert.equal res[0].status, "failure"
+          done()
 
       it "should explain what went wrong"
+      # TODO - handle validation errors from object to string
 
   describe "#getAll", ->
 
