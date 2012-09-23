@@ -128,7 +128,7 @@ exports.actions = (req, res, ss) ->
       if !err and doc?
         res status: 'success', token: doc.changePasswordToken
       else
-        res status: 'failure', reason: err
+        res status: 'failure', reason: err || "No user found with that token"
 
   # Changes the user's password, as part of the forgotten password user flow
   changePassword: (data) ->
