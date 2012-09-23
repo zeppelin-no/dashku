@@ -43,6 +43,7 @@ files = [
   "server/models/user.coffee",
   "server/rpc/authentication.coffee"
   "server/rpc/dashboard.coffee"
+  "server/rpc/general.coffee"
 ]
 
 test = (callback) ->
