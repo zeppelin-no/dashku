@@ -40,4 +40,6 @@ exports.actions = (req, res, ss) ->
                 else
                   res status: 'failure', reason: err
         else
-          res status: 'failure', reason: err
+          reason = err.message if err?
+          reason = "Dashboard not found" if !dashboard?
+          res status: 'failure', reason: reason 

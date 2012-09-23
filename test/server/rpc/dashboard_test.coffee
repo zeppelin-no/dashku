@@ -121,16 +121,33 @@ describe "Dashboard", ->
 
     describe "if successful", ->
       
-      it "should set the widget's position to the new value"
-
-      it "should adjust the positions of the other widgets accordingly"
+      it "should set the widget's position to the new value", (done) ->
+        ass.rpc "dashboard.create", {name: "Sales Dashboard"}, (res) ->
+          dashboard = res[0].dashboard
+          ass.rpc "widget.create", {dashboardId: dashboard._id, name: "Widget 1"}, (res) ->
+            widget1 = res[0].widget
+            ass.rpc "widget.create", {dashboardId: dashboard._id, name: "Widget 2"}, (res) ->
+              widget2 = res[0].widget
+              ass.rpc "widget.create", {dashboardId: dashboard._id, name: "Widget 3"}, (res) ->
+                widget3 = res[0].widget
+                positions = {}
+                positions[widget1._id] = 1
+                positions[widget2._id] = 2
+                positions[widget3._id] = 0                
+                ass.rpc "dashboard.updateWidgetPositions", {_id: dashboard._id, positions: positions}, (res) ->
+                  assert.equal res[0].status, "success"
+                  Dashboard.findOne {_id: dashboard._id}, (err, dashboardReloaded) ->
+                    assert.equal dashboardReloaded.widgets[0].position, 1
+                    assert.equal dashboardReloaded.widgets[1].position, 2
+                    assert.equal dashboardReloaded.widgets[2].position, 0
+                    done()
 
       it "should emit a widgetPositionsUpdated event to the user's channel, with the positions data"
 
-      it "should return a success status"
+    describe "if not successful, because the dashboard does not exist", ->
 
-    describe "if not successful", ->
-
-      it "should return a failure status"
-
-      it "should explain what went wrong"
+      it "should return a failure status and explain what went wrong", (done) ->
+        ass.rpc "dashboard.updateWidgetPositions", {_id: "00001111", positions: {}}, (res) ->
+          assert.equal res[0].status, "failure"
+          assert.equal res[0].reason, "Dashboard not found"
+          done()
