@@ -2,6 +2,9 @@
 # ss when executing the authentication.logout
 # rpc call is a bug in your app, or in 
 # SocketStream
+#
+# Then go through all of the tests, and implement
+# logout as an after() cleanup where appropriate
 
 assert  = require "assert"
 
@@ -187,6 +190,7 @@ describe "Authentication", ->
     describe "if a user is found", ->
 
       it "should generate a change password token for the user"
+      # TODO - stub mail options in Dashku test mode
 
       it "should send an email to the user with a link to follow to change their password"
 
@@ -217,6 +221,8 @@ describe "Authentication", ->
       describe "if a password is provided", ->
 
         it "should change the user's password to the password provided"
+
+        it "should set the change password token to another random value"
 
         it "should return a success status"
 
@@ -260,15 +266,26 @@ describe "Authentication", ->
       
       describe "if the email address is unique", ->
 
-        it "should change the user's email address"
-
-        it "should return a success status"
+        it "should change the user's email address, and return a success status", (done) ->
+          User.findOne {username: "paul"}, (err, user) ->
+            ass.rpc "authentication.login", {identifier: "paul@anephenix.com", password: "123456"}, (res) ->
+              assert.equal res[0].status, "success"
+              ass.rpc "authentication.changeEmail", {email: "paulbjensen@gmail.com"}, (res) ->
+                User.findOne {_id: user._id}, (err, userReloaded) ->
+                  assert.equal res[0].status, "success"
+                  assert.equal userReloaded.email, "paulbjensen@gmail.com"
+                  done()
 
       describe "if the email address is not unique", ->
 
-        it "should return a failure status"
-
-        it "should explain what went wrong"
+        it "should return a failure status and explain what went wrong", (done) ->
+          new User({username: "johny_bravo", email:"johny@bravo.com", password: "123456"}).save (err, dupUser) ->
+            ass.rpc "authentication.login", {identifier: "paulbjensen@gmail.com", password: "123456"}, (res) ->
+              assert.equal res[0].status, "success"
+              ass.rpc "authentication.changeEmail", {email: "johny@bravo.com"}, (res) ->
+                assert.equal res[0].status, "failure"
+                assert.equal res[0].reason, "Someone already has that email address."
+                done()
 
     describe "if an email address is not provided", ->
 
