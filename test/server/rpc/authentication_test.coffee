@@ -136,19 +136,33 @@ describe "Authentication", ->
 
       it "should return the failure status, and explain what went wrong"
 
+  # The test here is causing ss to raise an error when clearing session channels.
   describe "#logout", ->
 
     it "should remove the userId attribute from the session"
 
     it "should clear all channels that the session was subscribed to"
 
-    it "should return a success status"
+    it "should return a success status"#, (done) ->
+    # ass.rpc "authentication.login", {identifier: "paul", password: "123456"}, (r) ->
+    #   assert.equal r[0].status, "success"
+    #   ass.rpc "authentication.logout", (res) ->
+    #     assert.equal res[0].status, "success"
+    #     done()
+    #   # TODO - figure out what should happen if you call the signedIn method 
+    #   # after you have signed out.
 
   describe "#isAttributeUnique", ->
 
-    it "should return true if the query finds a document that matches the criteria"
+    it "should return true if the query finds a document that matches the criteria", (done) ->
+      ass.rpc "authentication.isAttributeUnique", {username: "waa"}, (res) ->
+        assert.equal res[0], true
+        done()
 
-    it "should return false if the query does not find a document that matches the criteria"
+    it "should return false if the query does not find a document that matches the criteria", (done) ->
+      ass.rpc "authentication.isAttributeUnique", {username: "paul"}, (res) ->
+        assert.equal res[0], false
+        done()
 
   describe "#account", ->
 

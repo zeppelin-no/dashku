@@ -78,6 +78,10 @@ exports.actions = (req, res, ss) ->
     req.session.userId = null
     req.session.save (err) ->
       if !err 
+        # For some reason, one of the tests is causing
+        # this function to blow up
+        # see test/server/rpc/authentication_test.coffee
+        # and #logout section for more info
         req.session.channel.reset()
         res status: 'success'
       else
