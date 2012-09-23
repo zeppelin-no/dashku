@@ -107,11 +107,13 @@ describe "Authentication", ->
 
     it "should return the currently signed-in user", (done) ->
       User.findOne {username: "paul"}, (err, user) ->
-        ass.rpc "authentication.login", {identifier: "paul", password: "123456"}, (res) ->
-          assert.equal res[0].user.username, user.username
-          assert.equal res[0].user.email, user.email
-          assert.equal res[0].user._id, user._id.toString()
-          done()
+        ass.rpc "authentication.login", {identifier: "paul", password: "123456"}, (r) ->
+          ass.rpc "authentication.signedIn", {identifier: "paul", password: "123456"}, (res) ->
+            assert.equal res[0].user.username, user.username
+            assert.equal res[0].user.email, user.email
+            assert.equal res[0].user._id, user._id.toString()
+            assert.equal res[0].status, "success"
+            done()
 
     it "should subscribe the user to their own private channel"
 
@@ -119,7 +121,14 @@ describe "Authentication", ->
 
     describe "if successful", ->
 
-      it "should return a success status, and the user object"
+      it "should return a success status, and the user object", (done) ->
+        User.findOne {username: "paul"}, (err, user) ->
+          ass.rpc "authentication.login", {identifier: "paul", password: "123456"}, (res) ->
+            assert.equal res[0].status, "success"
+            assert.equal res[0].user.username, user.username
+            assert.equal res[0].user.email, user.email
+            assert.equal res[0].user._id, user._id.toString()
+            done()
 
       it "should subcribe the user to their private channel"
 
