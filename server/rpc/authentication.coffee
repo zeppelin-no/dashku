@@ -96,7 +96,7 @@ exports.actions = (req, res, ss) ->
     fetchUserFromSession req, res, (user) ->
       Redis.hget 'apiUsage', user.apiKey, (err, apiUsage) ->
         if !err
-          res status: 'success', user: _id: user._id, username: user.username, email: user.email, apiUsage: apiUsage || 0, demoUser: user.demoUser
+          res status: 'success', user: _id: user._id, username: user.username, email: user.email, apiUsage: apiUsage || 0
     
   # Generates an email and a forgotten password token, when the user has forgotten their password
   forgotPassword: (identifier) ->

@@ -1,3 +1,8 @@
+# TODO - find out whether the error relating to
+# ss when executing the authentication.logout
+# rpc call is a bug in your app, or in 
+# SocketStream
+
 assert  = require "assert"
 
 describe "Authentication", ->
@@ -166,7 +171,16 @@ describe "Authentication", ->
 
   describe "#account", ->
 
-    it "should return the user object based on the user's session"
+    it "should return the user object based on the user's session, including their api usage", (done) ->
+      User.findOne {username: "paul"}, (err, user) ->
+        ass.rpc "authentication.login", {identifier: "paul", password: "123456"}, (r) ->
+          ass.rpc "authentication.account", (res) ->
+            assert.equal res[0].user._id, user._id.toString()
+            assert.equal res[0].user.username, user.username
+            assert.equal res[0].user.email, user.email
+            assert.equal res[0].user.apiUsage, 0
+            assert.equal res[0].status, "success"
+            done()
 
   describe "#forgotPassword", ->
 
