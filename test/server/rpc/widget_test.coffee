@@ -1,10 +1,19 @@
+assert = require 'assert'
+
 describe "Widget", ->
   
   describe "#create", ->
 
     describe "if successful", ->
 
-      it "should create a widget in the dashboard"
+      it "should create a widget in the dashboard", (done) ->
+        Dashboard.findOne {}, (err, dashboard) ->
+          ass.rpc 'widget.create', {name: "Sales Widget", dashboardId: dashboard._id}, (res) ->
+            assert.equal res[0].status, "success"
+            assert.equal res[0].widget.name, "Sales Widget"
+            Dashboard.findOne {_id: dashboard._id}, (err, dashboardReloaded) ->
+              assert.equal dashboardReloaded.widgets[dashboardReloaded.widgets.length-1].name, "Sales Widget"
+              done()
 
       it "should scope the widget's css"
 
@@ -12,13 +21,13 @@ describe "Widget", ->
 
       it "should emit a widgetCreated event to the user's channel, with the dashboard id, and the widget"
 
-      it "should return a success status, and the widget"
-
     describe "if not successful", ->
 
-      it "should return a failure status"
-
-      it "should explain what went wrong"
+      it "should return a failure status and explain what went wrong", (done) ->
+        ass.rpc 'widget.create', {name: "Finance Widget", dashboardId: "231312312"}, (res) ->
+          assert.equal res[0].status, "failure"
+          assert.equal res[0].reason, "dashboard with id 231312312 not found"
+          done()
 
   describe "#update", ->
 
