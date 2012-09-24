@@ -15,9 +15,19 @@ describe "Widget", ->
               assert.equal dashboardReloaded.widgets[dashboardReloaded.widgets.length-1].name, "Sales Widget"
               done()
 
-      it "should scope the widget's css"
+      it "should scope the widget's css", (done) ->
+        Dashboard.findOne {}, (err, dashboard) ->
+          css = ".content { background: blue; }"
+          ass.rpc 'widget.create', {name: "Sales Widget", dashboardId: dashboard._id, css: css}, (res) ->
+            assert.equal res[0].status, "success"
+            assert.equal res[0].widget.scopedCSS, ".widget[data-id='" + res[0].widget._id + "'] .content { background: blue; }"
+            done()
 
       it "should append the widget id and the api key to the JSON"
+      # we want to save some example json, 
+      # and parse it to check it has the user's API key, 
+      # and the widget's id
+      #
 
       it "should emit a widgetCreated event to the user's channel, with the dashboard id, and the widget"
 

@@ -81,7 +81,10 @@ exports.actions = (req, res, ss) ->
         # For some reason, one of the tests is causing
         # this function to blow up
         # see test/server/rpc/authentication_test.coffee
-        # and #logout section for more info
+        # and #logout section for more info, also see:
+        #
+        # https://github.com/socketstream/socketstream/issues/299
+        #
         req.session.channel.reset()
         res status: 'success'
       else
