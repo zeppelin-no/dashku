@@ -23,11 +23,15 @@ describe "Widget", ->
             assert.equal res[0].widget.scopedCSS, ".widget[data-id='" + res[0].widget._id + "'] .content { background: blue; }"
             done()
 
-      it "should append the widget id and the api key to the JSON"
-      # we want to save some example json, 
-      # and parse it to check it has the user's API key, 
-      # and the widget's id
-      #
+      it "should append the widget id and the api key to the JSON", (done) ->
+        Dashboard.findOne {}, (err, dashboard) ->
+          json = JSON.stringify value: 76
+          ass.rpc 'widget.create', {name: "Sales Widget", dashboardId: dashboard._id, json: json}, (res) ->
+            assert.equal res[0].status, "success"
+            assert.equal JSON.parse(res[0].widget.json)._id, res[0].widget._id
+            User.findOne {_id: dashboard.userId}, (err, user) ->
+              assert.equal JSON.parse(res[0].widget.json).apiKey, user.apiKey
+              done()
 
       it "should emit a widgetCreated event to the user's channel, with the dashboard id, and the widget"
 
