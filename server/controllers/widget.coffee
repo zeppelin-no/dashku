@@ -76,7 +76,7 @@ module.exports =
             else
               cb status: 'failure', reason: err
         else
-          cb status: 'failure', reason: "Widget with id: #{data._id} not found"
+          cb status: 'failure', reason: "No widget found with id #{data._id}"
       else
         cb status: 'failure', reason: "No dashboard found with id #{data.dashboardId}"
 
