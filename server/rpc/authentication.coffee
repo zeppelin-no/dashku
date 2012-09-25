@@ -182,7 +182,7 @@ exports.actions = (req, res, ss) ->
               if !err
                 res status: 'success'
               else
-                res status: 'failure', reason: err
+                res status: 'failure', reason: err.message
           else
             res status: 'failure', reason: "Someone already has that email address."
         else

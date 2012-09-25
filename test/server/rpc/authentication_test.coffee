@@ -137,16 +137,29 @@ describe "Authentication", ->
 
       it "should subcribe the user to their private channel"
 
-    describe "if not successful", ->
+    describe "if not successful, because the password is not correct", ->
 
-      it "should return the failure status, and explain what went wrong"
+      it "should return the failure status, and explain what went wrong", (done) ->
+        ass.rpc "authentication.login", {identifier: "paul", password: "waaaaaaaa"}, (res) ->
+          assert.equal res[0].status, "failure"
+          assert.equal res[0].reason, "password incorrect"
+          done()
+
+    describe "if not successful, because the user doesn't exist", ->
+
+      it "should return the failure status, and explain what went wrong", (done) ->
+          ass.rpc "authentication.login", {identifier: "bambam", password: "waaaaaaaa"}, (res) ->
+            assert.equal res[0].status, "failure"
+            assert.equal res[0].reason, "the user bambam does not exist"
+            done()
+
 
   # The test here is causing ss to raise an error when clearing session channels.
   describe "#logout", ->
 
-    it "should remove the userId attribute from the session"
+    #it "should remove the userId attribute from the session"
 
-    it "should clear all channels that the session was subscribed to"
+    #it "should clear all channels that the session was subscribed to"
 
     # BUG - uncomment this section to replicate the bug
     #
@@ -320,14 +333,10 @@ describe "Authentication", ->
 
     describe "if an email address is not provided", ->
 
-      it "should return a failure status", (done) ->
+      it "should return a failure status and explain what went wrong", (done) ->
         ass.rpc "authentication.login", {identifier: "paulbjensen@gmail.com", password: "qwerty"}, (res) ->
           assert.equal res[0].status, "success"
           ass.rpc "authentication.changeEmail", {}, (res) ->
             assert.equal res[0].status, "failure"
+            assert.equal res[0].reason, "Validation failed"
             done()
-
-      it "should explain what went wrong"
-      # Turns out the reason is an object rather than a string. Will need to review what is
-      # best to do here.
-      # TODO - review best way to handle error reporting on responses.
