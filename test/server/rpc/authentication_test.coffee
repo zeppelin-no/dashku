@@ -1,9 +1,6 @@
-# TODO - find out whether the error relating to
-# ss when executing the authentication.logout
-# rpc call is a bug in your app, or in 
-# SocketStream
-#
-# Then go through all of the tests, and implement
+
+# TODO - once #299 on SocketStream is resolve,
+# go through all of the tests, and implement
 # logout as an after() cleanup where appropriate
 
 assert  = require "assert"
