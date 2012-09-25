@@ -1,5 +1,7 @@
 #### General RPC module ####
 
+# TODO - supply "success" and "failure" statuses
+
 md = require 'marked'
 fs = require 'fs'
 
@@ -16,8 +18,8 @@ exports.actions = (req, res, ss) ->
             data = data.replace /API_KEY/g , user.apiKey
             data = data.replace /DASHKU_API_URL/g , config[ss.env].apiHost
 
-            res content: md data
+            res status: "success", content: md data
         else
-          res content: md data
+          res status: "success", content: md data
       else
-        res content: "Error accessing document"
+        res status: "failure", content: "Document not found"
