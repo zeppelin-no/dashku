@@ -1,7 +1,5 @@
 #### General RPC module ####
 
-# TODO - supply "success" and "failure" statuses
-
 md = require 'marked'
 fs = require 'fs'
 
