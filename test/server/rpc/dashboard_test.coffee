@@ -19,13 +19,12 @@ describe "Dashboard", ->
 
     describe "if the name is not present", ->
 
-      it "should return a failure status", (done) ->
+      it "should return a failure status, and explain what went wrong", (done) ->
         ass.rpc "dashboard.create", {}, (res) ->
           assert.equal res[0].status, "failure"
+          assert.equal res[0].reason, "Validation failed"
           done()
 
-      it "should explain what went wrong"
-      # TODO - handle validation errors from object to string
 
   describe "#getAll", ->
 

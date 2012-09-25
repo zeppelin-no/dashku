@@ -9,7 +9,7 @@ module.exports =
         ss.api.publish.channel "user_#{data.userId}", 'dashboardCreated', doc
         cb status: 'success', dashboard: doc
       else
-        cb status: 'failure', reason: err
+        cb status: 'failure', reason: err.message
 
   getAll: (data, cb) ->
     Dashboard.find data, {}, {sort: {name: 1}}, (err, dashboards) ->
