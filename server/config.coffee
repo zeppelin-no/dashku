@@ -8,6 +8,13 @@ module.exports =
     apiUrl: 'http://localhost/api/transmission'
     apiHost: 'http://localhost/'
     forgottenPasswordUrl: 'http://localhost/?fptoken='
+    mail: 
+      type: "SMTP"
+      options:   
+        service: "Gmail"
+        auth:
+          user: "username"
+          pass: "password" 
   cucumber:
     port: 3001
     db: 'localhost/dashku_cucumber'
@@ -17,6 +24,8 @@ module.exports =
     apiUrl: 'http://localhost:3001/api/transmission'
     apiHost: 'http://localhost:3001/'
     forgottenPasswordUrl: 'http://localhost:3001/?fptoken='
+    mail:
+      type: "sendmail"
   test:
     port: 3002
     db: 'localhost/dashku_test'
@@ -26,3 +35,5 @@ module.exports =
     apiUrl: 'http://localhost:3002/api/transmission'
     apiHost: 'http://localhost:3002/'
     forgottenPasswordUrl: 'http://localhost:3002/?fptoken='
+    mail:
+      type: "sendmail"

@@ -18,8 +18,8 @@ hashPassword = (password, cb) ->
 # figure out a better way.
 #
 global.Users = new Schema
-  username            : type: String, set: toLower, required: true, index: {unique: true}
-  email               : type: String, set: toLower, required: true, index: {unique: true}
+  username            : type: String, set: toLower, required: true, unique: true, index: {dropDups: true}
+  email               : type: String, set: toLower, required: true, unique: true, index: {dropDups: true}
   password            : String                          
   passwordHash        : String
   passwordSalt        : String

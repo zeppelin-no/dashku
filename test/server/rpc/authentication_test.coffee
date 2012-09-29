@@ -1,5 +1,5 @@
 
-# TODO - once #299 on SocketStream is resolve,
+# TODO - once #299 on SocketStream is resolved,
 # go through all of the tests, and implement
 # logout as an after() cleanup where appropriate
 
@@ -201,18 +201,26 @@ describe "Authentication", ->
 
     describe "if a user is found", ->
 
-      it "should generate a change password token for the user"
-      # TODO - stub mail options in Dashku test mode
+      it "should generate a change password token for the user", (done) ->
+        identifier = "paul"
+        User.findOne {username: identifier}, (err, user) ->
+          assert.equal user.changePasswordToken, undefined
+          ass.rpc "authentication.forgotPassword", identifier, (res) ->
+            assert.equal res[0].status, "success"
+            User.findOne {username: identifier}, (err, userReloaded) ->
+              assert.notEqual userReloaded.changePasswordToken, undefined
+              done()
 
       it "should send an email to the user with a link to follow to change their password"
 
-      it "should return a success status"
-
     describe "if a user is not found", ->
 
-      it "should return a failure status"
-
-      it "should explain what went wrong"
+      it "should return a failure status and explain what went wrong", (done) ->
+        identifier = "theVanBowserBomb"
+        ass.rpc "authentication.forgotPassword", identifier, (res) ->
+          assert.equal res[0].status, "failure"
+          assert.equal res[0].reason, "User not found with identifier: #{identifier}"
+          done()
 
   describe "#loadChangePassword", ->
 

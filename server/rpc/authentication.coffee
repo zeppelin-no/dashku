@@ -117,7 +117,7 @@ exports.actions = (req, res, ss) ->
               subject: "Forgotten Password"
               text: forgottenPasswordEmailText link
               html: forgottenPasswordEmailHtml link 
-            smtpTransport.sendMail mailOptions, (error, response) -> {}
+            postman.sendMail mailOptions, (error, response) -> {}
           else
             res status: 'failure', reason: err
 
