@@ -25,7 +25,7 @@ module.exports =
     apiHost: 'http://localhost:3001/'
     forgottenPasswordUrl: 'http://localhost:3001/?fptoken='
     mail:
-      type: "sendmail"
+      type: "stub"
   test:
     port: 3002
     db: 'localhost/dashku_test'
@@ -36,4 +36,4 @@ module.exports =
     apiHost: 'http://localhost:3002/'
     forgottenPasswordUrl: 'http://localhost:3002/?fptoken='
     mail:
-      type: "sendmail"
+      type: "stub"

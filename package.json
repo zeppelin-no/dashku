@@ -27,6 +27,7 @@
     "selenium-launcher":"latest",
     "soda":"latest",
     "cucumber":"latest",
-    "mocha":"latest"
+    "mocha":"latest",
+    "gently":"latest"
   }
 }

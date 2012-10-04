@@ -4,6 +4,7 @@
 # logout as an after() cleanup where appropriate
 
 assert  = require "assert"
+Gently  = require "gently"
 
 describe "Authentication", ->
   
@@ -211,7 +212,19 @@ describe "Authentication", ->
               assert.notEqual userReloaded.changePasswordToken, undefined
               done()
 
-      it "should send an email to the user with a link to follow to change their password"
+      it "should send an email to the user with a link to follow to change their password", (done) ->
+        gently      = new Gently
+        identifier  = "paul"
+        gently.expect postman, 'sendMail', (sm) ->
+          fpToken = sm.text.split('fptoken=')[1].split(/\n/)[0]
+          assert.equal sm.from, "Dashku Admin <admin@dashku.com>"
+          assert.equal sm.to, "paul@anephenix.com"
+          assert.equal sm.subject, "Forgotten Password"
+          assert.equal sm.text, "Hi,\n\nWe got a notification that you\'ve forgotten your password. It\'s cool, we\'ll help you out. \n\nIf you wish to change your password, follow this link: #{config[ss.env].apiHost}?fptoken=#{fpToken}\n\nRegards,\n\n  Dashku Admin"
+          assert.equal sm.html, "<p>Hi,</p>\n<p>We got a notification that you\'ve forgotten your password. It\'s cool, we\'ll help you out.</p>\n<p>If you wish to change your password, follow this link: <a>#{config[ss.env].apiHost}?fptoken=#{fpToken}</a></p>\n<p>Regards,</p>\n<p>  Dashku Admin</p>"
+          done()
+        ass.rpc "authentication.forgotPassword", identifier, (res) ->
+
 
     describe "if a user is not found", ->
 
