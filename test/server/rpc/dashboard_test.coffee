@@ -1,4 +1,5 @@
 assert = require 'assert'
+Gently = require 'gently'
 
 describe "Dashboard", ->
 
@@ -13,9 +14,18 @@ describe "Dashboard", ->
           assert.equal res[0].dashboard.name, "Nice dashboard"
           done()
 
-      it "should emit a dashboardCreated event with the dashboard"
-      # TODO - find out how to listen on emitted events, I think
-      # there's a gist somewhere for this
+      it "should emit a dashboardCreated event with the dashboard", (done) ->
+        gently = new Gently
+        User.findOne {}, (err, user) ->
+          gently.expect ss.api.publish, 'channel', (channel, event, data) ->
+            assert.equal channel, "user_#{user._id}"
+            assert.equal event, "dashboardCreated"
+            assert.equal data.name, "Yet another dashboard"
+            done()
+          ass.rpc "dashboard.create", {name: "Yet another dashboard"}, (res) ->
+            assert.equal res[0].status, "success"
+            ass.rpc "dashboard.delete", res[0].dashboard._id, (res) ->
+
 
     describe "if the name is not present", ->
 
@@ -72,7 +82,17 @@ describe "Dashboard", ->
               assert.equal dashboardReloaded.name, "CheeseWin"
               done()
 
-      it "should emit a dashboardUpdated event to the user's channel, with the updated dashboard"
+      it "should emit a dashboardUpdated event to the user's channel, with the updated dashboard", (done) ->
+        gently = new Gently
+        User.findOne {}, (err, user) ->
+          Dashboard.findOne {}, (err, dashboard) ->
+            gently.expect ss.api.publish, 'channel', (channel, event, data) ->
+              assert.equal channel, "user_#{user._id}"
+              assert.equal event, "dashboardUpdated"
+              assert.equal data.name, "CheeseWin 2.0"
+              done()
+
+            ass.rpc "dashboard.update", {_id: dashboard._id, name: "CheeseWin 2.0"}, (res) ->
 
     describe "if not successful, because the dashboard id does not exist", ->
 
@@ -95,7 +115,16 @@ describe "Dashboard", ->
               assert.equal dashboardReloaded, null
               done()
 
-      it "should emit a dashboardDeleted event to the user's channel, with the id of the deleted dashboard"
+      it "should emit a dashboardDeleted event to the user's channel, with the id of the deleted dashboard", (done) ->
+        gently = new Gently
+        User.findOne {}, (err, user) ->
+          new Dashboard({userId: user._id, name: "Boom"}).save (err, dashboard) ->
+            gently.expect ss.api.publish, 'channel', (channel, event, data) ->
+              assert.equal channel, "user_#{user._id}"
+              assert.equal event, "dashboardDeleted"
+              assert.equal data, dashboard._id.toString()
+              done()
+            ass.rpc "dashboard.delete", dashboard._id, (res) ->
 
 
     describe "if not successful because only one dashboard remains", ->
@@ -141,7 +170,23 @@ describe "Dashboard", ->
                     assert.equal dashboardReloaded.widgets[2].position, 0
                     done()
 
-      it "should emit a widgetPositionsUpdated event to the user's channel, with the positions data"
+      it "should emit a widgetPositionsUpdated event to the user's channel, with the positions data", (done) ->
+        gently = new Gently
+        Dashboard.findOne {name: "Sales Dashboard"}, (err, dashboard) ->
+          positions = {}
+          positions[dashboard.widgets[0]._id] = 0
+          positions[dashboard.widgets[1]._id] = 1
+          positions[dashboard.widgets[2]._id] = 2
+          gently.expect ss.api.publish, 'channel', (channel, event, data) ->
+            assert.equal channel, "user_#{dashboard.userId}"
+            assert.equal event, "widgetPositionsUpdated"
+            assert.equal data._id, dashboard._id.toString()
+            assert.equal data.positions[dashboard.widgets[0]._id], 0
+            assert.equal data.positions[dashboard.widgets[1]._id], 1
+            assert.equal data.positions[dashboard.widgets[2]._id], 2
+            done()
+          ass.rpc "dashboard.updateWidgetPositions", {_id: dashboard._id, positions: positions}, (res) ->
+  
 
     describe "if not successful, because the dashboard does not exist", ->
 

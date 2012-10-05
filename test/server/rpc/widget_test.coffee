@@ -1,4 +1,5 @@
 assert = require 'assert'
+Gently = require 'gently'
 
 describe "Widget", ->
   
@@ -33,7 +34,16 @@ describe "Widget", ->
               assert.equal JSON.parse(res[0].widget.json).apiKey, user.apiKey
               done()
 
-      it "should emit a widgetCreated event to the user's channel, with the dashboard id, and the widget"
+      it "should emit a widgetCreated event to the user's channel, with the dashboard id, and the widget", (done) ->
+        gently = new Gently
+        json = JSON.stringify value: 76
+        Dashboard.findOne {}, (err, dashboard) ->
+          gently.expect ss.api.publish, 'channel', (channel, event, data) ->
+            assert.equal channel, "user_#{dashboard.userId}"
+            assert.equal event, "widgetCreated"
+            assert.equal data.widget.name, "Sales Widget"
+            done()          
+          ass.rpc 'widget.create', {name: "Sales Widget", dashboardId: dashboard._id, json: json}, (res) ->
 
     describe "if not successful", ->
 
@@ -81,7 +91,17 @@ describe "Widget", ->
             assert.equal res[0].widget.scopedCSS, ".widget[data-id='" + res[0].widget._id + "'] .content { background: red; }"
             done()
 
-      it "should emit the widgetUpdated event to the user's channel, with the dashboard id, and the widget"
+      it "should emit the widgetUpdated event to the user's channel, with the dashboard id, and the widget", (done) ->
+        Dashboard.findOne {}, (err, dashboard) ->
+          widget = dashboard.widgets[0]
+          css = ".content { background: green; }"
+          gently = new Gently
+          gently.expect ss.api.publish, 'channel', (channel, event, data) ->
+            assert.equal channel, "user_#{dashboard.userId}"
+            assert.equal event, "widgetUpdated"
+            assert.equal data.widget.css, css
+            done()          
+          ass.rpc "widget.update", {dashboardId: dashboard._id, _id: widget._id, css: css}, (res) ->
 
     describe "if not successful because dashboard id is wrong", ->
 
@@ -114,7 +134,19 @@ describe "Widget", ->
               assert.equal dashboardReloaded.widgets.length + 1, dashboard.widgets.length 
               done()
 
-      it "should emit the widgetDeleted event to the user's channel, with the dashboard id, and the widget id"
+      it "should emit the widgetDeleted event to the user's channel, with the dashboard id, and the widget id", (done) ->
+        Dashboard.findOne {}, (err, dashboard) ->
+          ass.rpc 'widget.create', {name: "Sales Widget", dashboardId: dashboard._id}, (res) ->
+            widget = res[0].widget
+            gently = new Gently
+            gently.expect ss.api.publish, 'channel', (channel, event, data) ->
+              assert.equal channel, "user_#{dashboard.userId}"
+              assert.equal event, "widgetDeleted"
+              assert.equal data.dashboardId, dashboard._id.toString()
+              assert.equal data.widgetId, widget._id.toString()
+              done()
+            ass.rpc "widget.delete", {dashboardId: dashboard._id, _id: widget._id}, (res) ->
+
 
     describe "if not successful because dashboard id is wrong", ->
 
