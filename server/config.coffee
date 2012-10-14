@@ -7,6 +7,7 @@ module.exports =
       host: '127.0.0.1'
     apiUrl: 'http://localhost/api/transmission'
     apiHost: 'http://localhost/'
+    wsHost: 'localhost'
     forgottenPasswordUrl: 'http://localhost/?fptoken='
     mail: 
       type: "SMTP"
@@ -23,6 +24,7 @@ module.exports =
       host: '127.0.0.1'
     apiUrl: 'http://localhost:3001/api/transmission'
     apiHost: 'http://localhost:3001/'
+    wsHost: 'localhost'
     forgottenPasswordUrl: 'http://localhost:3001/?fptoken='
     mail:
       type: "stub"
@@ -34,6 +36,7 @@ module.exports =
       host: '127.0.0.1'
     apiUrl: 'http://localhost:3002/api/transmission'
     apiHost: 'http://localhost:3002/'
+    wsHost: 'localhost'
     forgottenPasswordUrl: 'http://localhost:3002/?fptoken='
     mail:
       type: "stub"
