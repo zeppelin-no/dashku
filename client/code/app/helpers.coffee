@@ -121,7 +121,7 @@ window.Dashboard = new Bucket
   selectCb: (dashboard) ->
     # Clear all the widgets out of the Widget Bucket
     Widget.unload ->
-      dashboard.dashboardUrl = "#{document.location.origin}?dashboard=#{dashboard._id}"
+      dashboard.dashboardUrl = "#{document.location}?dashboard=#{dashboard._id}"
       # Render the dashboard nav state
       navState.setState 'dashboard', {dashboards: Dashboard.all, dashboardId: dashboard._id}
       # Order the widgets in the dashboard by their position number
