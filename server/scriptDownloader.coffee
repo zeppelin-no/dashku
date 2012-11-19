@@ -29,7 +29,7 @@ nodejsScript = '// Instructions
 \n
 \nvar data = JSONDATA;
 \n
-\nrequest.post({url: "URL", body: JSON.stringify(data), json: true});
+\nrequest.post({url: "URL", body: data, json: true});
 \n
 \n// Note - you will notice that the API url is different to the main url.
 \n// I\'ve been experiencing DNS/latency problems with making the API call through
@@ -46,7 +46,7 @@ coffeeScript = '# Instructions
 \n
 \ndata = JSONDATA;
 \n
-\nrequest.post url: "URL", body: JSON.stringify(data), json: true
+\nrequest.post url: "URL", body: data, json: true
 \n
 \n# Note - you will notice that the API url is different to the main url.
 \n# I\'ve been experiencing DNS/latency problems with making the API call through
