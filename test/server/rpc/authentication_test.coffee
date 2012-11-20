@@ -5,6 +5,9 @@
 
 assert  = require "assert"
 Gently  = require "gently"
+uuid    = require 'node-uuid'
+config  = require '../../../server/config.coffee'
+
 
 describe "Authentication", ->
   

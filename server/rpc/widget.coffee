@@ -1,5 +1,7 @@
 #### Widget RPC module ####
 
+widgetController  = require "../controllers/widget.coffee"
+
 exports.actions = (req, res, ss) ->
 
   req.use 'session'

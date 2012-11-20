@@ -3,7 +3,6 @@
 loadDependencies = ->
   env                       = process.env["SS_ENV"] || "development"
   global.ss                 = require 'socketstream'
-  global.uuid               = require 'node-uuid'
   global.config             = require "#{__dirname}/server/config"
   db                        = require "#{__dirname}/server/db"
   global.fs                 = require 'fs'

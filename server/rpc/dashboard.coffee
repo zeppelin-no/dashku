@@ -1,5 +1,8 @@
 #### Dashboard rpc module ####
 
+_                     = require 'underscore'
+dashboardController   = require "../controllers/dashboard.coffee"
+
 exports.actions = (req, res, ss) ->
 
   req.use 'session'

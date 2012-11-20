@@ -1,3 +1,5 @@
+config                = require './config'
+
 rubyScript = '### Instructions
 \n#    gem install em-http-request
 \n#    ruby dashku_WIDGETID.rb

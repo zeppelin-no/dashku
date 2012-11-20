@@ -3,16 +3,10 @@ http              = require 'http'
 connect           = require 'connect'
 connectRoute      = require 'connect-route'
 global.ss         = require 'socketstream'
-global.uuid       = require 'node-uuid'
-global._          = require 'underscore'
-global.config     = require "#{__dirname}/server/config.coffee"
+config            = require "#{__dirname}/server/config.coffee"
 
 require "#{__dirname}/server/db.coffee"
 require "#{__dirname}/server/mailer.coffee"
-
-# Controllers, a way of sharing common logic between RPC and REST APIs
-global.dashboardController  = require "#{__dirname}/server/controllers/dashboard.coffee"
-global.widgetController     = require "#{__dirname}/server/controllers/widget.coffee"
 
 # Define a single-page client
 ss.client.define 'main',

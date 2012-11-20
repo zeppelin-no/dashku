@@ -1,7 +1,8 @@
 #### General RPC module ####
 
-md = require 'marked'
-fs = require 'fs'
+md      = require 'marked'
+fs      = require 'fs'
+config  = require '../config.coffee'
 
 exports.actions = (req, res, ss) ->  
 

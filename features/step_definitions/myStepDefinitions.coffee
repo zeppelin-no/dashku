@@ -1,4 +1,5 @@
-fs = require "fs"
+fs                = require "fs"
+widgetController  = require "../../server/controllers/widget.coffee"
 
 wrap = (funk, cb) ->
   funk.end (err) ->

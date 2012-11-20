@@ -1,6 +1,7 @@
 assert  = require 'assert'
 md      = require 'marked'
 fs      = require 'fs'
+config  = require '../../../server/config.coffee'
 
 describe "General", ->
 

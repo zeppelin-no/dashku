@@ -1,3 +1,7 @@
+# Controllers, a way of sharing common logic between RPC and REST APIs
+dashboardController  = require "./controllers/dashboard.coffee"
+widgetController     = require "./controllers/widget.coffee"
+
 #### The Dashku REST API #### 
 
 # Fetch the API Key from Redis

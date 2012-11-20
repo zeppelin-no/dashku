@@ -1,5 +1,7 @@
 #### The Widget controller ####
 
+_  = require 'underscore'
+
 
 # TODO - make this shared between client and server, in too many places ATM
 scopeCSS = (text,id) ->

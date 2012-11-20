@@ -1,6 +1,6 @@
 #### User model ####
-
 bcrypt     = require 'bcrypt'
+uuid       = require 'node-uuid'
 
 toLower = (value) -> value.toLowerCase()
 

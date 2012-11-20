@@ -1,6 +1,9 @@
 #### Authentication RPC module ####
 
 bcrypt     = require 'bcrypt'
+uuid       = require 'node-uuid'
+config     = require '../config.coffee'
+
 
 forgottenPasswordEmailText = (link) -> "Hi,
 \n

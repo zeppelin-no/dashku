@@ -1,6 +1,8 @@
 # npm modules
 global.mongoose   = require 'mongoose'
 global.redis      = require 'redis'
+config            = require './config.coffee'
+
 
 # Redis-related configuration
 global.Redis = redis.createClient config[ss.env].redis.port, config[ss.env].redis.host
