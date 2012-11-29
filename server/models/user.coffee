@@ -17,7 +17,8 @@ hashPassword = (password, cb) ->
 # This is a workaround for the moment, until I
 # figure out a better way.
 #
-global.Users = new Schema
+
+Users = new Schema
   username            : type: String, set: toLower, required: true, unique: true, index: {dropDups: true}
   email               : type: String, set: toLower, required: true, unique: true, index: {dropDups: true}
   password            : String                          

@@ -3,9 +3,9 @@
 loadDependencies = ->
   env                       = process.env["SS_ENV"] || "development"
   global.ss                 = require 'socketstream'
-  global.config             = require "#{__dirname}/server/config"
+  config                    = require "#{__dirname}/server/config"
   db                        = require "#{__dirname}/server/db"
-  global.fs                 = require 'fs'
+  fs                        = require 'fs'
   global.ass                = ss.start()
 
 # If you move to a new Redis DB, you may want to run this function

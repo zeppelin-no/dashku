@@ -27,7 +27,14 @@ Booting the application
 
     mongod &
     redis-server &
-    coffee app.coffee
+    node_modules/.bin/coffee app.coffee
+
+Seeding the database with widget templates
+---
+
+You can seed Dashku's database with widget templates by running this command:
+
+    node_modules/.bin/cake populateWidgetTemplates
 
 Using Dashku to create dashboards and widgets
 ---
@@ -39,7 +46,7 @@ Testing
 
 To run unit and functional tests:
 
-    cake test
+    node_modules/.bin/cake test
 
 To run the integration tests:
 

@@ -14,7 +14,7 @@
     "ss-jade": "0.1.x",
     "ss-stylus": "0.1.x",
     "ss-hogan": "0.1.x",
-    "ss-engine.io":"0.0.4",
+    "ss-engine.io":"0.0.8",
     "bcrypt": "0.6.0",
     "mongoose":"2.5.0",
     "node-uuid":"latest",
@@ -25,7 +25,8 @@
     "connect-route":"latest",
     "nodemailer": "latest",
     "options":"latest",
-    "marked":"latest"
+    "marked":"latest",
+    "coffee-script":"latest"
   },
   "devDependencies":{
     "selenium-launcher":"latest",
