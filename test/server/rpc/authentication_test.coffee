@@ -1,4 +1,3 @@
-
 # TODO - once #299 on SocketStream is resolved,
 # go through all of the tests, and implement
 # logout as an after() cleanup where appropriate
@@ -165,16 +164,14 @@ describe "Authentication", ->
 
     #it "should clear all channels that the session was subscribed to"
 
-    # BUG - uncomment this section to replicate the bug
-    #
-    # it "should return a success status", (done) ->
-    #   ass.rpc "authentication.login", {identifier: "paul", password: "123456"}, (r) ->
-    #     assert.equal r[0].status, "success"
-    #     ass.rpc "authentication.logout", (res) ->
-    #       assert.equal res[0].status, "success"
-    #       done()
-    #   # TODO - figure out what should happen if you call the signedIn method 
-    #   # after you have signed out.
+    it "should return a success status", (done) ->
+      ass.rpc "authentication.login", {identifier: "paul", password: "123456"}, (r) ->
+        assert.equal r[0].status, "success"
+        ass.rpc "authentication.logout", (res) ->
+          assert.equal res[0].status, "success"
+          done()
+      # TODO - figure out what should happen if you call the signedIn method 
+      # after you have signed out.
 
   describe "#isAttributeUnique", ->
 
