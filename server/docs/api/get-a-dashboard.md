@@ -11,7 +11,7 @@ Url Parameters
 - ID: the id of the dashboard e.g. 4fd1f55b7e9b8705a1000054
 
 
-    curl -H "Content-Type: application/json" "DASHKU_API_URLapi/dashboards/ID?apiKey=API_KEY"
+    curl -H "Accept: application/json" "DASHKU_API_URLapi/dashboards/ID?apiKey=API_KEY"
 
 
 Response

@@ -5,8 +5,8 @@ module.exports =
     redis:
       port: 6379
       host: '127.0.0.1'
-    apiUrl: 'http://localhost/api/transmission'
-    apiHost: 'http://localhost/'
+    apiUrl: 'http://localhost:3000/api/transmission'
+    apiHost: 'http://localhost:3000/'
     forgottenPasswordUrl: 'http://localhost/?fptoken='
     mail: 
       type: "SMTP"

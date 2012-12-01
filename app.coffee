@@ -1,6 +1,5 @@
 fs                = require 'fs'
 http              = require 'http'
-connect           = require 'connect'
 connectRoute      = require 'connect-route'
 global.ss         = require 'socketstream'
 config            = require "#{__dirname}/server/config.coffee"

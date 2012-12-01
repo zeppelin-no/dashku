@@ -10,20 +10,24 @@ apiKeyRequest = (apiKey, res, successFunction) ->
     if !err and userId?
       successFunction userId
     else
-      res.writeHead 401, {'Content-Type': 'application/json'}
-      res.write JSON.stringify status: 'failure', reason: if userId? then err else "Couldn't find a user with that API key"
-      res.end()
+      content = JSON.stringify status: 'failure', reason: if userId? then err else "Couldn't find a user with that API key"
+      res.statusCode = 401
+      res.setHeader 'Content-Type','application/json'
+      res.end content
 
 # A helper function that generates the JSON response
 applyStatusCodesToResponse = (res, response, statusCode=200, responseObject) ->
+
   if response.status is 'success'
-    res.writeHead statusCode, {'Content-Type': 'application/json'}
-    res.write JSON.stringify responseObject || response
-    res.end()
+    content = JSON.stringify responseObject or response
+    res.statusCode  = statusCode
+    res.setHeader 'Content-Type','application/json'
+    res.end content
   else
-    res.writeHead 400, {'Content-Type': 'application/json'}    
-    res.write JSON.stringify response
-    res.end()
+    content = JSON.stringify responseObject or response
+    res.statusCode  = 400
+    res.setHeader 'Content-Type','application/json'
+    res.end content
 
 module.exports = (router) ->
 
@@ -61,7 +65,7 @@ module.exports = (router) ->
   router.delete "/api/dashboards/:id", (req, res, next) ->
     apiKeyRequest req.query.apiKey, res, (userId) ->
       dashboardController.delete {userId: userId, id: req.params.id}, (response) -> 
-        applyStatusCodesToResponse res, response, 201, {dashboardId: response.dashboardId}
+        applyStatusCodesToResponse res, response, 201
 
   router.post "/api/dashboards/:dashboardId/widgets", (req, res, next) ->
     apiKeyRequest req.query.apiKey, res, (userId) ->
@@ -81,7 +85,7 @@ module.exports = (router) ->
   router.delete "/api/dashboards/:dashboardId/widgets/:id", (req, res, next) ->
     apiKeyRequest req.query.apiKey, res, (userId) ->
       widgetController.delete {dashboardId: req.params.dashboardId, _id: req.params.id}, (response) ->
-        applyStatusCodesToResponse res, response, 201, {widgetId: response.widgetId}
+        applyStatusCodesToResponse res, response, 201
 
   router.get "/api/dashboards/:dashboardId/widgets/:id/downloads/:format", (req, res, next) ->
     require("#{__dirname}/scriptDownloader.coffee")(req, res)

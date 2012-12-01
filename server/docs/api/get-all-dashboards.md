@@ -6,7 +6,7 @@ Fetches all your dashboards
 
 <span class="badge badge-get">GET</span> <span class="url">/api/dashboards</span>
 
-    curl -H "Content-Type: application/json" "DASHKU_API_URLapi/dashboards?apiKey=API_KEY"
+    curl -H "Accept: application/json" "DASHKU_API_URLapi/dashboards?apiKey=API_KEY"
 
 Response
 ---
