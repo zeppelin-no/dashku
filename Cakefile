@@ -5,7 +5,7 @@ loadDependencies = ->
   global.ss                 = require 'socketstream'
   config                    = require "#{__dirname}/server/config"
   db                        = require "#{__dirname}/server/db"
-  fs                        = require 'fs'
+  global.fs                 = require 'fs'
   global.ass                = ss.start()
 
 # If you move to a new Redis DB, you may want to run this function
