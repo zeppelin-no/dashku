@@ -26,13 +26,14 @@ populateWidgetTemplates = ->
     if !err
       fs.readdir "#{__dirname}/server/seed/widgetTemplates/", (err, files) ->
         if !err and files
+          count = 0
           for file in files
             widgetTemplate = new WidgetTemplate require "#{__dirname}/server/seed/widgetTemplates/#{file}"
             widgetTemplate.save (err,doc) -> 
-              if !err
-                console.log "WidgetTemplate collection populated"
-              else
-                console.log "There was an error populating the WidgetTemplate collection"
+              count++
+              msg = if !err then "WidgetTemplate collection populated" else "There was an error populating the WidgetTemplate collection"
+              console.log msg
+              process.exit 0 if count is files.length-1
     else
       console.log "There was an error clearing the WidgetTemplates collection"
       process.exit 1
