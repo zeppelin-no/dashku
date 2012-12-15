@@ -1,5 +1,6 @@
 nodemailer = require 'nodemailer'
-config     = require './config'
 
-# Setup the global mail transport
-global.postman = nodemailer.createTransport config[ss.env].mail.type, config[ss.env].mail.options
+module.exports = (app) ->
+
+  # Setup the global mail transport
+  app.postman = nodemailer.createTransport app.config.mail.type, app.config.mail.options

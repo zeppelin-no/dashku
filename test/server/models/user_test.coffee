@@ -1,4 +1,7 @@
+ss      = require "socketstream"
 assert  = require "assert"
+
+User = ss.api.app.models.User
 
 describe "User", ->
 

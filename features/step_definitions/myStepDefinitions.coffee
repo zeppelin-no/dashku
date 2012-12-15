@@ -1,3 +1,8 @@
+ss              = require 'socketstream'
+User            = ss.api.app.models.User 
+Dashboard       = ss.api.app.models.Dashboard
+WidgetTemplate  = ss.api.app.models.WidgetTemplate
+
 fs                = require "fs"
 widgetController  = require "../../server/controllers/widget.coffee"
 

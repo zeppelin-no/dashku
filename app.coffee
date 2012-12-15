@@ -1,11 +1,8 @@
 fs                = require 'fs'
 http              = require 'http'
 connectRoute      = require 'connect-route'
-global.ss         = require 'socketstream'
-config            = require "#{__dirname}/server/config.coffee"
-
-require "#{__dirname}/server/db.coffee"
-require "#{__dirname}/server/mailer.coffee"
+ss                = require 'socketstream'
+internals         = require './internals'
 
 # Define a single-page client
 ss.client.define 'main',
@@ -24,10 +21,10 @@ ss.http.middleware.prepend connectRoute api
 ss.http.route '/', (req, res) -> res.serveClient 'main'
 
 # Use redis for session store
-ss.session.store.use 'redis', config[ss.env].redis
+ss.session.store.use 'redis', ss.api.app.config.redis
 
 # Use redis for pubsub
-ss.publish.transport.use 'redis', config[ss.env].redis
+ss.publish.transport.use 'redis', ss.api.app.config.redis
 
 # Code Formatters
 ss.client.formatters.add require 'ss-coffee'
@@ -44,8 +41,8 @@ ss.client.packAssets() if ss.env is 'production'
 
 # Start SocketStream
 server = http.Server ss.http.middleware
-server.listen config[ss.env].port
+server.listen ss.api.app.config.port
 ss.start server
 
 # So that the process never dies
-process.on 'uncaughtException', (err) -> console.error 'Exception caught: ', err
+# process.on 'uncaughtException', (err) -> console.error 'Exception caught: ', err

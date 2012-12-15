@@ -1,7 +1,9 @@
 #### The Widget controller ####
 
-_  = require 'underscore'
-
+_               = require 'underscore'
+ss              = require 'socketstream'
+WidgetTemplate  = ss.api.app.models.WidgetTemplate
+Dashboard       = ss.api.app.models.Dashboard
 
 # TODO - make this shared between client and server, in too many places ATM
 scopeCSS = (text,id) ->

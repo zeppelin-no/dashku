@@ -2,11 +2,7 @@
 
 loadDependencies = ->
   env                       = process.env["SS_ENV"] || "development"
-  global.ss                 = require 'socketstream'
-  config                    = require "#{__dirname}/server/config"
-  db                        = require "#{__dirname}/server/db"
-  global.fs                 = require 'fs'
-  global.ass                = ss.start()
+  fs                        = require 'fs'
 
 # If you move to a new Redis DB, you may want to run this function
 # to regenerate the API Key database
@@ -42,10 +38,10 @@ populateWidgetTemplates = ->
 files = [
   "server/models/user.coffee"
   "server/rpc/authentication.coffee"
-  "server/rpc/dashboard.coffee"
-  "server/rpc/general.coffee"
-  "server/rpc/widget.coffee"
-  "server/rpc/widgetTemplate.coffee"
+  # "server/rpc/dashboard.coffee"
+  # "server/rpc/general.coffee"
+  # "server/rpc/widget.coffee"
+  # "server/rpc/widgetTemplate.coffee"
 ]
 
 test = (callback) ->

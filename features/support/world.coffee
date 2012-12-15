@@ -1,6 +1,7 @@
 selenium              = require 'selenium-launcher'
 soda                  = require 'soda'
 process.env["SS_ENV"] = "cucumber"
+ss                    = require 'socketstream'
 config                = require '../../server/config.coffee'
 app                   = require '../../app.coffee'
 

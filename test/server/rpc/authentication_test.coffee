@@ -2,17 +2,23 @@
 # go through all of the tests, and implement
 # logout as an after() cleanup where appropriate
 
-assert  = require "assert"
-Gently  = require "gently"
-uuid    = require 'node-uuid'
-config  = require '../../../server/config.coffee'
+assert        = require "assert"
+Gently        = require "gently"
+uuid          = require 'node-uuid'
+config        = require '../../../server/config.coffee'
+ss            = require "socketstream"
 
+postman       = ss.api.app.postman
+User          = ss.api.app.models.User
+Dashboard     = ss.api.app.models.Dashboard
+Redis         = ss.api.app.Redis
 
 describe "Authentication", ->
   
   before (done) ->
-    User.remove {}, (err) ->
-      Dashboard.remove {}, (err) ->
+    User.remove {}, (err) =>
+      Dashboard.remove {}, (err) =>
+        @ass = ss.start()
         done()
 
   describe "#signup", ->
@@ -28,7 +34,11 @@ describe "Authentication", ->
           email:    "paul@anephenix.com" 
           password: "123456"
 
-        ass.rpc 'authentication.signup', newUserCredentials, (res) =>
+        console.log @ass
+        console.log "XXXXXXXXXXXXX"
+        console.log ss
+
+        @ass.rpc 'authentication.signup', newUserCredentials, (res) =>
           # For some reason, the res object called back is an array,
           # rather than the object that we get back in the browser
           #

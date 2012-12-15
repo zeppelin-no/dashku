@@ -1,4 +1,6 @@
 #### The Dashboard controller ####
+ss        = require 'socketstream'
+Dashboard = ss.api.app.models.Dashboard
 
 module.exports =
   
