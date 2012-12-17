@@ -2,8 +2,6 @@
 bcrypt     = require 'bcrypt'
 uuid       = require 'node-uuid'
 
-toLower = (value) -> value.toLowerCase()
-
 hashPassword = (password, cb) ->
   bcrypt.genSalt 10, (err, salt) -> 
     bcrypt.hash password, salt, (err, hash) -> 
@@ -19,8 +17,8 @@ hashPassword = (password, cb) ->
 #
 
 Users = new Schema
-  username            : type: String, set: toLower, required: true, unique: true, index: {dropDups: true}
-  email               : type: String, set: toLower, required: true, unique: true, index: {dropDups: true}
+  username            : type: String, lowercase: true, required: true, unique: true, index: {dropDups: true}
+  email               : type: String, lowercase: true, required: true, unique: true, index: {dropDups: true}
   password            : String                          
   passwordHash        : String
   passwordSalt        : String
