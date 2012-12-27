@@ -1,5 +1,17 @@
-assert = require 'assert'
-Gently = require 'gently'
+assert        = require 'assert'
+Gently        = require 'gently'
+ss            = require 'socketstream'
+
+internals     = require "../../../internals.coffee"
+config        = require "../../../server/config.coffee"
+
+postman       = ss.api.app.postman
+User          = ss.api.app.models.User
+Dashboard     = ss.api.app.models.Dashboard
+Redis         = ss.api.app.Redis
+
+ass           = ss.start()
+
 
 describe "Dashboard", ->
 

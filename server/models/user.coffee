@@ -1,6 +1,7 @@
 #### User model ####
 bcrypt     = require 'bcrypt'
 uuid       = require 'node-uuid'
+mongoose   = require 'mongoose'
 
 hashPassword = (password, cb) ->
   bcrypt.genSalt 10, (err, salt) -> 
@@ -16,29 +17,31 @@ hashPassword = (password, cb) ->
 # figure out a better way.
 #
 
-Users = new Schema
-  username            : type: String, lowercase: true, required: true, unique: true, index: {dropDups: true}
-  email               : type: String, lowercase: true, required: true, unique: true, index: {dropDups: true}
-  password            : String                          
-  passwordHash        : String
-  passwordSalt        : String
-  createdAt           : type: Date, default: Date.now
-  updatedAt           : type: Date, default: Date.now
-  apiKey              : type: String, default: uuid.v4
-  changePasswordToken : String
+module.exports = (app) ->
 
-# Clean the password attribute
-Users.pre 'save', (next) ->
-  if @isNew
-    if @password is undefined
-      next new Error "Password field is missing"
+  app.schemas.Users = new mongoose.Schema
+    username            : type: String, lowercase: true, required: true, unique: true, index: {dropDups: true}
+    email               : type: String, lowercase: true, required: true, unique: true, index: {dropDups: true}
+    password            : String                          
+    passwordHash        : String
+    passwordSalt        : String
+    createdAt           : type: Date, default: Date.now
+    updatedAt           : type: Date, default: Date.now
+    apiKey              : type: String, default: uuid.v4
+    changePasswordToken : String
+
+  # Clean the password attribute
+  app.schemas.Users.pre 'save', (next) ->
+    if @isNew
+      if @password is undefined
+        next new Error "Password field is missing"
+      else
+        hashPassword @password, (hashedPassword) =>
+          @passwordHash = hashedPassword.hash
+          @passwordSalt = hashedPassword.salt
+          @password     = undefined
+          next()
     else
-      hashPassword @password, (hashedPassword) =>
-        @passwordHash = hashedPassword.hash
-        @passwordSalt = hashedPassword.salt
-        @password     = undefined
-        next()
-  else
-    next()
+      next()
 
-global.User = mongoose.model 'User', Users
+  app.models.User = mongoose.model 'User', app.schemas.Users
