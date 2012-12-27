@@ -31,7 +31,7 @@ ss.client.formatters.add require 'ss-coffee'
 ss.client.formatters.add require 'ss-jade'
 ss.client.formatters.add require 'ss-stylus'
 
-# Use server-side compiled Hogan (Mustache) templates. Others engines available
+# Use server-side compiled Hogan (Mustache) templates. Other engines available
 ss.client.templateEngine.use require 'ss-hogan'
 
 ss.ws.transport.use require 'ss-engine.io'

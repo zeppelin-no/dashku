@@ -48,7 +48,6 @@ test = (callback) ->
   mocha                 = require 'mocha'
   process.env["SS_ENV"] = "test"
   loadDependencies()
-  app                   = require './app.coffee'
   Mocha = new mocha
   for file in files
     Mocha.addFile "test/#{file.replace('.coffee','_test.coffee')}"

@@ -5,20 +5,22 @@
 assert        = require "assert"
 Gently        = require "gently"
 uuid          = require 'node-uuid'
-config        = require '../../../server/config.coffee'
 ss            = require "socketstream"
+internals     = require "../../../internals.coffee"
+config        = require "../../../server/config.coffee"
 
 postman       = ss.api.app.postman
 User          = ss.api.app.models.User
 Dashboard     = ss.api.app.models.Dashboard
 Redis         = ss.api.app.Redis
 
+ass           = ss.start()
+
 describe "Authentication", ->
   
   before (done) ->
     User.remove {}, (err) =>
       Dashboard.remove {}, (err) =>
-        @ass = ss.start()
         done()
 
   describe "#signup", ->
@@ -30,15 +32,11 @@ describe "Authentication", ->
         @res = null
 
         newUserCredentials = 
-          username: "paul" 
+          username: "paul"
           email:    "paul@anephenix.com" 
           password: "123456"
 
-        console.log @ass
-        console.log "XXXXXXXXXXXXX"
-        console.log ss
-
-        @ass.rpc 'authentication.signup', newUserCredentials, (res) =>
+        ass.rpc 'authentication.signup', newUserCredentials, (res) =>
           # For some reason, the res object called back is an array,
           # rather than the object that we get back in the browser
           #
@@ -98,7 +96,9 @@ describe "Authentication", ->
 
     describe "if the user is missing some credentials", ->
 
+
       it "should return a failure response", (done) ->
+
         missingUsername = 
           email:    "earthworm@jim.com"
           password: "123456"
@@ -140,7 +140,7 @@ describe "Authentication", ->
     describe "if successful", ->
 
       it "should return a success status, and the user object", (done) ->
-        User.findOne {username: "paul"}, (err, user) ->
+       User.findOne {username: "paul"}, (err, user) ->
           ass.rpc "authentication.login", {identifier: "paul", password: "123456"}, (res) ->
             assert.equal res[0].status, "success"
             assert.equal res[0].user.username, user.username

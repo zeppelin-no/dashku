@@ -1,5 +1,9 @@
 assert = require 'assert'
 Gently = require 'gently'
+ss     = require 'socketstream'
+
+User      = ss.api.app.models.User 
+Dashboard = ss.api.app.models.Dashboard
 
 describe "Dashboard", ->
 
@@ -9,7 +13,7 @@ describe "Dashboard", ->
 
       it "should create the dashboard, and return a success status along with the dashboard", (done) ->
         # Assume that we are already logged in from authentication.coffee
-        ass.rpc "dashboard.create", {name: "Nice dashboard"}, (res) ->
+        ss.rpc "dashboard.create", {name: "Nice dashboard"}, (res) ->
           assert.equal res[0].status, "success"
           assert.equal res[0].dashboard.name, "Nice dashboard"
           done()
@@ -22,7 +26,7 @@ describe "Dashboard", ->
             assert.equal event, "dashboardCreated"
             assert.equal data.name, "Yet another dashboard"
             done()
-          ass.rpc "dashboard.create", {name: "Yet another dashboard"}, (res) ->
+          ss.rpc "dashboard.create", {name: "Yet another dashboard"}, (res) ->
             assert.equal res[0].status, "success"
             ass.rpc "dashboard.delete", res[0].dashboard._id, (res) ->
 
@@ -30,7 +34,7 @@ describe "Dashboard", ->
     describe "if the name is not present", ->
 
       it "should return a failure status, and explain what went wrong", (done) ->
-        ass.rpc "dashboard.create", {}, (res) ->
+        ss.rpc "dashboard.create", {}, (res) ->
           assert.equal res[0].status, "failure"
           assert.equal res[0].reason, "Validation failed"
           done()

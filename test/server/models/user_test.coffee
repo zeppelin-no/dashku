@@ -1,5 +1,6 @@
-ss      = require "socketstream"
-assert  = require "assert"
+ss        = require "socketstream"
+assert    = require "assert"
+internals = require "../../../internals.coffee" 
 
 User = ss.api.app.models.User
 
