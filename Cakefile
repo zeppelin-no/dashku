@@ -40,8 +40,8 @@ files = [
   "server/rpc/authentication.coffee"
   "server/rpc/dashboard.coffee"
   "server/rpc/general.coffee"
-  # "server/rpc/widget.coffee"
-  # "server/rpc/widgetTemplate.coffee"
+  "server/rpc/widget.coffee"
+  "server/rpc/widgetTemplate.coffee"
 ]
 
 test = (callback) ->

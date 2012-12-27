@@ -1,4 +1,8 @@
-assert = require 'assert'
+assert          = require 'assert'
+ss              = require 'socketstream'
+internals       = require "../../../internals.coffee"
+WidgetTemplate  = ss.api.app.models.WidgetTemplate
+ass             = ss.start()
 
 describe "WidgetTemplate", ->
 
