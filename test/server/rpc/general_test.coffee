@@ -1,7 +1,13 @@
-assert  = require 'assert'
-md      = require 'marked'
-fs      = require 'fs'
-config  = require '../../../server/config.coffee'
+assert        = require 'assert'
+md            = require 'marked'
+fs            = require 'fs'
+ss            = require 'socketstream'
+
+internals     = require "../../../internals.coffee"
+config        = require '../../../server/config.coffee'
+
+User          = ss.api.app.models.User
+ass           = ss.start()
 
 describe "General", ->
 
