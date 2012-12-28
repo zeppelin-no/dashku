@@ -2,7 +2,7 @@
 ss                   = require 'socketstream'
 dashboardController  = require "./controllers/dashboard.coffee"
 widgetController     = require "./controllers/widget.coffee"
-Redis                = ss.api.Redis
+Redis                = ss.api.app.Redis
 
 #### The Dashku REST API #### 
 
