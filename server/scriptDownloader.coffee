@@ -1,4 +1,6 @@
-config                = require './config'
+ss                    = require 'socketstream'
+Dashboard             = ss.api.app.models.Dashboard
+apiUrl                = ss.api.app.config.apiUrl
 
 rubyScript = '### Instructions
 \n#    gem install em-http-request
@@ -15,13 +17,7 @@ rubyScript = '### Instructions
 \n  http.callback {
 \n    EventMachine.stop
 \n  }
-\n}
-\n
-\n# Note - you will notice that the API url is different to the main url.
-\n# I\'ve been experiencing DNS/latency problems with making the API call through
-\n# to the main sitem so I\'ve used this ip address instead. 
-\n#
-\n# Paul Jensen'
+\n}'
 
 nodejsScript = '// Instructions
 \n//    npm install request
@@ -31,13 +27,7 @@ nodejsScript = '// Instructions
 \n
 \nvar data = JSONDATA;
 \n
-\nrequest.post({url: "URL", body: data, json: true});
-\n
-\n// Note - you will notice that the API url is different to the main url.
-\n// I\'ve been experiencing DNS/latency problems with making the API call through
-\n// to the main sitem so I\'ve used this ip address instead. 
-\n//
-\n// Paul Jensen'
+\nrequest.post({url: "URL", body: data, json: true});'
 
 
 coffeeScript = '# Instructions
@@ -48,13 +38,7 @@ coffeeScript = '# Instructions
 \n
 \ndata = JSONDATA;
 \n
-\nrequest.post url: "URL", body: data, json: true
-\n
-\n# Note - you will notice that the API url is different to the main url.
-\n# I\'ve been experiencing DNS/latency problems with making the API call through
-\n# to the main sitem so I\'ve used this ip address instead. 
-\n#
-\n# Paul Jensen'
+\nrequest.post url: "URL", body: data, json: true'
 
 phpScript = '<?
 \n// Instructions
@@ -89,12 +73,6 @@ phpScript = '<?
 \n}
 \n
 \nrestcall("THEURL",\'JSONDATA\');
-\n
-\n// Note - you will notice that the API url is different to the main url.
-\n// I\'ve been experiencing DNS/latency problems with making the API call through
-\n// to the main sitem so I\'ve used this ip address instead. 
-\n//
-\n// Paul Jensen
 \n?>'
 
 pythonScript = '# Instructions
@@ -104,13 +82,7 @@ pythonScript = '# Instructions
 \n#
 \nimport requests
 \n
-\nrequests.post(\'URL\', JSONDATA)
-\n
-\n# Note - you will notice that the API url is different to the main url.
-\n# I\'ve been experiencing DNS/latency problems with making the API call through
-\n# to the main sitem so I\'ve used this ip address instead. 
-\n#
-\n# Paul Jensen'
+\nrequests.post(\'URL\', JSONDATA)'
 
 module.exports = (req,res) ->
   parsedFormat = req.params.format.split '.'
@@ -120,7 +92,7 @@ module.exports = (req,res) ->
       Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
         if !err and dashboard?
           widget = dashboard.widgets.id(req.params.id)
-          data = rubyScript.replace(/URL/,config[ss.env].apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
+          data = rubyScript.replace(/URL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
           res.writeHead 200, { 'Content-disposition': 'attachment', 'Content-Type': 'application/ruby' }
           res.end data
         else
@@ -130,7 +102,7 @@ module.exports = (req,res) ->
       Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
         if !err and dashboard?
           widget = dashboard.widgets.id(req.params.id)
-          data = nodejsScript.replace(/URL/,config[ss.env].apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
+          data = nodejsScript.replace(/URL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
           res.writeHead 200, {'Content-disposition': 'attachment', 'Content-Type': 'application/javascript' }
           res.end data
         else
@@ -140,7 +112,7 @@ module.exports = (req,res) ->
       Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
         if !err and dashboard?
           widget = dashboard.widgets.id(req.params.id)
-          data = coffeeScript.replace(/URL/,config[ss.env].apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
+          data = coffeeScript.replace(/URL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
           res.writeHead 200, {'Content-disposition': 'attachment', 'Content-Type': 'application/coffeescript' }
           res.end data
         else
@@ -150,8 +122,8 @@ module.exports = (req,res) ->
       Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
         if !err and dashboard?
           widget = dashboard.widgets.id(req.params.id)
-          data = phpScript.replace(/THEURL/,config[ss.env].apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
-          res.writeHead 200, {'Content-disposition': 'attachment', 'Content-Type': 'application/coffeescript' }
+          data = phpScript.replace(/THEURL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
+          res.writeHead 200, {'Content-disposition': 'attachment', 'Content-Type': 'application/php' }
           res.end data
         else
           res.writeHead 402, { 'Content-Type': 'text/plain' }
@@ -160,7 +132,7 @@ module.exports = (req,res) ->
       Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
         if !err and dashboard?
           widget = dashboard.widgets.id(req.params.id)
-          data = pythonScript.replace(/URL/,config[ss.env].apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
+          data = pythonScript.replace(/URL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
           res.writeHead 200, {'Content-disposition': 'attachment', 'Content-Type': 'application/python' }
           res.end data
         else
