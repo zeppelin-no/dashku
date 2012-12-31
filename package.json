@@ -35,5 +35,9 @@
     "mocha"             : "latest",
     "selenium-launcher" : "latest",
     "soda"              : "latest"
+  },
+  "scripts": {
+    "start":"./node_modules/coffee-script/bin/coffee app.coffee",
+    "test":"./node_modules/coffee-script/bin/cake test"
   }
 }
