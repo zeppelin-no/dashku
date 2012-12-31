@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Anephenix/dashku.png)](https://travis-ci.org/Anephenix/dashku)
+
 Dashku
 ===
 

@@ -60,8 +60,8 @@ test = (cb) ->
   Mocha = new mocha
   for file in files
     Mocha.addFile "test/#{file.replace('.coffee','_test.coffee')}"
-  Mocha.run ->
-    cb() if cb?
+  Mocha.run (res) ->
+    cb res if cb?
 
 task 'test', 'run unit tests for the project', ->
   test process.exit
