@@ -20,13 +20,13 @@ hashPassword = (password, cb) ->
 module.exports = (app) ->
 
   app.schemas.Users = new mongoose.Schema
-    username            : type: String, lowercase: true, required: true, unique: true, index: {dropDups: true}
-    email               : type: String, lowercase: true, required: true, unique: true, index: {dropDups: true}
+    username            : type: String, lowercase: true, required: true, index: {unique: true, dropDups: false}
+    email               : type: String, lowercase: true, required: true, index: {unique: true, dropDups: false}
     password            : String                          
     passwordHash        : String
     passwordSalt        : String
-    createdAt           : type: Date, default: Date.now
-    updatedAt           : type: Date, default: Date.now
+    createdAt           : type: Date,   default: Date.now
+    updatedAt           : type: Date,   default: Date.now
     apiKey              : type: String, default: uuid.v4
     changePasswordToken : String
 
