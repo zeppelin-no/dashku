@@ -11,7 +11,7 @@ regenerateApiKeyDb = (cb) ->
     if !err
       if docs.length > 0
         for doc in docs
-          Redis.hset "apiKeys", doc.apiKey, doc._id, redis.print
+          Redis.hset "apiKeys", doc.apiKey, doc._id, Redis.print
           if docs.indexOf doc is docs.length-1
             cb 0
       else
