@@ -81,63 +81,47 @@ pythonScript = '# Instructions
 \n# python dashku_WIDGETID.py
 \n#
 \nimport requests
+\nimport json
 \n
-\nrequests.post(\'URL\', JSONDATA)'
+\ndata    = json.dumps(JSONDATA)
+\nheaders = {\'content-type\': \'application/json\'}
+\n
+\nrequests.post(\'URL\', data)'
+
+attributes = 
+  rb:
+    script       : rubyScript
+    contentType  : 'ruby'
+  js:
+    script       : nodejsScript
+    contentType  : 'javascript'
+  coffee:
+    script       : coffeeScript
+    contentType  : 'coffeescript'
+  php:
+    script       : phpScript
+    contentType  : 'php'
+  py:
+    script       : pythonScript
+    contentType  : 'python'    
+
+wrapperFunction = (req,res, fileFormat) ->
+  Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
+    if !err and dashboard?
+      widget = dashboard.widgets.id(req.params.id)
+      data = attributes[fileFormat].script.replace(/URL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
+      res.writeHead 200, { 'Content-disposition': 'attachment', 'Content-Type': "application/#{attributes[fileFormat].contentType}" }
+      res.end data
+    else
+      res.writeHead 402, { 'Content-Type': 'text/plain' }
+      res.end err
 
 module.exports = (req,res) ->
   parsedFormat = req.params.format.split '.'
   fileFormat   = parsedFormat[parsedFormat.length-1]
-  switch fileFormat
-    when "rb"
-      Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
-        if !err and dashboard?
-          widget = dashboard.widgets.id(req.params.id)
-          data = rubyScript.replace(/URL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
-          res.writeHead 200, { 'Content-disposition': 'attachment', 'Content-Type': 'application/ruby' }
-          res.end data
-        else
-          res.writeHead 402, { 'Content-Type': 'text/plain' }
-          res.end err
-    when "js"
-      Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
-        if !err and dashboard?
-          widget = dashboard.widgets.id(req.params.id)
-          data = nodejsScript.replace(/URL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
-          res.writeHead 200, {'Content-disposition': 'attachment', 'Content-Type': 'application/javascript' }
-          res.end data
-        else
-          res.writeHead 402, { 'Content-Type': 'text/plain' }
-          res.end err
-    when "coffee"
-      Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
-        if !err and dashboard?
-          widget = dashboard.widgets.id(req.params.id)
-          data = coffeeScript.replace(/URL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
-          res.writeHead 200, {'Content-disposition': 'attachment', 'Content-Type': 'application/coffeescript' }
-          res.end data
-        else
-          res.writeHead 402, { 'Content-Type': 'text/plain' }
-          res.end err
-    when "php"
-      Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
-        if !err and dashboard?
-          widget = dashboard.widgets.id(req.params.id)
-          data = phpScript.replace(/THEURL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
-          res.writeHead 200, {'Content-disposition': 'attachment', 'Content-Type': 'application/php' }
-          res.end data
-        else
-          res.writeHead 402, { 'Content-Type': 'text/plain' }
-          res.end err
-    when "py"
-      Dashboard.findOne {_id: req.params.dashboardId}, (err, dashboard) ->
-        if !err and dashboard?
-          widget = dashboard.widgets.id(req.params.id)
-          data = pythonScript.replace(/URL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id)
-          res.writeHead 200, {'Content-disposition': 'attachment', 'Content-Type': 'application/python' }
-          res.end data
-        else
-          res.writeHead 402, { 'Content-Type': 'text/plain' }
-          res.end err
-    else
-      res.writeHead 402, { 'Content-Type': 'text/plain' }
-      res.end "not identified"
+
+  if attributes[fileFormat] is undefined
+    res.writeHead 402, { 'Content-Type': 'text/plain' }
+    res.end "not identified"
+  else
+    wrapperFunction req, res, fileFormat
