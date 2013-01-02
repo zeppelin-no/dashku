@@ -83,10 +83,10 @@ pythonScript = '# Instructions
 \nimport requests
 \nimport json
 \n
-\ndata    = json.dumps(JSONDATA)
+\npayload = JSONDATA
 \nheaders = {\'content-type\': \'application/json\'}
 \n
-\nrequests.post(\'URL\', data)'
+\nrequests.post(\'URL\', data=json.dumps(payload),headers=headers)'
 
 attributes = 
   rb:
