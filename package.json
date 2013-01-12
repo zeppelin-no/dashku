@@ -23,7 +23,7 @@
     "request"       : "latest",
     "socketstream"  : "git://github.com/socketstream/socketstream.git",
     "ss-coffee"     : "0.1.x",
-    "ss-engine.io"  : "0.1.0",
+    "ss-engine.io"  : "0.1.1",
     "ss-hogan"      : "0.1.x",
     "ss-jade"       : "0.1.x",
     "ss-stylus"     : "0.1.x",
