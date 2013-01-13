@@ -12,6 +12,7 @@ require("#{__dirname}/server/db.coffee") app
 require("#{__dirname}/server/mailer.coffee") app
 
 require("#{__dirname}/server/controllers/dashboard.coffee") app
+require("#{__dirname}/server/controllers/widget.coffee") app
 
 ss.api.add 'app', app
 

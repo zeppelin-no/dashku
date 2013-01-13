@@ -1,7 +1,7 @@
 #### Widget RPC module ####
 
 ss                    = require "socketstream"
-widgetController      = require "../controllers/widget.coffee"
+widgetController      = ss.api.app.controllers.widget
 fetchUserFromSession  = ss.api.fetchUserFromSession
 
 exports.actions = (req, res, ss) ->
