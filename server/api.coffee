@@ -1,6 +1,6 @@
 # Controllers, a way of sharing common logic between RPC and REST APIs
 ss                   = require 'socketstream'
-dashboardController  = require "./controllers/dashboard.coffee"
+dashboardController  = ss.api.app.controllers.dashboard
 widgetController     = require "./controllers/widget.coffee"
 Redis                = ss.api.app.Redis
 

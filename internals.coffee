@@ -11,6 +11,8 @@ app.config = require('./server/config')[ss.env]
 require("#{__dirname}/server/db.coffee") app
 require("#{__dirname}/server/mailer.coffee") app
 
+require("#{__dirname}/server/controllers/dashboard.coffee") app
+
 ss.api.add 'app', app
 
 #### HELPERS ####
