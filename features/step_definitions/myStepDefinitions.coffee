@@ -1,10 +1,9 @@
-ss              = require 'socketstream'
-User            = ss.api.app.models.User 
-Dashboard       = ss.api.app.models.Dashboard
-WidgetTemplate  = ss.api.app.models.WidgetTemplate
-
 fs                = require "fs"
-widgetController  = require "../../server/controllers/widget.coffee"
+ss                = require 'socketstream'
+User              = ss.api.app.models.User 
+Dashboard         = ss.api.app.models.Dashboard
+WidgetTemplate    = ss.api.app.models.WidgetTemplate
+widgetController  = ss.api.app.controllers.widget
 
 wrap = (funk, cb) ->
   funk.end (err) ->
@@ -61,7 +60,7 @@ module.exports = ->
               callback.fail err
   
   @After (callback) ->
-    wrap @browser.chain.close(), callback
+    wrap @browser.chain.testComplete(), callback
 
   @Given /^I am on the homepage$/, (callback) ->
     wrap @browser.chain.session().open('/'), callback
