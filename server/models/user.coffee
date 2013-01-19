@@ -6,7 +6,7 @@ mongoose   = require 'mongoose'
 hashPassword = (password, cb) ->
   bcrypt.genSalt 10, (err, salt) -> 
     bcrypt.hash password, salt, (err, hash) -> 
-      cb hash: hash, salt: salt
+      cb {hash, salt}
 
 # NOTE - the password attribute exists in order
 # to have a way to pass the value to the 
