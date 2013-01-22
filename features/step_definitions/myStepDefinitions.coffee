@@ -36,6 +36,9 @@ detectButton = (name, cb) ->
     else throw new Error "Could not find button for #{name}"
   cb selector
 
+shouldBeOnThePage = (browser, callback, selector) ->
+  wrap browser.chain.waitForElementPresent(selector), callback
+
 module.exports = ->
 
   @World = require("../support/world.coffee").World
@@ -95,16 +98,14 @@ module.exports = ->
       else
         callback.fail "Expected there to be 1 user record with username #{username}, but found #{docs.length}"
 
-  # TODO - refactor these 3 common step definitions
-
   @Given /^I should be on the dashboard page$/, (callback) ->
-    wrap @browser.chain.waitForElementPresent('css=.dashboard'), callback
+    shouldBeOnThePage @browser, callback, 'css=.dashboard'
 
   @Given /^I should be on the home page$/, (callback) ->
-    wrap @browser.chain.waitForElementPresent('css=.homepage'), callback
+    shouldBeOnThePage @browser, callback, 'css=.dashboard'
 
   @Given /^I should be on the account page$/, (callback) ->
-    wrap @browser.chain.waitForElementPresent('css=.account'), callback
+    shouldBeOnThePage @browser, callback, 'css=.dashboard'
 
   @Given /^I reload the page$/, (callback) ->
     wrap @browser.chain.refresh(), callback
@@ -299,6 +300,8 @@ module.exports = ->
   @Given /^I type some json into the editor$/, (callback) ->
     json  = "{\"version\":\"2\"}"
     wrap @browser.chain.focus("//textarea").type("//textarea",json), callback
+
+  # TODO - refactor the 3 following steps, the logic is the same, variables change
 
   @Given /^the widget for dashboard "([^"]*)" should have the html "([^"]*)"$/, (name, html, callback) ->
     Dashboard.findOne {name}, (err, dashboard) ->
