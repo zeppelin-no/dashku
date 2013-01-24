@@ -1,3 +1,5 @@
+nodemailer = require 'nodemailer'
+
 #### HELPERS ####
 
 module.exports = (app) ->
@@ -9,3 +11,6 @@ module.exports = (app) ->
         next user
       else
         res status: 'failure', reason: err || "User not found"
+
+  # Setup the global mail transport
+  app.helpers.postman = nodemailer.createTransport app.config.mail.type, app.config.mail.options

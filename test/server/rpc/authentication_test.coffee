@@ -9,7 +9,7 @@ ss            = require "socketstream"
 internals     = require "../../../internals.coffee"
 config        = require "../../../server/config.coffee"
 
-postman       = ss.api.app.postman
+postman       = ss.api.app.helpers.postman
 User          = ss.api.app.models.User
 Dashboard     = ss.api.app.models.Dashboard
 Redis         = ss.api.app.Redis

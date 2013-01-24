@@ -10,7 +10,6 @@ app =
 app.config = require('./server/config')[ss.env]
 
 require("#{__dirname}/server/db.coffee") app
-require("#{__dirname}/server/mailer.coffee") app
 require("#{__dirname}/server/helpers.coffee") app
 
 require("#{__dirname}/server/controllers/dashboard.coffee") app

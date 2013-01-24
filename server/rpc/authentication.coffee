@@ -6,9 +6,9 @@ uuid                  = require 'node-uuid'
 User                  = ss.api.app.models.User
 Dashboard             = ss.api.app.models.Dashboard
 Redis                 = ss.api.app.Redis
-postman               = ss.api.app.postman
 config                = ss.api.app.config
 fetchUserFromSession  = ss.api.app.helpers.fetchUserFromSession
+postman               = ss.api.app.helpers.postman
 
 forgottenPasswordEmailText = (link) -> "Hi,
 \n
