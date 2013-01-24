@@ -4,7 +4,7 @@ md                    = require 'marked'
 fs                    = require 'fs'
 ss                    = require 'socketstream'
 _                     = require 'underscore'
-fetchUserFromSession  = ss.api.fetchUserFromSession
+fetchUserFromSession  = ss.api.app.helpers.fetchUserFromSession
 config                = ss.api.app.config
 
 exports.actions = (req, res, ss) ->  

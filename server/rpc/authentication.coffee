@@ -8,7 +8,7 @@ Dashboard             = ss.api.app.models.Dashboard
 Redis                 = ss.api.app.Redis
 postman               = ss.api.app.postman
 config                = ss.api.app.config
-fetchUserFromSession  = ss.api.fetchUserFromSession
+fetchUserFromSession  = ss.api.app.helpers.fetchUserFromSession
 
 forgottenPasswordEmailText = (link) -> "Hi,
 \n

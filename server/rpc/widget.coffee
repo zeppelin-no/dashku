@@ -2,7 +2,7 @@
 
 ss                    = require "socketstream"
 widgetController      = ss.api.app.controllers.widget
-fetchUserFromSession  = ss.api.fetchUserFromSession
+fetchUserFromSession  = ss.api.app.helpers.fetchUserFromSession
 
 exports.actions = (req, res, ss) ->
 
