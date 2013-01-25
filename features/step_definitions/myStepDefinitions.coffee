@@ -102,10 +102,10 @@ module.exports = ->
     shouldBeOnThePage @browser, callback, 'css=.dashboard'
 
   @Given /^I should be on the home page$/, (callback) ->
-    shouldBeOnThePage @browser, callback, 'css=.dashboard'
+    shouldBeOnThePage @browser, callback, 'css=.homepage'
 
   @Given /^I should be on the account page$/, (callback) ->
-    shouldBeOnThePage @browser, callback, 'css=.dashboard'
+    shouldBeOnThePage @browser, callback, 'css=.account'
 
   @Given /^I reload the page$/, (callback) ->
     wrap @browser.chain.refresh(), callback

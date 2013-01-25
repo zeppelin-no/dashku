@@ -1,6 +1,6 @@
+connectRoute      = require 'connect-route'
 fs                = require 'fs'
 http              = require 'http'
-connectRoute      = require 'connect-route'
 ss                = require 'socketstream'
 internals         = require './server/internals'
 
