@@ -2,7 +2,7 @@ fs                = require 'fs'
 http              = require 'http'
 connectRoute      = require 'connect-route'
 ss                = require 'socketstream'
-internals         = require './internals'
+internals         = require './server/internals'
 
 # Define a single-page client
 ss.client.define 'main',
@@ -11,7 +11,7 @@ ss.client.define 'main',
   code: ['libs', 'app']
   tmpl: '*'
 
-api = require "#{__dirname}/server/api.coffee"
+api = require "#{__dirname}/server/api"
 
 ss.http.middleware.prepend ss.http.connect.bodyParser()
 ss.http.middleware.prepend ss.http.connect.query()

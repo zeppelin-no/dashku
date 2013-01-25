@@ -3,8 +3,8 @@ md            = require 'marked'
 fs            = require 'fs'
 ss            = require 'socketstream'
 
-internals     = require "../../../internals.coffee"
-config        = require '../../../server/config.coffee'
+internals     = require "../../../server/internals"
+config        = require '../../../server/config'
 
 User          = ss.api.app.models.User
 ass           = ss.start()

@@ -2,8 +2,8 @@ assert        = require 'assert'
 Gently        = require 'gently'
 ss            = require 'socketstream'
 
-internals     = require "../../../internals.coffee"
-config        = require "../../../server/config.coffee"
+internals     = require "../../../server/internals"
+config        = require "../../../server/config"
 
 postman       = ss.api.app.helpers.postman
 User          = ss.api.app.models.User

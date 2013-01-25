@@ -4,7 +4,7 @@
 # to regenerate the API Key database
 regenerateApiKeyDb = (cb) ->
   ss               = require 'socketstream'
-  internals        = require './internals'
+  internals        = require './server/internals'
   User             = ss.api.app.models.User
   Redis            = ss.api.app.Redis
   User.find {}, (err, docs) ->
@@ -22,7 +22,7 @@ regenerateApiKeyDb = (cb) ->
 populateWidgetTemplates = (cb) ->
   fs                    = require 'fs'
   ss                    = require 'socketstream'
-  internals             = require './internals'
+  internals             = require './server/internals'
   WidgetTemplate        = ss.api.app.models.WidgetTemplate
   console.log "Clearing the WidgetTemplates collection"
   WidgetTemplate.remove {}, (err) ->
@@ -56,7 +56,7 @@ test = (cb) ->
   mocha                 = require 'mocha'
   process.env["SS_ENV"] = "test"
   ss                    = require 'socketstream'
-  internals             = require './internals'
+  internals             = require './server/internals'
   Mocha = new mocha
   for file in files
     Mocha.addFile "test/#{file.replace('.coffee','_test.coffee')}"

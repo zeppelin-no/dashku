@@ -1,6 +1,6 @@
 assert          = require 'assert'
 ss              = require 'socketstream'
-internals       = require "../../../internals.coffee"
+internals       = require "../../../server/internals"
 WidgetTemplate  = ss.api.app.models.WidgetTemplate
 ass             = ss.start()
 

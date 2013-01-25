@@ -1,7 +1,7 @@
 assert        = require 'assert'
 Gently        = require 'gently'
 ss            = require 'socketstream'
-internals     = require "../../../internals.coffee"
+internals     = require "../../../server/internals"
 
 User          = ss.api.app.models.User
 Dashboard     = ss.api.app.models.Dashboard
