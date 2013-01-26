@@ -13,7 +13,7 @@ World = (callback) ->
       host:     selenium.host
       port:     selenium.port
       url:      config[ss.env].apiHost
-      browser:  "googlechrome"
+      browser:  "firefox"
 
     callback {@browser}
     process.on 'exit', -> selenium.kill()
