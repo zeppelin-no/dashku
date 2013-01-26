@@ -142,6 +142,11 @@ module.exports = ->
       callback()
     , 2000
 
+  @Given /^I wait for (\d+) seconds for Travis CI$/, (seconds, callback) ->
+    setTimeout ->
+      callback()
+    , seconds * 1000
+
   @Then /^there should not be a user with username "([^"]*)"$/, (username, callback) ->
     User.find {username}, (err, docs) ->
       if docs.length is 0
