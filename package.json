@@ -37,7 +37,9 @@
     "soda"              : "latest"
   },
   "scripts": {
-    "start":"./node_modules/coffee-script/bin/coffee app.coffee",
-    "test":"./node_modules/coffee-script/bin/cake test"
+    "start"                   : "./node_modules/.bin/coffee app.coffee",
+    "test"                    : "./node_modules/.bin/cake test",
+    "cuke"                    : "./node_modules/.bin/cucumber.js",
+    "populateWidgetTemplates" : "node_modules/.bin/cake populateWidgetTemplates"
   }
 }

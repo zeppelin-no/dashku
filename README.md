@@ -29,14 +29,14 @@ Booting the application
 
     mongod &
     redis-server &
-    node_modules/.bin/coffee app.coffee
+    npm start
 
 Seeding the database with widget templates
 ---
 
 You can seed Dashku's database with widget templates by running this command:
 
-    node_modules/.bin/cake populateWidgetTemplates
+    npm run-script populateWidgetTemplates
 
 Using Dashku to create dashboards and widgets
 ---
@@ -48,11 +48,11 @@ Testing
 
 To run unit and functional tests:
 
-    node_modules/.bin/cake test
+    npm test
 
 To run the integration tests:
 
-    node_modules/.bin/cucumber.js
+    npm run-script cuke
 
 License & Credits
 ---
