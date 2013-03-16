@@ -21,6 +21,7 @@ Feature: Signup
     Given I am on the homepage
     And I follow "Signup"
     And the "signup" modal should appear
+    And I wait for a few seconds
     And I fill in "username" with "paulbjensen"
     And I fill in "email" with "paulbjensen@gmail.com"
     And I fill in "password" with "123456"
@@ -33,6 +34,7 @@ Feature: Signup
     Given I am on the homepage
     And I follow "Signup"
     And the "signup" modal should appear
+    And I wait for a few seconds
     And I fill in "username" with "paulbjensen"
     And I fill in "email" with "paulbjensen@gmail.com"
     And I wait for 8 seconds for Travis CI

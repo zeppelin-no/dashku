@@ -88,7 +88,6 @@ Feature: Dashboards
     And I should see "Account Sales"
     And there should not be a dashboard with the name "Your Dashboard"
  
-  @wip
   Scenario: Restyle the Dashboard
     Given a user exists with username "paulbjensen" and email "paulbjensen@gmail.com" and password "123456"
     And a dashboard exists with name "Your Dashboard" for user "paulbjensen"

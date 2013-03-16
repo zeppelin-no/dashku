@@ -135,7 +135,7 @@ module.exports = ->
     wrap @browser.chain.assertValue("//input[@name=\"#{field}\"]", value), callback
 
   @Then /^the field "([^"]*)" placeholder should be "([^"]*)"$/, (field, placeholder, callback) ->
-    wrap @browser.chain.assertAttribute("//input[@name=\"#{field}\"]@placeholder", placeholder), callback
+    wrap @browser.chain.waitForAttribute("//input[@name=\"#{field}\"]@placeholder", placeholder), callback
 
   @Then /^I wait for a few seconds$/, (callback) ->
     setTimeout ->
@@ -155,7 +155,7 @@ module.exports = ->
         callback.fail "There shouldn't be a user with username #{username}"
 
   @Given /^I click on the "([^"]*)" menu item$/, (item, callback) ->
-    wrap @browser.chain.click("//span[contains(text(),'#{item}')]"), callback    
+    wrap @browser.chain.waitForElementPresent("//span[contains(text(),'#{item}')]").click("//span[contains(text(),'#{item}')]"), callback    
 
   @Then /^I should see "([^"]*)"$/, (content, callback) ->
     wrap @browser.chain.assertTextPresent(content), callback 
@@ -213,7 +213,7 @@ module.exports = ->
   # TODO - refactor these 2 steps with logic to match the passed name to the selector
 
   @When /^I click on the edit style button$/, (callback) ->
-    wrap @browser.chain.click("//a[@id=\"styleDashboard\"]"), callback
+    wrap @browser.chain.waitForElementPresent("//a[@id=\"styleDashboard\"]").click("//a[@id=\"styleDashboard\"]"), callback
 
   @Given /^I click on the "([^"]*)" button$/, (name, callback) ->
     detectButton name, (selector) =>

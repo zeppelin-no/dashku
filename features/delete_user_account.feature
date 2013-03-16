@@ -21,9 +21,11 @@ Feature: Delete user account
     And the "cancel account" modal should appear
     And I fill in "password" with "123456"
     And I press "Cancel Account"
+    And I wait for a few seconds
     And the "cancel account" modal should disappear
     And I should be on the home page
     And I reload the page
+    And I wait for a few seconds
     And I should be on the home page
     And there should not be a user with username "paulbjensen"
 
@@ -41,6 +43,7 @@ Feature: Delete user account
     And I follow "paulbjensen"
     And I should be on the account page
     And I follow "Cancel Account"
+    And I wait for a few seconds
     And the "cancel account" modal should appear
     And I fill in "password" with "1234567"
     And I press "Cancel Account"

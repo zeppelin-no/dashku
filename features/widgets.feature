@@ -183,7 +183,6 @@ Feature: Widgets
     Then widget with name "Widget 1" should have a position of "1"
     And widget with name "Widget 2" should have a position of "0"
 
-  @wip
   Scenario: Switch between JavaScript and CoffeeScript
     Given a user exists with username "paulbjensen" and email "paulbjensen@gmail.com" and password "123456"
     And a dashboard exists with name "Your Dashboard" for user "paulbjensen"
