@@ -21,7 +21,7 @@
     "options"       : "latest",
     "redis"         : "latest",
     "request"       : "latest",
-    "socketstream"  : "0.3.3",
+    "socketstream"  : "0.3.4",
     "ss-coffee"     : "0.1.x",
     "ss-hogan"      : "0.1.x",
     "ss-jade"       : "0.1.x",
