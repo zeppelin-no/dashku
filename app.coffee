@@ -35,7 +35,7 @@ ss.client.formatters.add require 'ss-stylus'
 ss.client.templateEngine.use require 'ss-hogan'
 
 # Minimize and pack assets if you type: SS_PACK=1 SS_ENV=production node app.js
-ss.client.packAssets() if ss.env is 'production'
+ss.client.packAssets ss.api.app.config.packAssets if ss.env is 'production'
 
 # Start SocketStream
 server = http.Server ss.http.middleware
