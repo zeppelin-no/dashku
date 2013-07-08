@@ -1,5 +1,5 @@
 fs              = require 'fs'
-folderPath      = "#{__dirname}/../widgetTemplateFiles/peity-chart"
+folderPath      = "#{__dirname}/../widgetTemplateFiles/peityChart"
 
 name            = "Peity Chart"
 html            = ""

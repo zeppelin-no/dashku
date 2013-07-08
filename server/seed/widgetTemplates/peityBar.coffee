@@ -1,5 +1,5 @@
 fs              = require 'fs'
-folderPath      = "#{__dirname}/../widgetTemplateFiles/peity-bar"
+folderPath      = "#{__dirname}/../widgetTemplateFiles/peityBar"
 
 name            = "Peity Bar"
 html            = fs.readFileSync "#{folderPath}/main.html"
