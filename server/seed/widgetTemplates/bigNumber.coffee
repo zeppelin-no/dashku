@@ -1,9 +1,11 @@
 fs          = require 'fs'
+folderPath  = "#{__dirname}/../widgetTemplateFiles/bigNumber"
+
 name        = "Big Number"
-html        = fs.readFileSync "#{__dirname}/../widgetTemplateFiles/bigNumber/main.html"
-css         = fs.readFileSync "#{__dirname}/../widgetTemplateFiles/bigNumber/main.css"
-script      = fs.readFileSync "#{__dirname}/../widgetTemplateFiles/bigNumber/main.js"
-json        = fs.readFileSync "#{__dirname}/../widgetTemplateFiles/bigNumber/main.json"
+html        = fs.readFileSync "#{folderPath}/main.html"
+css         = fs.readFileSync "#{folderPath}/main.css"
+script      = fs.readFileSync "#{folderPath}/main.js"
+json        = fs.readFileSync "#{folderPath}/main.json"
 snapshotUrl = "/images/widgetTemplates/bigNumber.png"
 
 module.exports = {name, html, css, script, json, snapshotUrl}
