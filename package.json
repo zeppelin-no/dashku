@@ -6,7 +6,8 @@
   "contributors"  : [
     "Nick Niemeir <nick.niemeir@gmail.com> (http://nrn.io)",
     "Stuart Quin (https://github.com/stuartquin)",
-    "Joe Passavanti <gottaloveit@gmail.com>"
+    "Joe Passavanti <gottaloveit@gmail.com>",
+    "Maxime Beauchemin (https://github.com/mistercrunch)"
   ],
   "private"       : true,
   "engines"       : { "node": ">= 0.6.0" },
