@@ -30,11 +30,13 @@
     "underscore"    : "latest"
   },
   "devDependencies" : {
-    "cucumber"          : "latest",
-    "gently"            : "latest",
-    "mocha"             : "latest",
-    "selenium-launcher" : "latest",
-    "soda"              : "latest"
+    "cucumber"            : "latest",
+    "gently"              : "latest",
+    "mocha"               : "latest",
+    "selenium-launcher"   : "latest",
+    "soda"                : "latest",
+    "coveralls"           : "2.0.16",
+    "mocha-lcov-reporter" : "0.0.1"
   },
   "scripts": {
     "start"                   : "./node_modules/.bin/coffee app.coffee",
