@@ -59,7 +59,7 @@ window.makeWidgetsResizeable = (widget) ->
   widget.resizable
     minWidth : 200 
     minHeight : 180 
-    grid: [20,20]
+    grid: [117,107]
     helper: 'ui-resizable-helper'
     handles: 'se'
     stop: (event, ui) ->
