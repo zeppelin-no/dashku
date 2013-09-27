@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Anephenix/dashku.png)](https://travis-ci.org/Anephenix/dashku)
+[![Dependency Status](https://david-dm.org/anephenix/dashku.png)](https://david-dm.org/anephenix/dashku)
 
 Dashku
 ===
@@ -13,7 +14,7 @@ Dashku is a web application for creating dashboards and widgets in HTML, CSS, an
 Dependencies
 ---
 
-- Node.js (0.8)
+- Node.js (0.10)
 - MongoDB
 - Redis
 
