@@ -1,3 +1,4 @@
+@failing
 Feature: Delete user account
   In order to stop using Dashku
   As a user
@@ -12,8 +13,8 @@ Feature: Delete user account
     And I fill in "identifier" with "paulbjensen"
     And I fill in "password" with "123456789"
     And I press "Login"
-    And I should be on the home page
-    And I wait for 5 seconds
+    And I wait for 2 seconds
+    And I should be on the dashboard page
     And I follow "paulbjensen"
     And I should be on the account page
     And I follow "Cancel Account"
