@@ -57,7 +57,7 @@ module.exports = ->
     @wrap @browser.chain.testComplete(), callback
 
   @Given /^I am on the homepage$/, (callback) ->
-    @wrap @browser.chain.session().open('/'), callback
+    @wrap @browser.chain.session().open('/').windowMaximize(), callback
 
   @Given /^I follow "([^"]*)"$/, (link, callback) ->
     @wrap @browser.chain.waitForElementPresent("link=#{link}").click("link=#{link}"), callback
@@ -263,8 +263,7 @@ module.exports = ->
       if err?
         callback.fail err
       else
-        User.find {_id: dashboard.userId}, (err, user) ->
-          # TODO - find out why user is sometimes undefined
+        User.findOne {_id: dashboard.userId}, (err, user) ->
           if err?
             callback.fail err
           else

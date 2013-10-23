@@ -1,4 +1,3 @@
-@failing
 Feature: Delete user account
   In order to stop using Dashku
   As a user

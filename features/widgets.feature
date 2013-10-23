@@ -1,4 +1,3 @@
-@failed
 Feature: Widgets
   In order to display my data in a meaningful way
   As a user
@@ -162,7 +161,7 @@ Feature: Widgets
     And I fill in "identifier" with "paulbjensen@gmail.com"
     And I fill in "password" with "123456789"
     And I press "Login"
-    And I wait for 5 seconds
+    And I wait for a few seconds
     And I drag "Widget 1" 600 pixels to the right 
     And I wait for a few seconds
     Then widget with name "Widget 1" should have a position of "1"
