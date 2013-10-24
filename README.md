@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/Anephenix/dashku.png)](https://travis-ci.org/Anephenix/dashku)
 [![Dependency Status](https://david-dm.org/anephenix/dashku.png)](https://david-dm.org/anephenix/dashku)
+[![Code Climate](https://codeclimate.com/repos/5269343e56b10210e500f079/badges/a61f883bf2c000c21142/gpa.png)](https://codeclimate.com/repos/5269343e56b10210e500f079/feed)
 
 Dashku
 ===
