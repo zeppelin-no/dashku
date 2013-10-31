@@ -12,7 +12,7 @@ Introduction
 
 Dashku is a web application for creating dashboards and widgets in HTML, CSS, and JavaScript. It is open source, and available to download from Github. There is also a [hosted edition at Dashku.com](https://dashku.com).
 
-<a href="https://flattr.com/submit/auto?user_id=paulbjensen&url=https%3A%2F%2Fgithub.com%2FAnephenix%2Fdashku" target="_blank"><img src="//api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+<a href="https://flattr.com/submit/auto?user_id=paulbjensen&url=https%3A%2F%2Fgithub.com%2FAnephenix%2Fdashku" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
 
 Dependencies
 ---
