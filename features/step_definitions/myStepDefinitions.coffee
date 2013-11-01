@@ -124,7 +124,7 @@ module.exports = ->
           callback()
 
   @Then /^the field "([^"]*)" should be "([^"]*)"$/, (field, value, callback) ->
-    @wrap @browser.chain.assertValue("//input[@name=\"#{field}\"]", value), callback
+    @wrap @browser.chain.waitForValue("//input[@name=\"#{field}\"]", value), callback
 
   @Then /^the field "([^"]*)" placeholder should be "([^"]*)"$/, (field, placeholder, callback) ->
     @wrap @browser.chain.waitForAttribute("//input[@name=\"#{field}\"]@placeholder", placeholder), callback
@@ -156,10 +156,10 @@ module.exports = ->
     @wrap @browser.chain.waitForElementPresent(element).click(element), callback    
 
   @Then /^I should see "([^"]*)"$/, (content, callback) ->
-    @wrap @browser.chain.assertTextPresent(content), callback 
+    @wrap @browser.chain.waitForTextPresent(content), callback 
 
   @Then /^there should be an "([^"]*)" item in the Dashboards menu list$/, (item, callback) ->
-    @wrap @browser.chain.assertElementPresent("//span[contains(text(),'#{item}')]"), callback
+    @wrap @browser.chain.waitForElementPresent("//span[contains(text(),'#{item}')]"), callback
 
   @Given /^I type "([^"]*)" into "([^"]*)"$/, (newText, oldText, callback) ->
     element = "//h1[contains(text(),'#{oldText}')]"
@@ -215,7 +215,7 @@ module.exports = ->
     @wrap @browser.chain.focus("//textarea").type("//textarea", "\n\nbody {background:#111;}"), callback
 
   @Then /^the dashboard background should be dark grey$/, (callback) ->
-    @wrap @browser.chain.assertElementPresent("//style[@id=\"dashboardStyle\" and contains(text(), 'body {background:#111;}')]"), callback
+    @wrap @browser.chain.waitForElementPresent("//style[@id=\"dashboardStyle\" and contains(text(), 'body {background:#111;}')]"), callback
 
   @When /^I close the style editor$/, (callback) ->
     @wrap @browser.chain.click("//a[@class=\"close\"]"), callback
@@ -363,7 +363,7 @@ module.exports = ->
             callback.fail "The widget with name #{name} should have a position of #{position}, but has a position of #{widget.position}"
 
   @Given /^the script tab should say "([^"]*)"$/, (text, callback) ->
-    @wrap @browser.chain.assertElementPresent("//li[@id=\"script\" and contains(text(),'#{text}')]"), callback
+    @wrap @browser.chain.waitForElementPresent("//li[@id=\"script\" and contains(text(),'#{text}')]"), callback
 
   @Given /^I type in some coffeescript for the widget$/, (callback) ->
     # type some CoffeeScript into the editor's textarea
@@ -409,7 +409,7 @@ module.exports = ->
     @wrap @browser.chain.focus("//textarea").type("//textarea",coffeescript), callback
 
   @Given /^the widget on the page should contain "([^"]*)" in its html$/, (content, callback) ->
-    @wrap @browser.chain.assertElementPresent("//div[@id=\"message\" and contains(text(),'#{content}')]"), callback
+    @wrap @browser.chain.waitForElementPresent("//div[@id=\"message\" and contains(text(),'#{content}')]"), callback
 
   @Given /^I type some special javascript into the editor$/, (callback) ->
     specialJavascript = "
@@ -444,4 +444,4 @@ module.exports = ->
     @wrap @browser.chain.focus("//textarea").type("//textarea",json), callback
 
   @Given /^the special widget on the page should contain "([^"]*)" in its html$/, (content, callback) ->
-    @wrap @browser.chain.assertElementPresent("//div[@class=\"content\" and contains(text(),'#{content}')]"), callback
+    @wrap @browser.chain.waitForElementPresent("//div[@class=\"content\" and contains(text(),'#{content}')]"), callback
