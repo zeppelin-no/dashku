@@ -12,7 +12,6 @@ Feature: Signup
     And I fill in "password" with "123456"
     And I press "Signup"
     And the "signup" modal should disappear
-    And I wait for 8 seconds for Travis CI
     And there should be a user with username "paulbjensen"
     And I should be on the dashboard page
 
@@ -21,11 +20,9 @@ Feature: Signup
     Given I am on the homepage
     And I follow "Signup"
     And the "signup" modal should appear
-    And I wait for a few seconds
     And I fill in "username" with "paulbjensen"
     And I fill in "email" with "paulbjensen@gmail.com"
     And I fill in "password" with "123456"
-    And I wait for 8 seconds for Travis CI
     Then the field "username" should be ""
     And the field "username" placeholder should be "username is already taken"
 
@@ -34,10 +31,8 @@ Feature: Signup
     Given I am on the homepage
     And I follow "Signup"
     And the "signup" modal should appear
-    And I wait for a few seconds
     And I fill in "username" with "paulbjensen"
     And I fill in "email" with "paulbjensen@gmail.com"
-    And I wait for 8 seconds for Travis CI
     Then the field "email" should be ""
     And the field "email" placeholder should be "email is already taken"
 
@@ -49,6 +44,5 @@ Feature: Signup
     And I fill in "username" with "paulbjensen"
     And I fill in "email" with "paulbjensen@gmail.com"
     And I fill in "password" with "12345"
-    And I wait for 8 seconds for Travis CI
     Then the field "password" should be ""
     And the field "password" placeholder should be "password is too short"

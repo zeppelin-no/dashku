@@ -28,7 +28,6 @@ Feature: login
     And I fill in "identifier" with "bob"
     And I fill in "password" with "123456789101112"
     And I press "Login"
-    And I wait for 3 seconds
     Then the "login" modal should not disappear
     And the field "password" placeholder should be "the user bob does not exist"
 
@@ -36,6 +35,5 @@ Feature: login
     And I fill in "identifier" with "paulbjensen"
     And I fill in "password" with "123456788888888"
     And I press "Login"
-    And I wait for 3 seconds
     Then the "login" modal should not disappear
     And the field "password" placeholder should be "password incorrect"

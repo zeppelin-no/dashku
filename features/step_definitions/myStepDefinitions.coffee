@@ -350,7 +350,8 @@ module.exports = ->
     Dashboard.findOne {}, (err, dashboard) =>
       for widget in dashboard.widgets
         if widget.name is element
-          @wrap @browser.chain.dragAndDrop("//div[@class=\"content\"]","+#{pixelsRight},+0"), callback
+          selector = "//div[@class=\"content\"]"
+          @wrap @browser.chain.waitForElementPresent(selector).dragAndDrop(selector,"+#{pixelsRight},+0"), callback
 
   @Then /^widget with name "([^"]*)" should have a position of "([^"]*)"$/, (name, position, callback) ->
     Dashboard.findOne {}, (err, dashboard) =>
