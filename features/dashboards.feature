@@ -12,7 +12,6 @@ Feature: Dashboards
     And I fill in "identifier" with "paulbjensen@gmail.com"
     And I fill in "password" with "123456789"
     And I press "Login"
-    And I wait for 3 seconds  
 
   @test
   Scenario: Create a Dashboard
@@ -29,7 +28,6 @@ Feature: Dashboards
   Scenario: Rename a Dashboard
     Given pending
     And I type "Server Monitor" into "Your Dashboard"
-    And I wait for a few seconds
     And I should see "Server Monitor"
     And there should be an "Server Monitor" item in the Dashboards menu list
     And there should be a dashboard with the name "Server Monitor"
@@ -39,14 +37,12 @@ Feature: Dashboards
     And the dashboard should be fluid length
     And the dashboard with name "Your Dashboard" should have a size of "fluid"
     And I click on the resize icon
-    And I wait for 2 seconds
     And the dashboard should be fixed length
     And the dashboard with name "Your Dashboard" should have a size of "fixed"
   
   Scenario: Delete the Dashboard
     And I click on the "Dashboards" menu item
     And I click on the "New Dashboard" menu item
-    And I wait for a few seconds
     And the "new dashboard" modal should appear
     And I fill in "name" with "Account Sales"
     And I press "Create"
@@ -66,10 +62,8 @@ Feature: Dashboards
   Scenario: Restyle the Dashboard
     When I click on the "edit style" button
     And I change the dashboard background colour to dark grey
-    And I wait for a few seconds
     Then the dashboard background should be dark grey
     When I close the style editor
-    And I wait for a few seconds
     Then the dashboard with name "Your Dashboard" should have css with a background of dark grey 
 
   # TODO - create a step to populate the default dashboard with some widgets
