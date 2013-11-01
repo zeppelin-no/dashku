@@ -57,7 +57,7 @@ module.exports = ->
     @wrap @browser.chain.testComplete(), callback
 
   @Given /^I am on the homepage$/, (callback) ->
-    @wrap @browser.chain.session().open('/').windowMaximize(), callback
+    @wrap @browser.chain.session().open('/').windowMaximize().setSpeed(100), callback
 
   @Given /^I follow "([^"]*)"$/, (link, callback) ->
     @wrap @browser.chain.waitForElementPresent("link=#{link}").click("link=#{link}"), callback
@@ -226,7 +226,6 @@ module.exports = ->
         callback.fail err
       else
         dashboard = dashboards[0]
-        console.log(dashboards.length)
         if dashboard.css.match(/body {background:#111;}/)?
           callback()
         else

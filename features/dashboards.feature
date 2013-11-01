@@ -14,10 +14,10 @@ Feature: Dashboards
     And I press "Login"
     And I wait for 3 seconds  
 
+  @test
   Scenario: Create a Dashboard
     And I click on the "Dashboards" menu item
     And I click on the "New Dashboard" menu item
-    And I wait for a few seconds
     And the "new dashboard" modal should appear
     And I fill in "name" with "Account Sales"
     And I press "Create"
