@@ -7,7 +7,7 @@
 # and check if it is valid. If it's valid, we 
 # allow the user to change their password.
 #
-if document.location.href.match('fptoken')?
+if document.location.href.match('fptoken=')?
   token = document.location.href.split("=")[1]
   ss.rpc 'authentication.loadChangePassword', (token), (response) ->
     if response.status is 'success'
@@ -21,7 +21,7 @@ else
   # application as normal.
 
 
-  if document.location.href.match('dashboard')?
+  if document.location.href.match('dashboard=')?
     
     # Render the dashboard in view-only mode
     $('.navbar').hide()
