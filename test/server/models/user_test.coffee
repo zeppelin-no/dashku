@@ -103,3 +103,41 @@ describe "User", ->
         new User(userCredentials).save (err, doc) ->
           assert.notEqual err, null
           done()
+
+
+  describe ".authenticate", ->
+
+    before (done) ->
+      User.remove {}, (err) ->
+        username  = "paulbjensen"
+        email     = "paul@anephenix.com"
+        password  = "123456"
+        user = new User {username, email, password}
+        user.save (err, doc) ->
+          done()
+
+    describe "when the user exists and the password is correct", ->
+
+      it "should return a successful status along with the user record", (done) ->
+        User.authenticate {identifier: "paulbjensen", password: "123456"}, (response) ->
+          assert response.status is "success"
+          assert response.user.username is "paulbjensen"
+          assert response.user.email is "paul@anephenix.com"
+          done()
+
+
+    describe "when the user exists but the password is incorrect", ->
+
+      it "should return a failure status along with stating that the password is incorrect", (done) ->
+        User.authenticate {identifier: "paulbjensen", password: "1234567"}, (response) ->
+          assert response.status is "failure"
+          assert response.reason is "password incorrect"
+          done()
+
+    describe "when the user does not exist", ->
+
+      it "should return a failure status along with stating that the user does not exist", (done) ->
+        User.authenticate {identifier: "ziggywazoo", password: "istherelifeonmars"}, (response) ->
+          assert response.status is "failure"
+          assert response.reason is "the user ziggywazoo does not exist"
+          done()

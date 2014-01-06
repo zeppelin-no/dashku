@@ -64,22 +64,17 @@ exports.actions = (req, res, ss) ->
 
   # Login an existing user
   login: (data) ->
-    query = if data.identifier.match('@')? then {email: data.identifier.toLowerCase()} else {username: data.identifier.toLowerCase()}
-    User.findOne query, (err, doc) ->
-      if doc?
-        bcrypt.compare data.password, doc.passwordHash, (err, authenticated) ->
-          if authenticated
-              req.session.userId = doc._id
-              req.session.save (err) ->
-                if !err
-                  req.session.channel.subscribe "user_#{doc._id}"
-                  res status: 'success', user: _id: doc._id, username: doc.username, email: doc.email, demoUser: doc.demoUser
-                else
-                  res status: 'failure', reason: err
+    User.authenticate data, (response) ->
+      if response.status is 'success'
+        req.session.userId = response.user._id
+        req.session.save (err) ->
+          if !err
+            req.session.channel.subscribe "user_#{response.user._id}"
+            res response
           else
-            res status: 'failure', reason: "password incorrect"
+            res status: 'failure', reason: err
       else
-        res status: 'failure', reason: "the user #{data.identifier} does not exist"
+        res response
   
   # Logout the user from the session
   logout: ->

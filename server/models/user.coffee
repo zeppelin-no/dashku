@@ -44,4 +44,17 @@ module.exports = (app) ->
     else
       next()
 
+
+  app.schemas.Users.statics.authenticate = (data, cb) ->
+    query = if data.identifier.match('@')? then {email: data.identifier.toLowerCase()} else {username: data.identifier.toLowerCase()}
+    @findOne query, (err, doc) ->
+      if doc?
+        bcrypt.compare data.password, doc.passwordHash, (err, authenticated) ->
+          if authenticated
+            cb status: 'success', user: _id: doc._id, username: doc.username, email: doc.email, demoUser: doc.demoUser
+          else
+            cb status: 'failure', reason: "password incorrect"
+      else
+        cb status: 'failure', reason: "the user #{data.identifier} does not exist"
+
   app.models.User = mongoose.model 'User', app.schemas.Users
