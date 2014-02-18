@@ -25,8 +25,7 @@ else
     
     # Render the dashboard in view-only mode
     $('.navbar').hide()
-    id = document.location.hash.split("dashboard=")[1].split('?')[0].split('&')[0]
-
+    id = document.location.href.split("?dashboard=")[1].split('?')[0].split('&')[0]
     # We define a special bucket just for the view only-dashboard
     DashboardViewWidget = new Bucket
       loadFunction: (cb) ->
