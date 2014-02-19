@@ -1,11 +1,11 @@
 'use strict';
 
 // GLOBALS
-var ss						= ss,
-	mainState				= mainState,
-	showLogoutState			= showLogoutState,
-	serializeFormData		= serializeFormData,
-	alert					= alert;
+// - ss
+// - mainState
+// - showLogoutState
+// - serializeFormData
+// - alert
 
 
 

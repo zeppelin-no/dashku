@@ -2,10 +2,10 @@
 
 
 // GLOBALS
-var ss					= ss,
-	serializeFormData	= serializeFormData,
-	showLogoutState		= showLogoutState,
-	alert				= alert;
+// - ss
+// - serializeFormData
+// - showLogoutState
+// - alert
 
 
 
