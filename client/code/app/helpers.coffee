@@ -1,7 +1,7 @@
 # A helper function to sort the dashboard's menu
 # items in Alphabetical order.
 window.sortDashboardMenuList = (parent,child) ->
-  mylist = jQuery parent
+  mylist = $ parent
   listitems = mylist.children(child).get()
   listitems.sort (a, b) ->
     compA = $(a).text().toUpperCase()
@@ -14,7 +14,7 @@ window.sortDashboardMenuList = (parent,child) ->
       else
         return 0
   listitems.reverse()
-  jQuery.each listitems, (idx, itm) ->
+  $.each listitems, (idx, itm) ->
     mylist.prepend itm 
 
 # A helper function to scope a widget's CSS so that
@@ -30,9 +30,9 @@ window.scopeCSS = (text,id) ->
 
 # A helper function to serialize the form data 
 # into a JS object to be sent to the server
-window.serializeFormData = (jquerySelector) ->
+window.serializeFormData = ($Selector) ->
   data = {}
-  jQuery.each jQuery(jquerySelector).serializeArray(), (index,key) -> data[key.name] = key.value
+  $.each $($Selector).serializeArray(), (index,key) -> data[key.name] = key.value
   data
 
 # A helper function to remove an error
@@ -55,7 +55,7 @@ window.displayErrorOnField = (element, errorMessage, errorCollection, callback=n
 # widgets resizeable, by clicking on the 
 # bottom-right handle, and dragging it.
 window.makeWidgetsResizeable = (widget) ->
-  widget = jQuery(".widget") unless widget?
+  widget = $(".widget") unless widget?
   widget.resizable
     minWidth : 200 
     minHeight : 180 
@@ -63,7 +63,7 @@ window.makeWidgetsResizeable = (widget) ->
     helper: 'ui-resizable-helper'
     handles: 'se'
     stop: (event, ui) ->
-      ss.rpc 'widget.update', dashboardId: Dashboard.selected._id, _id: jQuery(@).attr('data-id'), width: jQuery(@).width(), height: jQuery(@).height(), (response) ->
+      ss.rpc 'widget.update', dashboardId: Dashboard.selected._id, _id: $(@).attr('data-id'), width: $(@).width(), height: $(@).height(), (response) ->
         if response.status is 'success'
           # Nothing to do, the widget has been resized
         else
@@ -79,15 +79,15 @@ window.makeWidgetsResizeable = (widget) ->
 # TODO - refactor this chunky code
 window.renderScreenSize = (size='fixed') ->
   if size is 'fixed'
-    jQuery.each jQuery('.switch-width'), (index, element) ->
-      element = jQuery(element)
+    $.each $('.switch-width'), (index, element) ->
+      element = $(element)
       if element.hasClass('row-fluid')
         element.removeClass('row-fluid').addClass('row')
       if element.hasClass('container-fluid')
         element.removeClass('container-fluid').addClass('container')
   else
-    jQuery.each jQuery('.switch-width'), (index, element) ->
-      element = jQuery(element)
+    $.each $('.switch-width'), (index, element) ->
+      element = $(element)
       if element.hasClass('row')
         element.removeClass('row').addClass('row-fluid')
       if element.hasClass('container')
@@ -95,7 +95,7 @@ window.renderScreenSize = (size='fixed') ->
 
 # A helper function that renders the Dashboard's CSS
 window.renderCSS = (css) ->
-  jQuery('style#dashboardStyle').text css
+  $('style#dashboardStyle').text css
 
 
 #### Models ####
@@ -136,13 +136,13 @@ window.Dashboard = new Bucket
         sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]')
         makeWidgetsResizeable()
         # Bind the widget position update call to the widgets when they are sorted
-        jQuery('#widgets').sortable 
+        $('#widgets').sortable 
           handle: '.content'
           update: (event, ui) ->
             positions = {}
-            jQuery('#widgets').children().each (index, widget) -> 
-              positions[jQuery(widget).attr('data-id')] = index
-              if index is jQuery('#widgets').children().length - 1
+            $('#widgets').children().each (index, widget) -> 
+              positions[$(widget).attr('data-id')] = index
+              if index is $('#widgets').children().length - 1
                 ss.rpc 'dashboard.updateWidgetPositions', {_id: dashboard._id, positions: positions}, (response) ->
                   if response.status is 'success'
                     console.log 'waa'
@@ -213,48 +213,48 @@ window.WidgetTemplate = new Bucket
 # The account element (the top right section of the page, username, login/logout link)
 accountState = new StateManager('#account')
 # The homepage state for the account element (render template with login link)
-accountState.addState 'homepage', -> jQuery("#account").html ss.tmpl["homepage-account"].r()
+accountState.addState 'homepage', -> $("#account").html ss.tmpl["homepage-account"].r()
 # The app state for the account element (render template with username and logout link)
-accountState.addState 'app', (data) -> jQuery("#account").html ss.tmpl["app-account"].render data
+accountState.addState 'app', (data) -> $("#account").html ss.tmpl["app-account"].render data
 
 # The nav element (the links in the top bar, like the Dashboards menu)
 window.navState = new StateManager('#nav')
 # The homepage state for the nav element (render template which contains no menus/links)
-navState.addState 'homepage', -> jQuery("#nav").html ss.tmpl["homepage-nav"].r()
+navState.addState 'homepage', -> $("#nav").html ss.tmpl["homepage-nav"].r()
 # The dashboard state for the nav element (render template which contains Dashboards menu and new widget link)
-navState.addState 'dashboard', (data) -> jQuery("#nav").html ss.tmpl['dashboard-nav'].render data, dashboardMenuItem: ss.tmpl['dashboard-dashboardMenuItem']
+navState.addState 'dashboard', (data) -> $("#nav").html ss.tmpl['dashboard-nav'].render data, dashboardMenuItem: ss.tmpl['dashboard-dashboardMenuItem']
 
 # The main element (the main part of the page)
 window.mainState = new StateManager('#main')
 # The homepage state for the main element (render homepage template, and adjust screen size if it was set to fluid by a dashboard)
 mainState.addState 'homepage', ->
   renderScreenSize()
-  jQuery('#main').html ss.tmpl['homepage-main'].r()
+  $('#main').html ss.tmpl['homepage-main'].r()
 
 # The dashboard state for the main element (render dashboard template with data)
 mainState.addState 'dashboard', (data) ->
-  jQuery("#main").html ss.tmpl['dashboard-main'].render data, widget: ss.tmpl['dashboard-widget']
+  $("#main").html ss.tmpl['dashboard-main'].render data, widget: ss.tmpl['dashboard-widget']
 
 # The account state for the main element (render account template with data)
 mainState.addState 'account', (data) ->
   Dashboard.selected = undefined
   renderScreenSize()
-  jQuery('#newWidget').remove()
-  jQuery('#main').html ss.tmpl['account-main'].render data
+  $('#newWidget').remove()
+  $('#main').html ss.tmpl['account-main'].render data
 
 # The docs state for the main element (render docs template)
 mainState.addState 'docs', (data) ->
   Dashboard.selected = undefined
   renderScreenSize()
-  jQuery('#newWidget').remove()
-  jQuery('#main').html ss.tmpl['docs-main'].r()
+  $('#newWidget').remove()
+  $('#main').html ss.tmpl['docs-main'].r()
 
 # The dashboardView state for the main element (render dashboardView template with data)
 mainState.addState 'dashboardView', (data) ->
-  jQuery("#main").html ss.tmpl['dashboardView-main'].render data, widget: ss.tmpl['dashboardView-widget']
+  $("#main").html ss.tmpl['dashboardView-main'].render data, widget: ss.tmpl['dashboardView-widget']
 
 # Display the signup modal when the signup link is clicked
-jQuery(document).on 'click', 'a#signup', (event) ->
+$(document).on 'click', 'a#signup', (event) ->
   signup.init signupFunction: (element) ->
     ss.rpc 'authentication.signup', serializeFormData(element.find('form')), (response) ->
       if response.status is 'success'

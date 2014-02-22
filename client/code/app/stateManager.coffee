@@ -44,9 +44,9 @@ class window.StateManager
   # been set before, and fade in the new one.
   setState: (state, data=null) ->
     if @currentState?
-      jQuery("#{@domId} .#{@currentState}").fadeOut 'slow', =>
+      $("#{@domId} .#{@currentState}").fadeOut 'slow', =>
         @states[state] data
-        jQuery("#{@domId} .#{state}").hide().fadeIn 'slow'
+        $("#{@domId} .#{state}").hide().fadeIn 'slow'
     else
       @states[state] data
-      jQuery("#{@domId} .#{state}").hide().fadeIn 'slow'
+      $("#{@domId} .#{state}").hide().fadeIn 'slow'

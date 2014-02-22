@@ -7,6 +7,8 @@
 
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
+
+
 window.EE = (function() {
 	function EE(options) {
 		this.emit = __bind(this.emit, this);
@@ -22,6 +24,8 @@ window.EE = (function() {
 			this.emit('load', options.loadData);
 		}
 	}
+
+
 
 	EE.prototype.on = function(eventName, fnk) {
 		var streamId;
@@ -42,6 +46,8 @@ window.EE = (function() {
 		}
 	};
 
+
+
 	EE.prototype.emit = function(eventName, data) {
 		var fnk, _i, _len, _ref, _results;
 		if (this.listeners[eventName] != null) {
@@ -54,6 +60,8 @@ window.EE = (function() {
 			return _results;
 		}
 	};
+
+
 
 	return EE;
 
