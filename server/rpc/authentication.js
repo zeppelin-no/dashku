@@ -71,7 +71,11 @@ exports.actions = function (req, res, ss) {
 					req.session.userId = doc._id;
 					req.session.save(function (err) {
 
-						if (err === undefined) {
+						if (err) {
+
+							res({status: 'failure', reason: err});
+
+						} else {
 
 							var dashboard = new Dashboard({name: 'Your Dashboard', userId: user._id});
 							dashboard.save(function (err) {
@@ -82,8 +86,6 @@ exports.actions = function (req, res, ss) {
 									res({status: 'failure', reason: 'Failed to create dashboard for the new user'});
 								}
 							});
-						} else {
-							res({status: 'failure', reason: err});
 						}
 					});
 				} else {
@@ -110,11 +112,11 @@ exports.actions = function (req, res, ss) {
 				if (response.status === 'success') {
 					req.session.userId = response.user._id;
 					req.session.save(function (err) {
-						if (err === undefined) {
+						if (err) {
+							res({status: 'failure', reason: err});
+						} else {
 							req.session.channel.subscribe('user_' + response.user._id);
 							res(response);
-						} else {
-							res({status: 'failure', reason: err});
 						}
 					});
 				} else {
@@ -129,7 +131,9 @@ exports.actions = function (req, res, ss) {
 		logout: function () {
 			req.session.userId = null;
 			req.session.save(function (err) {
-				if (err === undefined) {
+				if (err) {
+					res({status: 'failure', reason: err});
+				} else {
 
 					// For some reason, one of the tests is causing
 					// this function to blow up
@@ -140,8 +144,6 @@ exports.actions = function (req, res, ss) {
 					//
 					req.session.channel.reset();
 					res({status: 'success'});
-				} else {
-					res({status: 'failure', reason: err});
 				}
 			});
 		},
@@ -329,7 +331,9 @@ exports.actions = function (req, res, ss) {
 						req.session.userId = null;
 						req.session.save(function (err) {
 
-							if (err === null) {
+							if (err) {
+								res({status: 'failure', reason: err});
+							} else {
 
 								req.session.channel.reset();
 								Dashboard.remove({userId: user._id}, function (err) {
@@ -347,8 +351,6 @@ exports.actions = function (req, res, ss) {
 									}
 
 								});
-							} else {
-								res({status: 'failure', reason: err});
 							}
 						});
 					} else {
