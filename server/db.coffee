@@ -11,7 +11,7 @@ module.exports = (app) ->
   
   # MongoDB-related configuration
   mongoose.connect "mongodb://#{app.config.db}"
-  require("#{__dirname}/models/user.coffee") app
-  require("#{__dirname}/models/widget.coffee") app
-  require("#{__dirname}/models/dashboard.coffee") app
-  require("#{__dirname}/models/widgetTemplate.coffee") app
+  require("#{__dirname}/models/user") app
+  require("#{__dirname}/models/widget") app
+  require("#{__dirname}/models/dashboard") app
+  require("#{__dirname}/models/widgetTemplate") app
