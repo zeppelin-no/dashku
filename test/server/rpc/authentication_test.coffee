@@ -230,7 +230,7 @@ describe "Authentication", ->
           assert.equal sm.from, "Dashku Admin <admin@dashku.com>"
           assert.equal sm.to, "paul@anephenix.com"
           assert.equal sm.subject, "Forgotten Password"
-          assert.equal sm.text, "Hi,\n\nWe got a notification that you\'ve forgotten your password. It\'s cool, we\'ll help you out. \n\nIf you wish to change your password, follow this link: #{config[ss.env].apiHost}?fptoken=#{fpToken}\n\nRegards,\n\n  Dashku Admin"
+          assert.equal sm.text, "Hi,\n\nWe got a notification that you\'ve forgotten your password. It\'s cool, we\'ll help you out.\n\nIf you wish to change your password, follow this link: #{config[ss.env].apiHost}?fptoken=#{fpToken}\n\nRegards,\n\n  Dashku Admin"
           assert.equal sm.html, "<p>Hi,</p>\n<p>We got a notification that you\'ve forgotten your password. It\'s cool, we\'ll help you out.</p>\n<p>If you wish to change your password, follow this link: <a>#{config[ss.env].apiHost}?fptoken=#{fpToken}</a></p>\n<p>Regards,</p>\n<p>  Dashku Admin</p>"
           done()
         ass.rpc "authentication.forgotPassword", identifier, (res) ->
