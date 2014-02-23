@@ -39,7 +39,7 @@
     "mocha-lcov-reporter" : "0.0.1"
   },
   "scripts": {
-    "start"                   : "./node_modules/.bin/coffee app.coffee",
+    "start"                   : "node app",
     "test"                    : "./node_modules/.bin/cake test",
     "cuke"                    : "./node_modules/.bin/cucumber.js",
     "populateWidgetTemplates" : "./node_modules/.bin/cake populateWidgetTemplates",
