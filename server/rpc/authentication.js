@@ -62,7 +62,7 @@ exports.actions = function (req, res, ss) {
 		signup: function (data) {
 
 			var user = new User({username: data.username, email: data.email, password: data.password});
-			user.save(function (err,doc) {
+			user.save(function (err, doc) {
 
 				if (err === null) {
 
@@ -70,7 +70,8 @@ exports.actions = function (req, res, ss) {
 					var user = {_id: doc._id, username: doc.username, email: doc.email};
 					req.session.userId = doc._id;
 					req.session.save(function (err) {
-						if (err === null) {
+
+						if (err === undefined) {
 
 							var dashboard = new Dashboard({name: 'Your Dashboard', userId: user._id});
 							dashboard.save(function (err) {
@@ -109,7 +110,7 @@ exports.actions = function (req, res, ss) {
 				if (response.status === 'success') {
 					req.session.userId = response.user._id;
 					req.session.save(function (err) {
-						if (err === null) {
+						if (err === undefined) {
 							req.session.channel.subscribe('user_' + response.user._id);
 							res(response);
 						} else {
@@ -128,7 +129,7 @@ exports.actions = function (req, res, ss) {
 		logout: function () {
 			req.session.userId = null;
 			req.session.save(function (err) {
-				if (err === null) {
+				if (err === undefined) {
 
 					// For some reason, one of the tests is causing
 					// this function to blow up
