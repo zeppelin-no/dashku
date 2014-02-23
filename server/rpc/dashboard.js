@@ -5,6 +5,10 @@
 // Dependencies
 //
 var _                     = require('underscore');
+var ss                    = require('socketstream');
+var dashboardController   = ss.api.app.controllers.dashboard;
+var Dashboard             = ss.api.app.models.Dashboard;
+var fetchUserFromSession  = ss.api.app.helpers.fetchUserFromSession;
 
 
 
@@ -12,9 +16,6 @@ var _                     = require('underscore');
 //
 exports.actions = function (req, res, ss) {
 
-	var dashboardController   = ss.app.controllers.dashboard;
-	var Dashboard             = ss.app.models.Dashboard;
-	var fetchUserFromSession  = ss.app.helpers.fetchUserFromSession;
 
 	req.use('session');
 
