@@ -43,6 +43,6 @@
     "test"                    : "./node_modules/.bin/cake test",
     "cuke"                    : "./node_modules/.bin/cucumber.js",
     "populateWidgetTemplates" : "./node_modules/.bin/cake populateWidgetTemplates",
-    "console"                 : "./node_modules/.bin/coffee repl.coffee"
+    "console"                 : "node repl"
   }
 }
