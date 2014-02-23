@@ -12,10 +12,10 @@ var ss = require('socketstream');
 // Generate the app object to store the models, controllers and helpers
 //
 var app = {
-  models      : {},
-  controllers : {},
-  schemas     : {},
-  helpers     : {}
+	models      : {},
+	controllers : {},
+	schemas     : {},
+	helpers     : {}
 };
 
 
