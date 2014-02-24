@@ -42,30 +42,6 @@ populateWidgetTemplates = (cb) ->
       console.log "There was an error clearing the WidgetTemplates collection"
       cb 1
 
-# TODO - figure out a way to automate this
-files = [
-  "server/models/user.coffee"
-  "server/rpc/authentication.coffee"
-  "server/rpc/dashboard.coffee"
-  "server/rpc/general.coffee"
-  "server/rpc/widget.coffee"
-  "server/rpc/widgetTemplate.coffee"
-]
-
-test = (cb) ->
-  mocha                 = require 'mocha'
-  process.env["SS_ENV"] = "test"
-  ss                    = require 'socketstream'
-  internals             = require './server/internals'
-  Mocha = new mocha
-  for file in files
-    Mocha.addFile "test/#{file.replace('.coffee','_test.coffee')}"
-  Mocha.run (res) ->
-    cb res if cb?
-
-task 'test', 'run unit tests for the project', ->
-  test process.exit
-
 task 'regenerateApiKeyDb', 'Compiles the SocketStream assets, and copies them to a fixed path', ->
   regenerateApiKeyDb process.exit
 
