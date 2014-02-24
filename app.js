@@ -20,7 +20,7 @@ ss.client.define('main', {
 });
 
 
-require('coffee-script');
+
 var api = require(__dirname + '/server/api');
 
 
