@@ -1,22 +1,4 @@
 # Cakefile
- 
-# If you move to a new Redis DB, you may want to run this function
-# to regenerate the API Key database
-regenerateApiKeyDb = (cb) ->
-  ss               = require 'socketstream'
-  internals        = require './server/internals'
-  User             = ss.api.app.models.User
-  Redis            = ss.api.app.Redis
-  User.find {}, (err, docs) ->
-    if !err
-      if docs.length > 0
-        for doc in docs
-          Redis.hset "apiKeys", doc.apiKey, doc._id, Redis.print
-          if docs.indexOf doc is docs.length-1
-            cb 0
-      else
-        console.log "There are no users in the database, no need to regenerate the API key database"
-        cb 0
 
 # This populates the WidgetTemplates collection with Widget Templates
 populateWidgetTemplates = (cb) ->
@@ -41,9 +23,6 @@ populateWidgetTemplates = (cb) ->
     else
       console.log "There was an error clearing the WidgetTemplates collection"
       cb 1
-
-task 'regenerateApiKeyDb', 'Compiles the SocketStream assets, and copies them to a fixed path', ->
-  regenerateApiKeyDb process.exit
 
 task 'populateWidgetTemplates', "Populates the database with widget templates", ->
   populateWidgetTemplates process.exit
