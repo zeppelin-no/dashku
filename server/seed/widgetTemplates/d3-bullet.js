@@ -17,5 +17,5 @@ module.exports = {
 	css         : fs.readFileSync(folderPath + '/main.css'),
 	script      : fs.readFileSync(folderPath + '/main.js'),
 	json        : fs.readFileSync(folderPath + '/main.json'),
-	snapshotUrl : '/images/widgetTemplates/d3d3BulletImg.png'
+	snapshotUrl : '/images/widgetTemplates/d3BulletImg.png'
 };
