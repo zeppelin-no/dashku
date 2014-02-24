@@ -42,8 +42,8 @@
     "start"                   : "node app",
     "test"                    : "NODE_ENV=test node_modules/.bin/mocha --compilers coffee:coffee-script test/**/*",
     "cuke"                    : "./node_modules/.bin/cucumber.js",
-    "regenerateApiKeyDb"      : "node ./lib/regenerateApiKeyDb",
-    "populateWidgetTemplates" : "./node_modules/.bin/cake populateWidgetTemplates",
+    "regenerateApiKeyDb"      : "node lib/regenerateApiKeyDb",
+    "populateWidgetTemplates" : "node lib/populateWidgetTemplates.js",
     "console"                 : "node repl"
   }
 }
