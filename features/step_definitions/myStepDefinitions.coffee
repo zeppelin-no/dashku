@@ -32,7 +32,7 @@ detectButton = (name, cb) ->
 
 module.exports = ->
 
-  @World = require("../support/world.coffee").World
+  @World = require('../support/world').World
 
   @Before (callback) ->
     User.remove {}, (err) ->
