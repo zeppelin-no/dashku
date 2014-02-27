@@ -32,7 +32,7 @@ var World = function (callback) {
 	if (browser === null) {
 		selenium(function (err, selenium) {
 
-			process.on('exit', selenium.kill);
+			process.on('exit', function () { selenium.kill(); });
 
 			var newBrowser = soda.createClient({
 				host    : selenium.host,
