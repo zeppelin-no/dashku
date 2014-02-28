@@ -10,6 +10,8 @@ require('../../../server/internals');
 var WidgetTemplate  = ss.api.app.models.WidgetTemplate;
 var ass             = ss.start();
 
+
+
 describe('WidgetTemplate', function () {
 
 
