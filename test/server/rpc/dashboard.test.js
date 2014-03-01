@@ -8,11 +8,8 @@ var assert        = require('assert');
 var Gently        = require('gently');
 var ss            = require('socketstream');
 require('../../../server/internals');
-// config        = require "../../../server/config"
-// var postman       = ss.api.app.helpers.postman;
 var User          = ss.api.app.models.User;
 var Dashboard     = ss.api.app.models.Dashboard;
-// var Redis         = ss.api.app.Redis;
 var ass           = ss.start();
 
 
