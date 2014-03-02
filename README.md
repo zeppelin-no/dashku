@@ -40,7 +40,7 @@ Seeding the database with widget templates
 
 You can seed Dashku's database with widget templates by running this command:
 
-    npm run-script populateWidgetTemplates
+    npm run populateWidgetTemplates
 
 Using Dashku to create dashboards and widgets
 ---
@@ -56,7 +56,7 @@ To run unit and functional tests:
 
 To run the integration tests:
 
-    npm run-script cuke
+    npm run cuke
 
 License & Credits
 ---

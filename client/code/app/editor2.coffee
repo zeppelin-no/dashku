@@ -1,14 +1,14 @@
 # Editor v2
 #
 # A rewrite of the code editor. 
-# Dependencies: jQuery, jQuery-ui(draggable), ss.tmpl(Hogan), CodeMirror, scopeCss global function, underscore.js
+# Dependencies: $, $-ui(draggable), ss.tmpl(Hogan), CodeMirror, scopeCss global function, underscore.js
 
 module.exports =
 
   # loads the widget editor, and puts it on the page
   init: (@dashboardId, @widget, @exitCb=null) ->
-    jQuery('body').append ss.tmpl['widget-editor2'].render scriptType: @titleify @widget.scriptType
-    jQuery('#editor2').hide().fadeIn 500
+    $('body').append ss.tmpl['widget-editor2'].render scriptType: @titleify @widget.scriptType
+    $('#editor2').hide().fadeIn 500
     @setupDataStore()
     @element().draggable({handle:'.header'}).css
       top: "#{(window.innerHeight-@element().height())/2}px"
@@ -20,7 +20,7 @@ module.exports =
 
   # return the element
   element: -> 
-    jQuery '#editor2'
+    $ '#editor2'
 
   # Loads CodeMirror with the code and the code's type
   loadEditor: (value, mode, codeType) ->
@@ -42,7 +42,7 @@ module.exports =
   bindTabs: ->
     @element().find('li.tab#script').tooltip {}
     @element().find('li.tab').on 'click', (event) =>
-      @selectTab jQuery(event.currentTarget).attr('id')
+      @selectTab $(event.currentTarget).attr('id')
 
   # add Twitter tooltips to the action buttons, and bind their clicks
   bindActionButtons: ->
@@ -63,7 +63,7 @@ module.exports =
     @element().find('#download').on 'click', =>      
       @exit =>
         @exitCb()
-        jQuery(ss.tmpl['widget-scriptModal'].render({dashboardId: @dashboardId, _id: @widget._id})).modal()
+        $(ss.tmpl['widget-scriptModal'].render({dashboardId: @dashboardId, _id: @widget._id})).modal()
 
   # bind the close button
   bindCloseAction: ->
@@ -104,7 +104,7 @@ module.exports =
 
   # Updates ther widget's html and css on-the-fly
   liveUpdate: (codeType, value) ->
-    widgetElement = jQuery("#widgets .widget[data-id='#{@widget._id}']")
+    widgetElement = $("#widgets .widget[data-id='#{@widget._id}']")
     switch codeType
       when 'html'
         widgetElement.find('.content').html value
@@ -121,7 +121,7 @@ module.exports =
 
   # handles UI removal of editor
   wrapItUp: (cb=null) ->
-    jQuery('.tooltip').remove() # prevent the download tooltip hanging around
+    $('.tooltip').remove() # prevent the download tooltip hanging around
     @element().remove()
     cb() if cb?
 

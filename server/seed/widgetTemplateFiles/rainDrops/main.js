@@ -1,6 +1,7 @@
 // The widget's html as a jQuery object
 var widget = this.widget;
 var widgetId = widget.parent().attr('data-id');
+var particle;
 
 // This runs when the widget is loaded
 this.on('load', function(data){
