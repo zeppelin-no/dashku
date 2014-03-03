@@ -31,6 +31,7 @@
   "devDependencies" : {
     "cucumber"            : "latest",
     "gently"              : "latest",
+    "istanbul"            : "0.2.4",
     "mocha"               : "1.17.1",
     "selenium-launcher"   : "latest",
     "soda"                : "latest",
@@ -40,6 +41,7 @@
   "scripts": {
     "start"                   : "node app",
     "test"                    : "NODE_ENV=test node_modules/.bin/mocha test/server/**/*",
+    "cover"                   : "node_modules/.bin/istanbul cover node_modules/.bin/cucumber.js",
     "cuke"                    : "./node_modules/.bin/cucumber.js",
     "regenerateApiKeyDb"      : "node lib/regenerateApiKeyDb",
     "populateWidgetTemplates" : "node lib/populateWidgetTemplates.js",
