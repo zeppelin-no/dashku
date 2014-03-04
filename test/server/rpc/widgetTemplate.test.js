@@ -8,6 +8,16 @@ var assert          = require('assert');
 var ss              = require('socketstream');
 require('../../../server/internals');
 var WidgetTemplate  = ss.api.app.models.WidgetTemplate;
+
+
+
+// Omit logging
+//
+ss.api.log.debug	= function (){};
+ss.api.log.info		= function (){};
+
+
+
 var ass             = ss.start();
 
 

@@ -20,6 +20,13 @@ var config        = require('../../../server/config');
 
 
 
+// Omit logging
+//
+ss.api.log.debug	= function (){};
+ss.api.log.info		= function (){};
+
+
+
 var postman       = ss.api.app.helpers.postman;
 var User          = ss.api.app.models.User;
 var Dashboard     = ss.api.app.models.Dashboard;

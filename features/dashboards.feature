@@ -13,7 +13,6 @@ Feature: Dashboards
     And I fill in "password" with "123456789"
     And I press "Login"
 
-  @test
   Scenario: Create a Dashboard
     And I click on the "Dashboards" menu item
     And I click on the "New Dashboard" menu item
@@ -64,16 +63,16 @@ Feature: Dashboards
     And I change the dashboard background colour to dark grey
     Then the dashboard background should be dark grey
     When I close the style editor
-    Then the dashboard with name "Your Dashboard" should have css with a background of dark grey 
+    Then the dashboard with name "Your Dashboard" should have css with a background of dark grey
 
-  # TODO - create a step to populate the default dashboard with some widgets
-  @wip    
-  Scenario: Copy an existing Dashboard
-    Given a user has created an account
-    And they have logged in
-    When they click on the "copy dashboard" button
-    Then they should see the "copy dashboard" modal
-    When they fill in "name" with "My other analytics dashboard"
-    And they press "Create a copy"
-    Then there should be a dashboard with the name "My other analytics dashboard"
-    And they should see "My other analytics dashboard"
+  # # TODO - create a step to populate the default dashboard with some widgets
+  # @wip    
+  # Scenario: Copy an existing Dashboard
+  #   Given a user has created an account
+  #   And they have logged in
+  #   When they click on the "copy dashboard" button
+  #   Then they should see the "copy dashboard" modal
+  #   When they fill in "name" with "My other analytics dashboard"
+  #   And they press "Create a copy"
+  #   Then there should be a dashboard with the name "My other analytics dashboard"
+  #   And they should see "My other analytics dashboard"

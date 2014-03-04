@@ -9,6 +9,15 @@ var Gently        = require('gently');
 var ss            = require('socketstream');
 require('../../../server/internals');
 
+
+
+// Omit logging
+//
+ss.api.log.debug	= function (){};
+ss.api.log.info		= function (){};
+
+
+
 var User          = ss.api.app.models.User;
 var Dashboard     = ss.api.app.models.Dashboard;
 var ass           = ss.start();

@@ -11,6 +11,13 @@ var ss                    = require('socketstream');
 var config                = require('../../server/config');
 require('../../app');
 
+
+// Stub the output for now
+//
+ss.api.log.debug 	= function (){};
+ss.api.log.info 	= function (){};
+
+
 var browser = null;
 
 var World = function (callback) {

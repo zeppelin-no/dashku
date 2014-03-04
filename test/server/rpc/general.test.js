@@ -9,6 +9,16 @@ var md            = require('marked');
 var fs            = require('fs');
 var ss            = require('socketstream');
 require('../../../server/internals');
+
+
+
+// Omit logging
+//
+ss.api.log.debug	= function (){};
+ss.api.log.info		= function (){};
+
+
+
 var config        = require('../../../server/config');
 var User          = ss.api.app.models.User;
 var ass           = ss.start();

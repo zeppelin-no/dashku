@@ -8,6 +8,15 @@ var ss        = require('socketstream');
 var assert    = require('assert');
 require('../../../server/internals');
 
+
+
+// Omit logging
+//
+ss.api.log.debug	= function (){};
+ss.api.log.info		= function (){};
+
+
+
 var User = ss.api.app.models.User;
 
 describe('User', function () {

@@ -10,6 +10,16 @@ var ss            = require('socketstream');
 require('../../../server/internals');
 var User          = ss.api.app.models.User;
 var Dashboard     = ss.api.app.models.Dashboard;
+
+
+
+// Omit logging
+//
+ss.api.log.debug	= function (){};
+ss.api.log.info		= function (){};
+
+
+
 var ass           = ss.start();
 
 
