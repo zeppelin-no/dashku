@@ -10,10 +10,10 @@
     "Maxime Beauchemin (https://github.com/mistercrunch)"
   ],
   "private"       : true,
-  "engines"       : { "node": ">= 0.6.0" },
+  "engines"       : { "node": ">= 0.10.0" },
   "dependencies"  : {
     "bcrypt"        : "0.7.7",
-    "connect-route" : "0.1.3",
+    "connect-route" : "0.1.4",
     "marked"        : "latest",
     "mongoose"      : "3.8.8",
     "nodemailer"    : "latest",
