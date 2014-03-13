@@ -11,11 +11,11 @@ var apiUrl                = ss.api.app.config.apiUrl;
 
 
 
-var rubyScript      = fs.readFileSync(__dirname + '/scriptDownloads/script.rb');
-var nodejsScript    = fs.readFileSync(__dirname + '/scriptDownloads/script.js');
-var coffeeScript    = fs.readFileSync(__dirname + '/scriptDownloads/script.coffee');
-var phpScript       = fs.readFileSync(__dirname + '/scriptDownloads/script.php');
-var pythonScript    = fs.readFileSync(__dirname + '/scriptDownloads/script.py');
+var rubyScript      = fs.readFileSync(__dirname + '/scriptDownloads/script.rb').toString();
+var nodejsScript    = fs.readFileSync(__dirname + '/scriptDownloads/script.js').toString();
+var coffeeScript    = fs.readFileSync(__dirname + '/scriptDownloads/script.coffee').toString();
+var phpScript       = fs.readFileSync(__dirname + '/scriptDownloads/script.php').toString();
+var pythonScript    = fs.readFileSync(__dirname + '/scriptDownloads/script.py').toString();
 
 
 
