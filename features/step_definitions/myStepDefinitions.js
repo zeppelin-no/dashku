@@ -420,18 +420,20 @@ module.exports = function () {
 
 
 	this.Then(/^the dashboard with name "([^"]*)" should have css with a background of dark grey$/, function (name, callback) {
-		Dashboard.find({name:name}, function (err, dashboards) {
-			if (err) {
-				callback.fail(err);
-			} else {
-				var dashboard = dashboards[0];
-				if (dashboard.css.match(/body {background:#111;}/) !== null) {
-					callback();
+		setTimeout(function () {		
+			Dashboard.find({name:name}, function (err, dashboards) {
+				if (err) {
+					callback.fail(err);
 				} else {
-					callback.fail('The dashboard does not have that style');
+					var dashboard = dashboards[0];
+					if (dashboard.css.match(/body {background:#111;}/) !== null) {
+						callback();
+					} else {
+						callback.fail('The dashboard does not have that style');
+					}
 				}
-			}
-		});
+			});
+		}, 500);
 	});
 
 
