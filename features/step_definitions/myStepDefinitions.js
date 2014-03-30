@@ -13,6 +13,23 @@ var widgetController  = ss.api.app.controllers.widget;
 
 
 
+function checkDashboardAttribute (name, type, value, callback) {
+	Dashboard.findOne({name: name}, function (err, dashboard) {
+		if (err) {
+			callback.fail(err);
+		} else {
+			var widget = dashboard.widgets[0];
+			if (widget[type].match(value) !== null) {
+				callback();
+			} else {
+				callback.fail('The widget\'s ' + type + ' was supposed to be ' + value + ', but is ' + widget[type]);
+			}
+		}
+	});
+}
+
+
+
 var detectModal = function (name, cb) {
 	var character = (function() {
 		switch (name) {
@@ -547,55 +564,21 @@ module.exports = function () {
 		this.wrap(this.browser.chain.focus('//textarea').type('//textarea',json), callback);
 	});
 
-	// TODO - refactor the 3 following steps, the logic is the same, variables change
 
 	this.Given(/^the widget for dashboard "([^"]*)" should have the html "([^"]*)"$/, function (name, html, callback) {
-		Dashboard.findOne({name: name}, function (err, dashboard) {
-			if (err) {
-				callback.fail(err);
-			} else {
-				var widget = dashboard.widgets[0];
-				if (widget.html.match(html) !== null) {
-					callback();
-				} else {
-					callback.fail('The widget\'s html was supposed to be ' + html + ', but is ' + widget.html);
-				}
-			}
-		});
+		checkDashboardAttribute(name, 'html', html, callback);
 	});
 
 
 
 	this.Given(/^the widget for dashboard "([^"]*)" should have the css "([^"]*)"$/, function (name, css, callback) {
-		Dashboard.findOne({name: name}, function (err, dashboard) {
-			if (err) {
-				callback.fail(err);
-			} else {
-				var widget = dashboard.widgets[0];
-				if (widget.css.match(css) !== null) {
-					callback();
-				} else {
-					callback.fail('The widget\'s html was supposed to be ' + css + ', but is ' + widget.css);
-				}
-			}
-		});
+		checkDashboardAttribute(name, 'css', css, callback);
 	});
 
 
 
 	this.Given(/^the widget for dashboard "([^"]*)" should have the script "([^"]*)"$/, function (name, script, callback) {
-		Dashboard.findOne({name: name}, function (err, dashboard) {
-			if (err) {
-				callback.fail(err);
-			} else {
-				var widget = dashboard.widgets[0];
-				if (widget.script.match(script) !== null) {
-					callback();
-				} else {
-					callback.fail('The widget\'s script was supposed to include ' + script + ', but is ' + widget.script);
-				}
-			}
-		});
+		checkDashboardAttribute(name, 'script', script, callback);
 	});
 
 
@@ -643,13 +626,12 @@ module.exports = function () {
 
 
 	this.Then(/^widget with name "([^"]*)" should have a position of "([^"]*)"$/, function (name, position, callback) {
-		var self = this;
 		Dashboard.findOne({}, function (err, dashboard) {
 			for (var i=0;i<dashboard.widgets.length;i++) {
 				var widget = dashboard.widgets[i];
 				if (widget.name === name) {
 
-					if (widget.position - new Number(position) == 0) {
+					if (widget.position - Number(position) === 0) {
 						callback();
 					} else {
 						callback.fail('The widget with name ' + name + ' should have a position of ' + position + ', but has a position of ' + widget.position);
