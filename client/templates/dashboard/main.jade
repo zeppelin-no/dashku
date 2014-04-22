@@ -5,13 +5,13 @@ style(id="dashboardStyle"). {{{css}}}
       h1.name(contenteditable="true") {{name}}
     .span4.settings
       a(href="#", title="Adjust the width of the dashboard").btn.btn-primary#screenWidth
-        i.icon-white.icon-resize-horizontal
+        i.fa.fa-arrows-h
       a(href="#", title="Change the style of the dashboard").btn.btn-primary#styleDashboard
-        i.icon-white.icon-edit
+        i.fa.fa-pencil-square-o
       a(href="{{dashboardUrl}}", target="_blank", title="Share your dashboard with a read-only link").btn.btn-primary#share
-        i.icon-white.icon-share
+        i.fa.fa-external-link
       a(href="#", title="Delete the dashboard").btn.btn-danger#deleteDashboard
-        i.icon-white.icon-trash
+        i.fa.fa-trash-o
   .row.switch-width
     .span12#widgets(data-dashboardId="{{_id}}")
       | {{#widgets}}
