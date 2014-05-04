@@ -65,9 +65,9 @@ var detectButton = function (name, cb) {
 		case 'big number':
 			return '//div[@class="name" and contains(text(),\'Big Number\')]';
 		case 'delete widget':
-			return '//div[@class="delete" and @title="delete widget"]';
+			return '//i[@class="fa fa-times-circle-o delete" and @title="delete widget"]';
 		case 'edit widget':
-			return '//div[@class="edit" and @title="edit widget"]';
+			return '//i[@class="fa fa-cog edit" and @title="edit widget"]';
 		case 'edit style':
 			return '//a[@id="styleDashboard"]';
 		case 'close editor':

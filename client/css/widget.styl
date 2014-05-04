@@ -96,24 +96,23 @@
   .buttons
     float right
     opacity 0
-    width 23px
+    width 25px
     height 20px
     z-index 2
 
-    .edit
+    i.edit
+      margin 0px
+      padding 0px
       cursor pointer
       float left
-      width 10px
-      height 10px
-      background url('/images/cog.png')
+      color #ffcc00
 
-    .delete
+    i.delete
+      margin 0px
+      padding 0px
       cursor pointer
-      margin-left 3px
-      float left
-      background url('/images/delete2.png')
-      width 10px
-      height 10px
+      float right
+      color red
 
   .header
     font-weight bold
@@ -152,18 +151,21 @@
   opacity 1
 
 .widget .ui-resizable-handle.ui-resizable-se
-  opacity 0
+  color #fff
   width 14px
   height 14px
   float right
   margin-right -5px
   margin-top -32px
-  background url('/images/resize.png')
-  background-repeat no-repeat
-  background-position center
   cursor se-resize
   z-index 3
   padding 0px
+
+.widget .ui-resizable-handle.ui-resizable-se:before {
+    font-family FontAwesome;
+    content "\f065"
+    font-size 12px
+}
 
 .widget:hover .ui-resizable-handle.ui-resizable-se
   opacity 1
