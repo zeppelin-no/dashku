@@ -38,7 +38,8 @@ var attributes = {
 
 	php: {
 		script       : phpScript,
-		contentType  : 'php'
+		contentType  : 'php',
+		replace      : 'THEURL'
 	},
 
 	py: {
@@ -53,7 +54,8 @@ var wrapperFunction = function (req,res, fileFormat) {
 	Dashboard.findOne({_id: req.params.dashboardId}, function (err, dashboard) {
 		if (err === null && dashboard) {
 			var widget  = dashboard.widgets.id(req.params.id);
-			var data    = attributes[fileFormat].script.replace(/URL/,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id);
+			var regex = new RegExp(typeof (attributes[fileFormat].replace) !== 'undefined' ? attributes[fileFormat].replace : 'URL');
+			var data    = attributes[fileFormat].script.replace(regex,apiUrl).replace(/JSONDATA/,widget.json).replace(/WIDGETID/,widget._id);
 			res.writeHead(200, { 'Content-disposition': 'attachment', 'Content-Type': 'application/' + attributes[fileFormat].contentType });
 			res.end(data);
 		} else {

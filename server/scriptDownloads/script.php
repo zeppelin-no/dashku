@@ -1,4 +1,4 @@
-<?
+<?php
 // Instructions
 // 
 // php dashku_WIDGETID.php
@@ -31,4 +31,3 @@ function restcall($url,$vars) {
 }
 
 restcall("THEURL",'JSONDATA');
-?>
