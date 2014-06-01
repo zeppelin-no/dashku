@@ -7,7 +7,7 @@ var compare_pos = -23
 var target_url = 'd3js.org';
 var compare_suffix = ' DoD';
 
-onload = function(data){
+var onload = function(data){
   
 // The widget's html as a jQuery object
 var width = wgt.width();
@@ -21,8 +21,8 @@ head.ready(function(){
   
   var div = d3.select(widget);
   div.html('');
-  var svg = div.append('svg'); 
-  
+  var svg = div.append('svg');
+
   data = example_data();
   
   var v = data[data.length-1][1];
@@ -140,11 +140,11 @@ this.on('transmission', function(data){
 });
 
 
-example_data = function(){
+var example_data = function(){
   //Building a random growing trend
 	var rnd = d3.random.normal(5000000, 1000000);
   var data = [];
-  for(i=0; i<24; i++){
+  for(var i=0; i<24; i++){
   	data.push([
       new Date(2013, 1, 1, i, 0, 0, 0), 
       rnd() + (i*(rnd()/40))
@@ -153,4 +153,5 @@ example_data = function(){
   
   return data;
 }
+
 onload();
