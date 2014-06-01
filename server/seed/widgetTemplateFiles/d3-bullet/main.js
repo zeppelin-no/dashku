@@ -26,6 +26,7 @@ var load_data = {
   "current":   65,
   "previous":  50
 };
+var bullet;
 
 // This runs when the widget is loaded
 this.on('load', function(data){
