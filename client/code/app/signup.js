@@ -64,9 +64,13 @@ function validateMinimumLength (value, number, trueFunction, falseFunction) {
 var ErrorHandler;
 
 ErrorHandler = (function() {
+
+
 	function ErrorHandler() {
 		this.errors = {};
 	}
+
+
 
 	ErrorHandler.prototype.addError = function(key, value, cb) {
 		if (cb == null) {
@@ -83,6 +87,8 @@ ErrorHandler = (function() {
 			return cb();
 		}
 	};
+
+
 
 	ErrorHandler.prototype.removeError = function(key, value, cb) {
 		var index;
@@ -103,6 +109,8 @@ ErrorHandler = (function() {
 		}
 	};
 
+
+
 	ErrorHandler.prototype.removeErrors = function(key, cb) {
 		if (cb == null) {
 			cb = null;
@@ -113,9 +121,13 @@ ErrorHandler = (function() {
 		}
 	};
 
+
+
 	ErrorHandler.prototype.valid = function() {
 		return Object.keys(this.errors).length === 0;
 	};
+
+
 
 	return ErrorHandler;
 
@@ -312,6 +324,8 @@ module.exports = {
 		}
 	},
 
+
+
 	// This does a bit of cleanup when the modal is closed
 	bindUponClosure: function () {
 		this.errors = {};
@@ -319,6 +333,8 @@ module.exports = {
 			$(this).remove();
 		});
 	},
+
+
 
 	// This binds the signup function to the form submission
 	bindSignupFunction: function (signupFunction) {
@@ -329,6 +345,8 @@ module.exports = {
 			});
 		}
 	},
+
+
 
 	// A semantic helper function
 	element: function () {
