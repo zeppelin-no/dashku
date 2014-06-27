@@ -33,7 +33,7 @@
     "gently"              : "latest",
     "istanbul"            : "0.2.4",
     "mocha"               : "1.17.1",
-    "selenium-launcher"   : "latest",
+    "selenium-launcher"   : "1.1.10",
     "soda"                : "latest",
     "coveralls"           : "2.10.0",
     "mocha-lcov-reporter" : "0.0.1"
