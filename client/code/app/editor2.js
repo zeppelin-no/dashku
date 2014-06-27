@@ -13,7 +13,7 @@ module.exports = {
 	init: function (dashboardId, widget, exitCb) {
 		this.dashboardId = dashboardId;
 		this.widget = widget;
-		if (!exitCb) { this.exitCb = null; }
+		if (!exitCb) { this.exitCb = null; } else {this.exitCb = exitCb; }
 		$('body').append(ss.tmpl['widget-editor2'].render({scriptType: this.titleify(this.widget.scriptType)}));
 		$('#editor2').hide().fadeIn(500);
 		this.setupDataStore();
