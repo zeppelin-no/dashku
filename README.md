@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/Anephenix/dashku.png)](https://travis-ci.org/Anephenix/dashku)
 [![Coverage Status](https://coveralls.io/repos/Anephenix/dashku/badge.png?branch=master)](https://coveralls.io/r/Anephenix/dashku?branch=master)
 [![Dependency Status](https://david-dm.org/anephenix/dashku.png)](https://david-dm.org/anephenix/dashku)
+[![Dev Dependency Status](https://david-dm.org/anephenix/dashku.png)](https://david-dm.org/anephenix/dashku#info=devDependencies)
 [![Code Climate](https://codeclimate.com/github/Anephenix/dashku.png)](https://codeclimate.com/github/Anephenix/dashku)
 [![Gitter chat](https://badges.gitter.im/Anephenix/dashku.png)](https://gitter.im/Anephenix/dashku)
 
