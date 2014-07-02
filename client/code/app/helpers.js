@@ -45,6 +45,9 @@ window.scopeCSS = function (text,id) {
       text = text.replace(line, '.widget[data-id="' + id + '"] ' + line);
     }
   }
+
+  return text;
+
 };
 
 
