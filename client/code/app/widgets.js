@@ -214,7 +214,7 @@ ss.event.on('widgetUpdated', function (data, channelName) {
         // TODO - find a better way to bind view-rendering to the model changes.
         Dashboard.all[dashboardIndex].widgets[widgetIndex] = data.widget;
         if (Dashboard.selected._id === data.dashboardId) {
-            widgetView = $('#widgets').find('.widget[data-id="' + data.widget._id + '"]');
+            var widgetView = $('#widgets').find('.widget[data-id="' + data.widget._id + '"]');
             widgetView.find('.content').html($(ss.tmpl['dashboard-widget'].render(data.widget)).find('.content').html());
             widgetView.find('style').text(data.widget.scopedCSS);
             widgetView.css({width: data.widget.width + 'px', height: data.widget.height + 'px'});
