@@ -13,7 +13,7 @@ module.exports = {
 		},
 		apiUrl: 'http://localhost:3000/api/transmission',
 		apiHost: 'http://localhost:3000/',
-		forgottenPasswordUrl: 'http://localhost/?fptoken=',
+		forgottenPasswordUrl: 'http://localhost:3000/?fptoken=',
 		mail: {
 			type: 'SMTP',
 			options: {
