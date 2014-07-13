@@ -21,7 +21,7 @@
     "options"       : "0.0.5",
     "redis"         : "0.10.3",
     "request"       : "2.36.0",
-    "socketstream"  : "git://github.com/socketstream/socketstream.git",
+    "socketstream"  : "0.3.10",
     "ss-coffee"     : "0.1.x",
     "ss-hogan"      : "0.1.x",
     "ss-jade"       : "0.1.x",
