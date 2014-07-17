@@ -1,7 +1,7 @@
 {
   "name"          : "dashku-web",
   "description"   : "Realtime dashboards and widgets built with HTML, CSS, and JavaScript",
-  "version"       : "0.0.1",
+  "version"       : "0.0.2",
   "author"        : "Anephenix <paul@anephenix.com> (http://anephenix.com)",
   "contributors"  : [
     "Nick Niemeir <nick.niemeir@gmail.com> (http://nrn.io)",
