@@ -17,7 +17,14 @@ describe('generateTestUser()', function () {
 
     beforeEach(function (done) {
 
-        fs.unlink(expectedFilePath, done);
+        fs.exists(expectedFilePath, function (exists) {
+
+            if (!exists) { return done(); }
+
+            fs.unlink(expectedFilePath, done);
+
+        });
+
 
     });
 
