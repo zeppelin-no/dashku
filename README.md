@@ -4,6 +4,8 @@
 [![Dev Dependency Status](https://david-dm.org/anephenix/dashku/dev-status.png)](https://david-dm.org/anephenix/dashku#info=devDependencies)
 [![Code Climate](https://codeclimate.com/github/Anephenix/dashku.png)](https://codeclimate.com/github/Anephenix/dashku)
 [![Gitter chat](https://badges.gitter.im/Anephenix/dashku.png)](https://gitter.im/Anephenix/dashku)
+[![Issue Stats](http://issuestats.com/github/Anephenix/dashku/badge/pr)](http://issuestats.com/github/Anephenix/dashku)
+[![Issue Stats](http://issuestats.com/github/Anephenix/dashku/badge/issue)](http://issuestats.com/github/Anephenix/dashku)
 
 Dashku
 ===
