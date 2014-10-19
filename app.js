@@ -4,6 +4,7 @@
 
 // Dependencies
 //
+var bodyParser        = require('body-parser');
 var connectRoute      = require('connect-route');
 var http              = require('http');
 var ss                = require('socketstream');
@@ -25,10 +26,10 @@ var api = require(__dirname + '/server/api');
 
 
 
-ss.http.middleware.prepend(ss.http.connect.bodyParser());
+ss.http.middleware.prepend(bodyParser.json());
 ss.http.middleware.prepend(ss.http.connect.query());
 ss.http.middleware.prepend(connectRoute(api));
-
+ss.session.options.secret = ss.api.app.config.sessionSecret;
 
 
 // Serve this client on the root URL

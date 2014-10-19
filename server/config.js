@@ -24,7 +24,8 @@ module.exports = {
 				}
 			}
 		},
-		packAssets: {}
+		packAssets: {},
+		sessionSecret: 'feK4li1aek8koe7JeiC3shai7ahy7uduch5ahY7n'
 	},
 
 
@@ -42,7 +43,8 @@ module.exports = {
 		mail: {
 			type: 'stub'
 		},
-		packAssets: {}
+		packAssets: {},
+		sessionSecret: 'feK4li1aek8koe7JeiC3shai7ahy7uduch5ahY7n'
 	},
 
 
@@ -60,7 +62,8 @@ module.exports = {
 		mail: {
 			type: 'stub'
 		},
-		packAssets: {}
+		packAssets: {},
+		sessionSecret: 'feK4li1aek8koe7JeiC3shai7ahy7uduch5ahY7n'
 	}
 
 };
