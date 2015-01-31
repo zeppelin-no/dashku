@@ -1,5 +1,13 @@
 'use strict';
 
+
+
+// Dependencies
+//
+var scopeCSS  = require('./shared').scopeCSS;
+
+
+
 // Editor v2
 //
 // A rewrite of the code editor. 

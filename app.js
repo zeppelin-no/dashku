@@ -32,6 +32,7 @@ ss.http.middleware.prepend(connectRoute(api));
 ss.session.options.secret = ss.api.app.config.sessionSecret;
 
 
+
 // Serve this client on the root URL
 ss.http.route('/', function (req, res) {
 	res.serveClient('main');

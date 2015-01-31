@@ -66,4 +66,4 @@ To run the integration tests:
 License & Credits
 ---
 
-&copy; 2014 Anephenix Ltd. The Nike swoosh is a registered trademark of Nike Inc. Dashku is a trademark of Anephenix Ltd, and dashku is licenced under the LGPLv3 license. See LICENSE for details.
+&copy; 2015 Anephenix Ltd. The Nike swoosh is a registered trademark of Nike Inc. Dashku is a trademark of Anephenix Ltd, and dashku is licenced under the LGPLv3 license. See LICENSE for details.
