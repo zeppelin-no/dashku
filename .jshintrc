@@ -24,6 +24,12 @@
     "it",
     "beforeEach",
     "afterEach",
-    "expect"
+    "expect",
+    "$",
+    "ss",
+    "EE",
+    "_",
+    "CodeMirror",
+    "alert"
   ]
 }
