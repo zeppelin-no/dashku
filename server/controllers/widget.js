@@ -8,22 +8,10 @@
 
 // Dependencies
 //
-var _  = require('underscore');
-var ss = require('socketstream');
+var _  			= require('underscore');
+var ss 			= require('socketstream');
+var scopeCSS 	= require('../../client/code/app/shared').scopeCSS;
 
-// TODO - make this shared between client and server, in too many places ATM
-//
-var scopeCSS = function (text,id) {
-	var lines = text.split('\n');
-
-	lines.forEach(function (line) {
-		if (line.match(/{/) !== null) {
-			text = text.replace(line, '.widget[data-id=\''+ id +'\'] ' + line);
-		}
-	});
-
-	return text;
-};
 
 
 // A man who moves a mountain, starts by moving small stones - Chinese Proverb

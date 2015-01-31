@@ -29,29 +29,6 @@ window.sortDashboardMenuList = function (parent,child) {
 
 
 
-// A helper function to scope a widget's CSS so that
-// it applies only to that widget, and doesn't leak 
-// out and disrupt other widgets.
-//
-// TODO - put this in a shared directory, so it can be used by both client and server
-window.scopeCSS = function (text,id) {
-  var lines = text.split('\n');
-
-  var line, text, _i, _len;
-
-  for (_i = 0, _len = lines.length; _i < _len; _i++) {
-    line = lines[_i];
-    if (line.match(/{/) !== null) {
-      text = text.replace(line, '.widget[data-id="' + id + '"] ' + line);
-    }
-  }
-
-  return text;
-
-};
-
-
-
 // A helper function to serialize the form data
 // into a JS object to be sent to the server
 window.serializeFormData = function (selector) {  
