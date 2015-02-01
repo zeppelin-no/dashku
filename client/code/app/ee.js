@@ -14,13 +14,13 @@ window.EE = (function() {
 		this.emit = __bind(this.emit, this);
 		this.on = __bind(this.on, this);
 		this.listeners = {};
-		this.widget = jQuery(".widget[data-id='" + options.id + "'] .content");
+		this.widget = jQuery('.widget[data-id=\'' + options.id + '\'] .content');
 		if (options.scriptType === 'javascript') {
 			eval(options.code);
 		} else {
 			eval(CoffeeScript.compile(options.code));
 		}
-		if (options.dontEmit == null) {
+		if (!options.dontEmit) {
 			this.emit('load', options.loadData);
 		}
 	}
@@ -29,17 +29,17 @@ window.EE = (function() {
 
 	EE.prototype.on = function(eventName, fnk) {
 		var streamId;
-		if (this.listeners[eventName] != null) {
+		if (this.listeners[eventName]) {
 			this.listeners[eventName].push(fnk);
 		} else {
 			this.listeners[eventName] = [fnk];
 		}
-		if (typeof eventName.match === "function" ? eventName.match('stream_') : void 0) {
+		if (typeof eventName.match === 'function' ? eventName.match('stream_') : void 0) {
 			streamId = eventName.split('_')[1];
 			return ss.rpc('stream.subscribe', streamId, (function(_this) {
-				return function(response) {
-					return ss.event.on("stream_" + streamId, function(data, channelName) {
-						return _this.emit("stream_" + streamId, data);
+				return function (response) {
+					return ss.event.on('stream_' + streamId, function (data) {
+						return _this.emit('stream_' + streamId, data);
 					});
 				};
 			})(this));
@@ -50,7 +50,7 @@ window.EE = (function() {
 
 	EE.prototype.emit = function(eventName, data) {
 		var fnk, _i, _len, _ref, _results;
-		if (this.listeners[eventName] != null) {
+		if (this.listeners[eventName]) {
 			_ref = this.listeners[eventName];
 			_results = [];
 			for (_i = 0, _len = _ref.length; _i < _len; _i++) {

@@ -1,13 +1,13 @@
 {
-  "name": "dashku-web",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/anephenix/dashku"
+  "name"          : "dashku-web",
+  "repository"    : {
+    "type"  : "git",
+    "url"   : "git://github.com/anephenix/dashku"
   },
-  "description": "Realtime dashboards and widgets built with HTML, CSS, and JavaScript",
-  "version": "0.0.2",
-  "author": "Anephenix <paul@anephenix.com> (http://anephenix.com)",
-  "contributors": [
+  "description"   : "Realtime dashboards and widgets built with HTML, CSS, and JavaScript",
+  "version"       : "0.0.2",
+  "author"        : "Anephenix <paul@anephenix.com> (http://anephenix.com)",
+  "contributors"  : [
     "Nick Niemeir <nick.niemeir@gmail.com> (http://nrn.io)",
     "Stuart Quin (https://github.com/stuartquin)",
     "Joe Passavanti <gottaloveit@gmail.com>",
@@ -32,30 +32,31 @@
     "ss-stylus"     : "0.1.x",
     "underscore"    : "1.7.0"
   },
-  "devDependencies": {
-    "cucumber": "0.4.7",
-    "gently": "0.9.2",
-    "istanbul": "0.3.5",
-    "mocha": "2.1.0",
-    "notes": "0.0.4",
-    "npm-dview": "1.1.2",
-    "selenium-launcher": "1.1.11",
-    "soda": "latest",
-    "coveralls": "2.11.2",
-    "mocha-lcov-reporter": "0.0.1"
+  "devDependencies" : {
+    "cucumber"            : "0.4.7",
+    "gently"              : "0.9.2",
+    "istanbul"            : "0.3.5",
+    "jshint"              : "2.6.0",
+    "mocha"               : "2.1.0",
+    "notes"               : "0.0.4",
+    "npm-dview"           : "1.1.2",
+    "selenium-launcher"   : "1.1.10",
+    "soda"                : "latest",
+    "coveralls"           : "2.11.2",
+    "mocha-lcov-reporter" : "0.0.1"
   },
-  "scripts": {
-    "checkDependencies": "node_modules/.bin/npm-dview",
-    "console": "node repl",
-    "cover-cukes": "NODE_ENV=cucumber node_modules/.bin/istanbul cover node_modules/.bin/cucumber.js  && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "cover-test": "NODE_ENV=test node_modules/.bin/istanbul cover node_modules/.bin/_mocha test/server/**/* && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "cuke": "NODE_ENV=cucumber node_modules/.bin/cucumber.js",
-    "generateTestUser": "NODE_ENV=test node bin/generateTestUser",
-    "notes": "node_modules/.bin/notes .",
-    "populateWidgetTemplates": "node lib/populateWidgetTemplates.js",
-    "regenerateApiKeyDb": "node lib/regenerateApiKeyDb",
-    "start": "node app",
-    "test": "NODE_ENV=test node_modules/.bin/mocha test/server/**/* test/lib/*"
+  "scripts"         : {
+    "checkDependencies"         : "node_modules/.bin/npm-dview",
+    "console"                   : "node repl",
+    "cover-cukes"               : "NODE_ENV=cucumber node_modules/.bin/istanbul cover node_modules/.bin/cucumber.js  && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "cover-test"                : "NODE_ENV=test node_modules/.bin/istanbul cover node_modules/.bin/_mocha test/server/**/* && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "cuke"                      : "NODE_ENV=cucumber node_modules/.bin/cucumber.js",
+    "generateTestUser"          : "NODE_ENV=test node bin/generateTestUser",
+    "lint"                      : "jshint .",
+    "notes"                     : "node_modules/.bin/notes .",
+    "populateWidgetTemplates"   : "node lib/populateWidgetTemplates.js",
+    "regenerateApiKeyDb"        : "node lib/regenerateApiKeyDb",
+    "start"                     : "node app",
+    "test"                      : "NODE_ENV=test node_modules/.bin/mocha test/server/**/* test/lib/*"
   }
 }
-
