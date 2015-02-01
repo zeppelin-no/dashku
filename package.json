@@ -1,5 +1,9 @@
 {
   "name": "dashku-web",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anephenix/dashku"
+  },
   "description": "Realtime dashboards and widgets built with HTML, CSS, and JavaScript",
   "version": "0.0.2",
   "author": "Anephenix <paul@anephenix.com> (http://anephenix.com)",

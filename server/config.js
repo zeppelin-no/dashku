@@ -64,6 +64,26 @@ module.exports = {
 		},
 		packAssets: {},
 		sessionSecret: 'feK4li1aek8koe7JeiC3shai7ahy7uduch5ahY7n'
+	},
+
+
+
+	docker: {
+		port: 3000,
+		db: process.env.MONGO_1_PORT_27017_TCP_ADDR + ':' + process.env.MONGO_1_PORT_27017_TCP_PORT + '/dashku_docker',
+		redis: {
+			port: process.env.REDIS_PORT_6379_TCP_PORT,
+			host: process.env.REDIS_PORT_6379_TCP_ADDR
+		},
+		apiUrl: 'http://localhost:3000/api/transmission',
+		apiHost: 'http://localhost:3000/',
+		forgottenPasswordUrl: 'http://localhost:3000/?fptoken=',
+		mail: {
+			type: 'stub'
+		},
+		packAssets: {},
+		sessionSecret: 'feK4li1aek8koe7JeiC3shai7ahy7uduch5ahY7n'
+
 	}
 
 };
