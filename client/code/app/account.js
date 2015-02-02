@@ -9,6 +9,10 @@
 
 
 
+var Helpers = require('./helpers');
+
+
+
 // Change Email
 
 
@@ -60,7 +64,7 @@ $(document).on('shown', '#changeEmailModal', function () {
 
 // Event binding on the change email form being submitted
 $(document).on('submit', '#changeEmailModal form', function () {
-	ss.rpc('authentication.changeEmail', serializeFormData(this), function (response) {
+	ss.rpc('authentication.changeEmail', Helpers.serializeFormData(this), function (response) {
 		if (response.status === 'success') {
 			$('#changeEmailModal').modal('hide');
 			ss.rpc('authentication.account', function (response) {
@@ -119,7 +123,7 @@ $(document).on('shown', '#changeAccountPasswordModal', function () {
 
 // Handle the submission of the change password form
 $(document).on('submit', '#changeAccountPasswordModal form', function () {
-	ss.rpc('authentication.changeAccountPassword', serializeFormData(this), function (response) {
+	ss.rpc('authentication.changeAccountPassword', Helpers.serializeFormData(this), function (response) {
 		if (response.status === 'success') {
 			$('#changeAccountPasswordModal').modal('hide');
 			alert('Password changed');
@@ -169,7 +173,7 @@ $(document).on('shown', '#cancelAccountModal', function () {
 
 // Handle the cancel account form submission
 $(document).on('submit', '#cancelAccountModal form', function () {
-	ss.rpc('authentication.cancelAccount', serializeFormData(this), function (response) {
+	ss.rpc('authentication.cancelAccount', Helpers.serializeFormData(this), function (response) {
 		if (response.status === 'success') {
 			$('#cancelAccountModal').modal('hide');
 			showLogoutState();

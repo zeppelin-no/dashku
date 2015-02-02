@@ -2,6 +2,10 @@
 
 
 
+var Helpers = require('./helpers');
+
+
+
 // Enable the user to submit the new dashboard form if the user provides a name
 function checkDashboardFormIsReady () {
 	var button = $('#newDashboardModal button');
@@ -32,7 +36,7 @@ $(document).on('shown', '#newDashboardModal', function () {
 
 // User submits the new dashboard form
 $(document).on('submit', '#newDashboardModal form', function () {
-	ss.rpc('dashboard.create', serializeFormData(this), function (response) {
+	ss.rpc('dashboard.create', Helpers.serializeFormData(this), function (response) {
 		if (response.status === 'success') {
 			$('#newDashboardModal').modal('hide');
 			Dashboard.select(response.dashboard);
@@ -133,7 +137,7 @@ $(document).on('click', 'a#styleDashboard', function () {
 ss.event.on('dashboardCreated', function (dashboard, channelName) {
 	Dashboard.add(dashboard);
 	$('#dashboardMenuItems').prepend(ss.tmpl['dashboard-dashboardMenuItem'].render(dashboard));
-	sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
+	Helpers.sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
 });
 
 
@@ -154,7 +158,7 @@ ss.event.on('dashboardUpdated', function (dashboard, channelName) {
 	$('#dashboardMenuItems')
 	.find('li[data-dashboardId="' + dashboard._id + '"]')
 	.replaceWith(ss.tmpl['dashboard-dashboardMenuItem'].render(dashboard));
-	sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
+	Helpers.sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
 });
 
 

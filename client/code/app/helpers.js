@@ -8,9 +8,15 @@ var StateManager = require('./stateManager');
 
 
 
+// Used to store the helper functios
+//
+var Helpers = {};
+
+
+
 // A helper function to sort the dashboard's menu
 // items in Alphabetical order.
-window.sortDashboardMenuList = function (parent,child) {
+Helpers.sortDashboardMenuList = function (parent,child) {
   var mylist    = $(parent);
   var listitems = mylist.children(child).get();
   listitems.sort(function (a, b) {
@@ -37,7 +43,7 @@ window.sortDashboardMenuList = function (parent,child) {
 
 // A helper function to serialize the form data
 // into a JS object to be sent to the server
-window.serializeFormData = function (selector) {  
+Helpers.serializeFormData = function (selector) {  
   var data = {};
   $.each($(selector).serializeArray(), function (index,key) { data[key.name] = key.value; });
   return data;
@@ -102,12 +108,12 @@ window.makeWidgetsResizeable = function (widget) {
 //
 // TODO - refactor this chunky code
 window.renderScreenSize = function (size) {
-  if (!size) { size = 'fixed'};
+  if (!size) { size = 'fixed'; }
   if (size === 'fixed') {
     $.each($('.switch-width'), function (index, element) {
       element = $(element);
       if (element.hasClass('row-fluid')) {
-        element.removeClass('row-fluid').addClass('row')
+        element.removeClass('row-fluid').addClass('row');
       }
       if (element.hasClass('container-fluid')) {
         element.removeClass('container-fluid').addClass('container');
@@ -343,7 +349,7 @@ mainState.addState('dashboardView', function (data) {
 // Display the signup modal when the signup link is clicked
 $(document).on('click', 'a#signup', function (event) {
   signup.init({signupFunction: function (element) {
-      ss.rpc('authentication.signup', serializeFormData(element.find('form')), function (response) {
+      ss.rpc('authentication.signup', Helpers.serializeFormData(element.find('form')), function (response) {
         if (response.status === 'success') {
           element.modal('hide').remove();
           showLoginState({username: response.user.username});
@@ -384,3 +390,7 @@ window.showLogoutState = function () {
   Dashboard.unload();
   WidgetTemplate.unload();  
 };
+
+
+
+module.exports = Helpers;

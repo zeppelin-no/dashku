@@ -8,10 +8,10 @@
 class window.Bucket
   constructor: (data) ->
     @loadFnx      = data.loadFunction
-    @selectCb     = data.selectCb || null
-    @preSelectCb  = data.preSelectCb || null
-    @preAddCb     = data.preAddCb || null
-    @postUpdateCb = data.postUpdateCb || null
+    @selectCb     = data.selectCb or null
+    @preSelectCb  = data.preSelectCb or null
+    @preAddCb     = data.preAddCb or null
+    @postUpdateCb = data.postUpdateCb or null
     @all = []
     @unique_key = '_id'
     @selected = null

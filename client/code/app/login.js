@@ -2,6 +2,12 @@
 
 
 
+// Dependencies
+//
+var Helpers = require('./helpers');
+
+
+
 // Enable the user to submit the login form if the fields are valid
 var checkLoginFormIsReady = function () {
 	if ($('#loginModal input[name="password"]').val().length > 5 && $('#loginModal input[name="identifier"]').val().length > 0) {
@@ -35,7 +41,7 @@ $(document).on('hidden', '#loginModal', function () {
 
 // Login the user when they submit the login form
 $(document).on('submit', '#loginModal form', function () {
-	ss.rpc('authentication.login', serializeFormData(this), function (response) {
+	ss.rpc('authentication.login', Helpers.serializeFormData(this), function (response) {
 		if (response.status === 'success') {
 			$('#loginModal').modal('hide');
 			showLoginState({username: response.user.username});
