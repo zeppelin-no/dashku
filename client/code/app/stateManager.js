@@ -35,34 +35,41 @@
 
 
 
-window.StateManager = (function() {
-	function StateManager(domId) {
+var StateManager = (function() {
+
+	function StateManager (domId) {
 		this.domId = domId;
 		this.currentState = null;
 		this.states = {};
 	}
 
-	StateManager.prototype.addState = function(domClass, render) {
-		return this.states[domClass] = render;
+	StateManager.prototype.addState = function (domClass, render) {
+		this.states[domClass] = render;
 	};
 
-	StateManager.prototype.setState = function(state, data) {
-		if (data == null) {
+	StateManager.prototype.setState = function (state, data) {
+		if (!data) {
 			data = null;
 		}
-		if (this.currentState != null) {
+		if (this.currentState) {
 			return $(this.domId + ' .' + this.currentState).fadeOut('slow', (function(_this) {
 				return function() {
 					_this.states[state](data);
-					return $(_this.domId + ' .' + state).hide().fadeIn('slow');
+					$(_this.domId + ' .' + state).hide().fadeIn('slow');
 				};
 			})(this));
 		} else {
 			this.states[state](data);
-			return $(this.domId + ' .' + state).hide().fadeIn('slow');
+			$(this.domId + ' .' + state).hide().fadeIn('slow');
 		}
 	};
 
 	return StateManager;
 
 })();
+
+
+
+// Expose the StateManager as te public API
+//
+module.exports = StateManager;

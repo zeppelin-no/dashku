@@ -2,6 +2,12 @@
 
 
 
+// Dependencies
+//
+var StateManager = require('./stateManager');
+
+
+
 // A helper function to sort the dashboard's menu
 // items in Alphabetical order.
 window.sortDashboardMenuList = function (parent,child) {

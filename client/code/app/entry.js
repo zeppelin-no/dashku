@@ -29,7 +29,6 @@ ss.server.on('ready', function () {
 	$(function () {
 		// Load app
 		require('/ee');
-		require('/stateManager');
 		require('/helpers');
 		require('/account');
 		require('/docs');

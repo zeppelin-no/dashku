@@ -2,6 +2,12 @@
 
 
 
+// Dependencies
+//
+var StateManager = require('./stateManager');
+
+
+
 // Widgets //
 
 // The state manager for the new widget modal
