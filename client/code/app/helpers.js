@@ -85,7 +85,7 @@ window.makeWidgetsResizeable = function (widget) {
     grid        : [117,107],
     helper      : 'ui-resizable-helper',
     handles     : 'se',
-    stop        : function (event, ui) {
+    stop        : function () {
       ss.rpc('widget.update', {dashboardId: Dashboard.selected._id, _id: $(this).attr('data-id'), width: $(this).width(), height: $(this).height()}, function (response) {
         if (response.status === 'success') {
           // Nothing to do, the widget has been resized
@@ -182,12 +182,12 @@ window.Dashboard = new Bucket({
       renderScreenSize(dashboard.screenWidth);
       // Load the dashboard's widget data into the Widget Bucket
       Widget.load(function () {
-        sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
+        Helpers.sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
         makeWidgetsResizeable();
         // Bind the widget position update call to the widgets when they are sorted
         $('#widgets').sortable({
           handle: '.content',
-          update: function (event, ui) {
+          update: function () {
             var positions = {};
             $('#widgets').children().each(function (index, widget) {
               positions[$(widget).attr('data-id')] = index;
@@ -330,7 +330,7 @@ mainState.addState('account', function (data) {
 
 
 // The docs state for the main element (render docs template)
-mainState.addState('docs', function (data) {
+mainState.addState('docs', function () {
   Dashboard.selected = undefined;
   renderScreenSize();
   $('#newWidget').remove();
@@ -347,7 +347,7 @@ mainState.addState('dashboardView', function (data) {
 
 
 // Display the signup modal when the signup link is clicked
-$(document).on('click', 'a#signup', function (event) {
+$(document).on('click', 'a#signup', function () {
   signup.init({signupFunction: function (element) {
       ss.rpc('authentication.signup', Helpers.serializeFormData(element.find('form')), function (response) {
         if (response.status === 'success') {
