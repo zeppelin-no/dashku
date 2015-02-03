@@ -163,7 +163,7 @@ if (document.location.href.match('fptoken=') !== null) {
             if (id === dashboard._id) {
                 $('.dashboardView h1.name').text(dashboard.name);
                 Helpers.renderScreenSize(dashboard.screenWidth);
-                renderCSS(dashboard.css);
+                Helpers.renderCSS(dashboard.css);
             }
         });
 

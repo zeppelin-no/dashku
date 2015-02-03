@@ -113,7 +113,7 @@ Helpers.renderScreenSize = function (size) {
 
 
 // A helper function that renders the Dashboard's CSS
-window.renderCSS = function (css) {
+Helpers.renderCSS = function (css) {
   $('style#dashboardStyle').text(css);
 };
 

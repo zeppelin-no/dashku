@@ -152,7 +152,7 @@ ss.event.on('dashboardUpdated', function (dashboard) {
 	if (Dashboard.selected !== undefined && Dashboard.selected._id === dashboard._id) {
 		Dashboard.selected = dashboard;
 		$('.dashboard h1.name').text(dashboard.name);
-		renderCSS(dashboard.css);
+		Helpers.renderCSS(dashboard.css);
 		Helpers.renderScreenSize(dashboard.screenWidth);
 	}
 	$('#dashboardMenuItems')
