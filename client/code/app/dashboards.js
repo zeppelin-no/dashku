@@ -153,7 +153,7 @@ ss.event.on('dashboardUpdated', function (dashboard) {
 		Dashboard.selected = dashboard;
 		$('.dashboard h1.name').text(dashboard.name);
 		renderCSS(dashboard.css);
-		renderScreenSize(dashboard.screenWidth);
+		Helpers.renderScreenSize(dashboard.screenWidth);
 	}
 	$('#dashboardMenuItems')
 	.find('li[data-dashboardId="' + dashboard._id + '"]')

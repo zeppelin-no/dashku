@@ -51,32 +51,10 @@ Helpers.serializeFormData = function (selector) {
 
 
 
-// A helper function to remove an error
-// from a field
-window.removeErrorFromField = function (element, errorMessage, errorCollection, callback) {  
-  element.parent().removeClass('control-group error');
-  var index = errorCollection.indexOf(errorMessage);
-  if (index !== -1) { errorCollection.splice(index, 1); }
-  if (typeof callback === 'function') { callback(); }
-};
-
-
-
-// A helper function to display an error
-// on a field
-window.displayErrorOnField = function (element, errorMessage, errorCollection, callback) {
-  element.parent().addClass('control-group error');
-  element.val(errorMessage);
-  if (errorCollection.indexOf(errorMessage) === -1) { errorCollection.push(errorMessage); }
-  if (typeof callback === 'function') { callback(); }
-};
-
-
-
 // A helper function that makes a Dashboard's
 // widgets resizeable, by clicking on the 
 // bottom-right handle, and dragging it.
-window.makeWidgetsResizeable = function (widget) {
+Helpers.makeWidgetsResizeable = function (widget) {
 
   if (!widget) { widget = $('.widget'); }
   widget.resizable({
@@ -107,7 +85,7 @@ window.makeWidgetsResizeable = function (widget) {
 // or a fluid widget (ideal for widescreen displays).
 //
 // TODO - refactor this chunky code
-window.renderScreenSize = function (size) {
+Helpers.renderScreenSize = function (size) {
   if (!size) { size = 'fixed'; }
   if (size === 'fixed') {
     $.each($('.switch-width'), function (index, element) {
@@ -179,11 +157,11 @@ window.Dashboard = new Bucket({
       // Render the dashboard view for the main part of the page
       mainState.setState('dashboard', dashboard);
       // Render the screen size
-      renderScreenSize(dashboard.screenWidth);
+      Helpers.renderScreenSize(dashboard.screenWidth);
       // Load the dashboard's widget data into the Widget Bucket
       Widget.load(function () {
         Helpers.sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
-        makeWidgetsResizeable();
+        Helpers.makeWidgetsResizeable();
         // Bind the widget position update call to the widgets when they are sorted
         $('#widgets').sortable({
           handle: '.content',
@@ -306,7 +284,7 @@ window.mainState = new StateManager('#main');
 
 // The homepage state for the main element (render homepage template, and adjust screen size if it was set to fluid by a dashboard)
 mainState.addState('homepage', function () {
-  renderScreenSize();
+  Helpers.renderScreenSize();
   $('#main').html(ss.tmpl['homepage-main'].r());
 });
 
@@ -322,7 +300,7 @@ mainState.addState('dashboard', function (data) {
 // The account state for the main element (render account template with data)
 mainState.addState('account', function (data) {
   Dashboard.selected = undefined;
-  renderScreenSize();
+  Helpers.renderScreenSize();
   $('#newWidget').remove();
   $('#main').html(ss.tmpl['account-main'].render(data));
 });
@@ -332,7 +310,7 @@ mainState.addState('account', function (data) {
 // The docs state for the main element (render docs template)
 mainState.addState('docs', function () {
   Dashboard.selected = undefined;
-  renderScreenSize();
+  Helpers.renderScreenSize();
   $('#newWidget').remove();
   $('#main').html(ss.tmpl['docs-main'].r());
 });

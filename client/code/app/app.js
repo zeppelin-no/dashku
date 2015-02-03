@@ -1,5 +1,13 @@
 'use strict';
 
+
+
+// Dependencies
+//
+var Helpers = require('./helpers');
+
+
+
 // ### App ####
 // 
 //  The application code starts with a call to see
@@ -42,7 +50,7 @@ if (document.location.href.match('fptoken=') !== null) {
 
                         response.dashboard.widgets.sort(function (a,b) { return a.position - b.position; });
                         mainState.setState('dashboardView', response.dashboard);
-                        renderScreenSize(response.dashboard.screenWidth);
+                        Helpers.renderScreenSize(response.dashboard.screenWidth);
                         cb(response.dashboard.widgets);
                     } else {
                         alert('There was an error - ' + response.reason);
@@ -154,7 +162,7 @@ if (document.location.href.match('fptoken=') !== null) {
         ss.event.on('dashboardUpdated', function (dashboard) {
             if (id === dashboard._id) {
                 $('.dashboardView h1.name').text(dashboard.name);
-                renderScreenSize(dashboard.screenWidth);
+                Helpers.renderScreenSize(dashboard.screenWidth);
                 renderCSS(dashboard.css);
             }
         });

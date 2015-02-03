@@ -5,6 +5,7 @@
 // Dependencies
 //
 var StateManager = require('./stateManager');
+var Helpers      = require('./helpers');
 
 
 
@@ -161,7 +162,7 @@ ss.event.on('widgetCreated', function (data) {
             $('#widgets').append(ss.tmpl['dashboard-widget'].render(data.widget));
             var widget = Widget.find(data.widget._id);
             widget.eventEmitter = new EE({code: widget.script, id: widget._id, scriptType: widget.scriptType});
-            makeWidgetsResizeable($('.widget[data-id="' + widget._id + '"]'));
+            Helpers.makeWidgetsResizeable($('.widget[data-id="' + widget._id + '"]'));
         });
     }
 });
