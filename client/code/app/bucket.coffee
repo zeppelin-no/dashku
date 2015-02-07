@@ -5,7 +5,7 @@
 #
 
 # TODO - write some tests for this library
-class window.Bucket
+class Bucket
   constructor: (data) ->
     @loadFnx      = data.loadFunction
     @selectCb     = data.selectCb or null
@@ -99,3 +99,9 @@ class window.Bucket
     else 
       @selected = if typeof(idOrObject) is "string" then @find(idOrObject) else idOrObject
       @selectCb @selected if @selected? and @selectCb?
+
+
+
+# Expose the Bucket class as the public API
+#
+module.exports = Bucket

@@ -5,6 +5,7 @@
 // Dependencies
 //
 var StateManager = require('./stateManager');
+var Bucket       = require('./bucket');
 
 
 
@@ -25,7 +26,7 @@ Helpers.sortDashboardMenuList = function (parent,child) {
     var compB = $(b).text().toUpperCase();
     if (compA < compB) {
       return -1;
-    } else {      
+    } else {
       if (compA > compB) {
         return 1;
       } else {
@@ -113,6 +114,9 @@ Helpers.renderScreenSize = function (size) {
 
 
 // A helper function that renders the Dashboard's CSS
+//
+// @param   css     String      The css to render
+//
 Helpers.renderCSS = function (css) {
   $('style#dashboardStyle').text(css);
 };

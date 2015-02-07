@@ -5,6 +5,7 @@
 // Dependencies
 //
 var Helpers = require('./helpers');
+var Bucket  = require('./bucket');
 
 
 
