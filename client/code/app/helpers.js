@@ -8,7 +8,7 @@ var StateManager = require('./stateManager');
 
 
 
-// Used to store the helper functios
+// Used to store the helper functions
 //
 var Helpers = {};
 
