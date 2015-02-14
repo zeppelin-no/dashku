@@ -5,13 +5,13 @@
 #
 
 # TODO - write some tests for this library
-class window.Bucket
+class Bucket
   constructor: (data) ->
     @loadFnx      = data.loadFunction
-    @selectCb     = data.selectCb || null
-    @preSelectCb  = data.preSelectCb || null
-    @preAddCb     = data.preAddCb || null
-    @postUpdateCb = data.postUpdateCb || null
+    @selectCb     = data.selectCb or null
+    @preSelectCb  = data.preSelectCb or null
+    @preAddCb     = data.preAddCb or null
+    @postUpdateCb = data.postUpdateCb or null
     @all = []
     @unique_key = '_id'
     @selected = null
@@ -99,3 +99,9 @@ class window.Bucket
     else 
       @selected = if typeof(idOrObject) is "string" then @find(idOrObject) else idOrObject
       @selectCb @selected if @selected? and @selectCb?
+
+
+
+# Expose the Bucket class as the public API
+#
+module.exports = Bucket

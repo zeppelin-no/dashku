@@ -5,12 +5,19 @@
 // Dependencies
 //
 var StateManager = require('./stateManager');
+var Bucket       = require('./bucket');
+
+
+
+// Used to store the helper functions
+//
+var Helpers = {};
 
 
 
 // A helper function to sort the dashboard's menu
 // items in Alphabetical order.
-window.sortDashboardMenuList = function (parent,child) {
+Helpers.sortDashboardMenuList = function (parent,child) {
   var mylist    = $(parent);
   var listitems = mylist.children(child).get();
   listitems.sort(function (a, b) {
@@ -19,7 +26,7 @@ window.sortDashboardMenuList = function (parent,child) {
     var compB = $(b).text().toUpperCase();
     if (compA < compB) {
       return -1;
-    } else {      
+    } else {
       if (compA > compB) {
         return 1;
       } else {
@@ -37,7 +44,7 @@ window.sortDashboardMenuList = function (parent,child) {
 
 // A helper function to serialize the form data
 // into a JS object to be sent to the server
-window.serializeFormData = function (selector) {  
+Helpers.serializeFormData = function (selector) {  
   var data = {};
   $.each($(selector).serializeArray(), function (index,key) { data[key.name] = key.value; });
   return data;
@@ -45,32 +52,10 @@ window.serializeFormData = function (selector) {
 
 
 
-// A helper function to remove an error
-// from a field
-window.removeErrorFromField = function (element, errorMessage, errorCollection, callback) {  
-  element.parent().removeClass('control-group error');
-  var index = errorCollection.indexOf(errorMessage);
-  if (index !== -1) { errorCollection.splice(index, 1); }
-  if (typeof callback === 'function') { callback(); }
-};
-
-
-
-// A helper function to display an error
-// on a field
-window.displayErrorOnField = function (element, errorMessage, errorCollection, callback) {
-  element.parent().addClass('control-group error');
-  element.val(errorMessage);
-  if (errorCollection.indexOf(errorMessage) === -1) { errorCollection.push(errorMessage); }
-  if (typeof callback === 'function') { callback(); }
-};
-
-
-
 // A helper function that makes a Dashboard's
 // widgets resizeable, by clicking on the 
 // bottom-right handle, and dragging it.
-window.makeWidgetsResizeable = function (widget) {
+Helpers.makeWidgetsResizeable = function (widget) {
 
   if (!widget) { widget = $('.widget'); }
   widget.resizable({
@@ -79,7 +64,7 @@ window.makeWidgetsResizeable = function (widget) {
     grid        : [117,107],
     helper      : 'ui-resizable-helper',
     handles     : 'se',
-    stop        : function (event, ui) {
+    stop        : function () {
       ss.rpc('widget.update', {dashboardId: Dashboard.selected._id, _id: $(this).attr('data-id'), width: $(this).width(), height: $(this).height()}, function (response) {
         if (response.status === 'success') {
           // Nothing to do, the widget has been resized
@@ -101,13 +86,13 @@ window.makeWidgetsResizeable = function (widget) {
 // or a fluid widget (ideal for widescreen displays).
 //
 // TODO - refactor this chunky code
-window.renderScreenSize = function (size) {
-  if (!size) { size = 'fixed'};
+Helpers.renderScreenSize = function (size) {
+  if (!size) { size = 'fixed'; }
   if (size === 'fixed') {
     $.each($('.switch-width'), function (index, element) {
       element = $(element);
       if (element.hasClass('row-fluid')) {
-        element.removeClass('row-fluid').addClass('row')
+        element.removeClass('row-fluid').addClass('row');
       }
       if (element.hasClass('container-fluid')) {
         element.removeClass('container-fluid').addClass('container');
@@ -129,7 +114,10 @@ window.renderScreenSize = function (size) {
 
 
 // A helper function that renders the Dashboard's CSS
-window.renderCSS = function (css) {
+//
+// @param   css     String      The css to render
+//
+Helpers.renderCSS = function (css) {
   $('style#dashboardStyle').text(css);
 };
 
@@ -173,15 +161,15 @@ window.Dashboard = new Bucket({
       // Render the dashboard view for the main part of the page
       mainState.setState('dashboard', dashboard);
       // Render the screen size
-      renderScreenSize(dashboard.screenWidth);
+      Helpers.renderScreenSize(dashboard.screenWidth);
       // Load the dashboard's widget data into the Widget Bucket
       Widget.load(function () {
-        sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
-        makeWidgetsResizeable();
+        Helpers.sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
+        Helpers.makeWidgetsResizeable();
         // Bind the widget position update call to the widgets when they are sorted
         $('#widgets').sortable({
           handle: '.content',
-          update: function (event, ui) {
+          update: function () {
             var positions = {};
             $('#widgets').children().each(function (index, widget) {
               positions[$(widget).attr('data-id')] = index;
@@ -300,7 +288,7 @@ window.mainState = new StateManager('#main');
 
 // The homepage state for the main element (render homepage template, and adjust screen size if it was set to fluid by a dashboard)
 mainState.addState('homepage', function () {
-  renderScreenSize();
+  Helpers.renderScreenSize();
   $('#main').html(ss.tmpl['homepage-main'].r());
 });
 
@@ -316,7 +304,7 @@ mainState.addState('dashboard', function (data) {
 // The account state for the main element (render account template with data)
 mainState.addState('account', function (data) {
   Dashboard.selected = undefined;
-  renderScreenSize();
+  Helpers.renderScreenSize();
   $('#newWidget').remove();
   $('#main').html(ss.tmpl['account-main'].render(data));
 });
@@ -324,9 +312,9 @@ mainState.addState('account', function (data) {
 
 
 // The docs state for the main element (render docs template)
-mainState.addState('docs', function (data) {
+mainState.addState('docs', function () {
   Dashboard.selected = undefined;
-  renderScreenSize();
+  Helpers.renderScreenSize();
   $('#newWidget').remove();
   $('#main').html(ss.tmpl['docs-main'].r());
 });
@@ -341,9 +329,9 @@ mainState.addState('dashboardView', function (data) {
 
 
 // Display the signup modal when the signup link is clicked
-$(document).on('click', 'a#signup', function (event) {
+$(document).on('click', 'a#signup', function () {
   signup.init({signupFunction: function (element) {
-      ss.rpc('authentication.signup', serializeFormData(element.find('form')), function (response) {
+      ss.rpc('authentication.signup', Helpers.serializeFormData(element.find('form')), function (response) {
         if (response.status === 'success') {
           element.modal('hide').remove();
           showLoginState({username: response.user.username});
@@ -384,3 +372,7 @@ window.showLogoutState = function () {
   Dashboard.unload();
   WidgetTemplate.unload();  
 };
+
+
+
+module.exports = Helpers;

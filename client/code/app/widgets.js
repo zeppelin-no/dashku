@@ -5,6 +5,7 @@
 // Dependencies
 //
 var StateManager = require('./stateManager');
+var Helpers      = require('./helpers');
 
 
 
@@ -104,14 +105,14 @@ $(document).on('keypress', '.widget .header', function (event) {
 
 
 // Record the previous value, in case the user decides not to update the field
-$(document).on('focus', '.widget .header', function (event) {
+$(document).on('focus', '.widget .header', function () {
     $(this).attr('data-previousName', $(this).text());
 });
 
 
 
 // Revert to the previous value, unless the user has pressed the enter key to submit the change
-$(document).on('blur', '.widget .header', function (event) {
+$(document).on('blur', '.widget .header', function () {
     if (!window.dontRevert) {
         $(this).text($(this).attr('data-previousName'));
     } else {
@@ -153,7 +154,7 @@ $(document).on('click', '.widget .delete', function () {
 
 
 // Bind on a new widget being created
-ss.event.on('widgetCreated', function (data, channelName) {
+ss.event.on('widgetCreated', function (data) {
     var index = Dashboard.all.indexOf(Dashboard.find(data.dashboardId));
     Dashboard.all[index].widgets.push(data.widget);
     if (Dashboard.selected._id === data.dashboardId) {
@@ -161,7 +162,7 @@ ss.event.on('widgetCreated', function (data, channelName) {
             $('#widgets').append(ss.tmpl['dashboard-widget'].render(data.widget));
             var widget = Widget.find(data.widget._id);
             widget.eventEmitter = new EE({code: widget.script, id: widget._id, scriptType: widget.scriptType});
-            makeWidgetsResizeable($('.widget[data-id="' + widget._id + '"]'));
+            Helpers.makeWidgetsResizeable($('.widget[data-id="' + widget._id + '"]'));
         });
     }
 });
@@ -190,7 +191,7 @@ window.onlyNameChanged = function (currentWidget, newWidget) {
 
 
 // Bind on when a widget is updated. A lot of things happen here.
-ss.event.on('widgetUpdated', function (data, channelName) {
+ss.event.on('widgetUpdated', function (data) {
 
     var item, widgetObject, _i, _len, _ref;
 
@@ -232,7 +233,7 @@ ss.event.on('widgetUpdated', function (data, channelName) {
 
       
 // Bind on when a widget is deleted      
-ss.event.on('widgetDeleted', function (data, channelName) {
+ss.event.on('widgetDeleted', function (data) {
 
     // Select the widget model object in the data Bucket
     var dashboardIndex = Dashboard.all.indexOf(Dashboard.find(data.dashboardId));
@@ -269,7 +270,7 @@ ss.event.on('widgetDeleted', function (data, channelName) {
 
 
 // Bind on the transmission event, where a widget receives data
-ss.event.on('transmission', function (data, channelName) {
+ss.event.on('transmission', function (data) {
     var widget = Widget.find(data._id);
     if (widget && widget.eventEmitter.widget.parent().hasClass('editMode') === false) {
         widget.eventEmitter.emit('transmission', data) ;
@@ -279,7 +280,7 @@ ss.event.on('transmission', function (data, channelName) {
 
 
 // Bind on the widget's positions being updated
-ss.event.on('widgetPositionsUpdated', function (data, channelName) {
+ss.event.on('widgetPositionsUpdated', function (data) {
     var dashboard = Dashboard.find(data._id);
 
     dashboard.widgets.forEach(function (widget) { widget.position = data.positions[widget._id]; });

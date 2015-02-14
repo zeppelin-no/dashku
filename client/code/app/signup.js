@@ -73,17 +73,17 @@ ErrorHandler = (function() {
 
 
 	ErrorHandler.prototype.addError = function(key, value, cb) {
-		if (cb == null) {
+		if (!cb) {
 			cb = null;
 		}
-		if (this.errors[key] != null) {
+		if (this.errors[key]) {
 			if (!this.errors[key].indexOf(value !== -1)) {
 				this.errors[key].push(value);
 			}
 		} else {
 			this.errors[key] = [value];
 		}
-		if (cb != null) {
+		if (cb) {
 			return cb();
 		}
 	};
@@ -92,10 +92,10 @@ ErrorHandler = (function() {
 
 	ErrorHandler.prototype.removeError = function(key, value, cb) {
 		var index;
-		if (cb == null) {
+		if (!cb) {
 			cb = null;
 		}
-		if (this.errors[key] != null) {
+		if (this.errors[key]) {
 			index = this.errors[key].indexOf(value);
 			if (index !== -1) {
 				this.errors[key].splice(index, 1);
@@ -104,7 +104,7 @@ ErrorHandler = (function() {
 				delete this.errors[key];
 			}
 		}
-		if (cb != null) {
+		if (cb) {
 			return cb();
 		}
 	};
@@ -112,11 +112,11 @@ ErrorHandler = (function() {
 
 
 	ErrorHandler.prototype.removeErrors = function(key, cb) {
-		if (cb == null) {
+		if (!cb) {
 			cb = null;
 		}
 		delete this.errors[key];
-		if (cb != null) {
+		if (cb) {
 			return cb();
 		}
 	};

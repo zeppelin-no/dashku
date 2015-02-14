@@ -8,6 +8,11 @@
 // - alert
 
 
+// Dependencies
+//
+var Helpers = require('./helpers');
+
+
 
 // A helper function to render
 // the change password page state
@@ -42,7 +47,7 @@ $(document).on('shown', '#changePasswordModal', function () {
 
 // Handle the change password form submission
 $(document).on('submit', '#changePasswordModal form', function () {
-	ss.rpc('authentication.changePassword', serializeFormData(this), function (response) {
+	ss.rpc('authentication.changePassword', Helpers.serializeFormData(this), function (response) {
 		if (response.status === 'success') {
 			$('#changePasswordModal').modal('hide');
 			showLogoutState();

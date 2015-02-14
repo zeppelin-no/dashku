@@ -12,11 +12,27 @@ require('./server/internals');
 
 
 
+// Declare order of dependencies to load
+//
+var codeLibDependencies = [
+  'libs/codemirror.js',
+  'libs/coffee-script.js',
+  'libs/codemirror-compressed.js',
+  'libs/head.min.js',
+  'libs/jquery.min.js',
+  'libs/jquery.ui-1.8.20.custom.min.js',
+  'libs/underscore.min.js',
+  'libs/bootstrap.min.js',
+  'libs/highlight.pack.js',
+  'app'
+];
+
+
 // Define a single-page client
 ss.client.define('main', {
 	view  : 'app.jade',
 	css   : ['libs', 'app.styl'],
-	code  : ['libs', 'app'],
+	code  : codeLibDependencies,
 	tmpl  : '*'
 });
 

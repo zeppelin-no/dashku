@@ -2,6 +2,10 @@
 
 
 
+var Helpers = require('./helpers');
+
+
+
 // Enable the user to submit the new dashboard form if the user provides a name
 function checkDashboardFormIsReady () {
 	var button = $('#newDashboardModal button');
@@ -15,7 +19,7 @@ function checkDashboardFormIsReady () {
 
 
 // Render the new dashboard modal
-$(document).on('click', 'a#newDashboard', function (event) {
+$(document).on('click', 'a#newDashboard', function () {
 	$(ss.tmpl['dashboard-newModal'].r()).modal();
 });
 
@@ -32,7 +36,7 @@ $(document).on('shown', '#newDashboardModal', function () {
 
 // User submits the new dashboard form
 $(document).on('submit', '#newDashboardModal form', function () {
-	ss.rpc('dashboard.create', serializeFormData(this), function (response) {
+	ss.rpc('dashboard.create', Helpers.serializeFormData(this), function (response) {
 		if (response.status === 'success') {
 			$('#newDashboardModal').modal('hide');
 			Dashboard.select(response.dashboard);
@@ -51,7 +55,7 @@ $(document).on('submit', '#newDashboardModal form', function () {
 
 
 // Clear the error style when the user focuses on the password field
-$(document).on('focus', '#newDashboardModal input[name="name"]', function (event) {
+$(document).on('focus', '#newDashboardModal input[name="name"]', function () {
 	$(this).parent().removeClass('control-group error');
 });
 
@@ -65,14 +69,14 @@ $(document).on('click', 'a.showDashboard', function () {
 
 
 // Record the previous value, in case the user decides not to update the field
-$(document).on('focus', 'h1.name', function (event) {
+$(document).on('focus', 'h1.name', function () {
 	$(this).attr('data-previousName', $(this).text());
 });
 
 
 
 // Revert to the previous value, unless the user has pressed the enter key to submit the change
-$(document).on('blur', 'h1.name', function (event) {
+$(document).on('blur', 'h1.name', function () {
 	if (!window.dontRevert) {
 		$(this).text($(this).attr('data-previousName'));
 	} else {
@@ -130,10 +134,10 @@ $(document).on('click', 'a#styleDashboard', function () {
 // A new dashboard has been created.
 // Add it to the data bucket,
 // and render it in the menu items list
-ss.event.on('dashboardCreated', function (dashboard, channelName) {
+ss.event.on('dashboardCreated', function (dashboard) {
 	Dashboard.add(dashboard);
 	$('#dashboardMenuItems').prepend(ss.tmpl['dashboard-dashboardMenuItem'].render(dashboard));
-	sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
+	Helpers.sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
 });
 
 
@@ -143,18 +147,18 @@ ss.event.on('dashboardCreated', function (dashboard, channelName) {
 // update the dashboards menu list item, and
 // update the view rendering of that dashboard
 // if it is currently selected.
-ss.event.on('dashboardUpdated', function (dashboard, channelName) {
+ss.event.on('dashboardUpdated', function (dashboard) {
 	Dashboard.update(dashboard);
 	if (Dashboard.selected !== undefined && Dashboard.selected._id === dashboard._id) {
 		Dashboard.selected = dashboard;
 		$('.dashboard h1.name').text(dashboard.name);
-		renderCSS(dashboard.css);
-		renderScreenSize(dashboard.screenWidth);
+		Helpers.renderCSS(dashboard.css);
+		Helpers.renderScreenSize(dashboard.screenWidth);
 	}
 	$('#dashboardMenuItems')
 	.find('li[data-dashboardId="' + dashboard._id + '"]')
 	.replaceWith(ss.tmpl['dashboard-dashboardMenuItem'].render(dashboard));
-	sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
+	Helpers.sortDashboardMenuList('ul#dashboardMenuItems', 'li[data-dashboardid]');
 });
 
 
@@ -163,7 +167,7 @@ ss.event.on('dashboardUpdated', function (dashboard, channelName) {
 // Remove the dashboard from the data bucket, 
 // remove it's item from the dashboards menu,
 // and deselect it if it is currently on display.
-ss.event.on('dashboardDeleted', function (dashboardId, channelName) {
+ss.event.on('dashboardDeleted', function (dashboardId) {
 	Dashboard.remove(dashboardId);
 	$('#dashboardMenuItems')
 	.find('li[data-dashboardId="' + dashboardId + '"]')
