@@ -8,7 +8,7 @@ var bodyParser        = require('body-parser');
 var connectRoute      = require('connect-route');
 var http              = require('http');
 var ss                = require('socketstream');
-var qs                = require('qs');
+
 require('./server/internals');
 
 
@@ -44,7 +44,7 @@ var api = require(__dirname + '/server/api');
 
 
 ss.http.middleware.prepend(bodyParser.json());
-ss.http.middleware.prepend(qs);
+ss.http.middleware.prepend(require('./server/queryMiddleware')());
 ss.http.middleware.prepend(connectRoute(api));
 ss.session.options.secret = ss.api.app.config.sessionSecret;
 
