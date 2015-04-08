@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Anephenix/dashku.svg)](https://travis-ci.org/Anephenix/dashku)
+[![Build Status](https://travis-ci.org/anephenix/dashku.svg)](https://travis-ci.org/anephenix/dashku)
 [![Coverage Status](https://coveralls.io/repos/Anephenix/dashku/badge.svg?branch=master)](https://coveralls.io/r/Anephenix/dashku?branch=master)
 [![Dependency Status](https://david-dm.org/anephenix/dashku.svg)](https://david-dm.org/anephenix/dashku)
 [![Dev Dependency Status](https://david-dm.org/anephenix/dashku/dev-status.svg)](https://david-dm.org/anephenix/dashku#info=devDependencies)
@@ -7,7 +7,7 @@
 [![Issue Stats](http://issuestats.com/github/Anephenix/dashku/badge/pr)](http://issuestats.com/github/Anephenix/dashku)
 [![Issue Stats](http://issuestats.com/github/Anephenix/dashku/badge/issue)](http://issuestats.com/github/Anephenix/dashku)
 
-Dashku
+Dashku (classic edition)
 ===
 
 ![Dashku Screenshot](https://raw.github.com/Anephenix/dashku/master/dashku-screenshot.png)
