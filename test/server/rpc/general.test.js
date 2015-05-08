@@ -5,7 +5,7 @@
 // Dependencies
 //
 var assert        = require('assert');
-var md            = require('marked');
+var md            = require('markdown').markdown.toHTML;
 var fs            = require('fs');
 var ss            = require('socketstream');
 require('../../../server/internals');

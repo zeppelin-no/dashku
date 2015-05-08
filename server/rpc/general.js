@@ -5,8 +5,8 @@
 
 // Dependencies
 //
-var md                    = require('marked');
-var fs                    = require('fs');
+var md 		= require('markdown').markdown.toHTML;
+var fs 		= require('fs');
 var docData = {};
 
 
