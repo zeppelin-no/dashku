@@ -674,7 +674,7 @@ describe('Authentication', function () {
 					assert.equal(res[0].status, 'success');
 					ass.rpc('authentication.changeEmail', {}, function (res) {
 						assert.equal(res[0].status, 'failure');
-						assert.equal(res[0].reason, 'Validation failed');
+						assert.equal(res[0].reason, 'User validation failed');
 						done();
 					});
 				});

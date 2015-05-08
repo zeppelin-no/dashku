@@ -74,7 +74,7 @@ describe('Dashboard', function () {
 			it('should return a failure status, and explain what went wrong', function (done) {
 				ass.rpc('dashboard.create', {}, function (res) {
 					assert.equal(res[0].status, 'failure');
-					assert.equal(res[0].reason, 'Validation failed');
+					assert.equal(res[0].reason, 'Dashboard validation failed');
 					done();
 				});
 			});
