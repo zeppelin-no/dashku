@@ -17,6 +17,10 @@ Introduction
 
 Dashku is a web application for creating dashboards and widgets in HTML, CSS, and JavaScript. It is open source, and available to download from Github. There is also a [hosted edition at Dashku.com](https://dashku.com).
 
+You can also deploy your own copy with Heroku's click-to-deploy button below:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy/?template=https://github.com/anephenix/dashku/)
+
 Dependencies
 ---
 
