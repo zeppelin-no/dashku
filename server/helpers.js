@@ -27,7 +27,7 @@ module.exports = function (app) {
 
 
 	// Setup the global mail transport
-	app.helpers.postman = nodemailer.createTransport(app.config.mail.type, app.config.mail.options);
+	app.helpers.postman = nodemailer.createTransport(app.config.mail);
 
 
 

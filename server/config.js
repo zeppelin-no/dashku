@@ -15,13 +15,10 @@ module.exports = {
 		apiHost: 'http://localhost:3000/',
 		forgottenPasswordUrl: 'http://localhost:3000/?fptoken=',
 		mail: {
-			type: 'SMTP',
-			options: {
-				service: 'Gmail',
-				auth: {
-					user: 'username',
-					pass: 'password'
-				}
+			service: 'Gmail',
+			auth: {
+				user: 'username',
+				pass: 'password'
 			}
 		},
 		packAssets: {},
@@ -41,7 +38,7 @@ module.exports = {
 		apiHost: 'http://localhost:3001/',
 		forgottenPasswordUrl: 'http://localhost:3001/?fptoken=',
 		mail: {
-			type: 'stub'
+			service: 'stub'
 		},
 		packAssets: {},
 		sessionSecret: 'feK4li1aek8koe7JeiC3shai7ahy7uduch5ahY7n'
@@ -60,7 +57,7 @@ module.exports = {
 		apiHost: 'http://localhost:3002/',
 		forgottenPasswordUrl: 'http://localhost:3002/?fptoken=',
 		mail: {
-			type: 'stub'
+			service: 'stub'
 		},
 		packAssets: {},
 		sessionSecret: 'feK4li1aek8koe7JeiC3shai7ahy7uduch5ahY7n'
@@ -79,7 +76,7 @@ module.exports = {
 		apiHost: 'http://localhost:3000/',
 		forgottenPasswordUrl: 'http://localhost:3000/?fptoken=',
 		mail: {
-			type: 'stub'
+			service: 'stub'
 		},
 		packAssets: {},
 		sessionSecret: 'feK4li1aek8koe7JeiC3shai7ahy7uduch5ahY7n'
