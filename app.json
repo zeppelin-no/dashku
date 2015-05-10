@@ -11,7 +11,7 @@
   ],
   "website": "https://github.com/Anephenix/dashku",
   "repository": "https://github.com/Anephenix/dashku",
-  "logo": "https://pbs.twimg.com/profile_images/2227367569/twitter_icon_400x400.png",
+  "logo": "https://pbs.twimg.com/profile_images/579271979515166720/Kfzusyjd_400x400.png",
   "env": {
     "APP_URL" : {
       "description" : "The url for the application, wihtout forward slash at the end e.g. http://my-dashboard.com",
