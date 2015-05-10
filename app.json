@@ -14,7 +14,7 @@
   "logo": "https://pbs.twimg.com/profile_images/579271979515166720/Kfzusyjd_400x400.png",
   "env": {
     "APP_URL" : {
-      "description" : "The url for the application, wihtout forward slash at the end e.g. http://my-dashboard.com",
+      "description" : "The url for the application, without forward slash at the end e.g. http://my-dashboard.com",
       "required" : true
     }
   },
