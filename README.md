@@ -19,7 +19,14 @@ Dashku is a web application for creating dashboards and widgets in HTML, CSS, an
 
 You can also deploy your own copy with Heroku's click-to-deploy button below:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy/?template=https://github.com/anephenix/dashku/)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy/?template=https://github.com/anephenix/dashku/tree/feature/deploy-to-heroku)
+
+Note: If you deploy to Heroku, you will want to enable these features in Heroku Labs for your app:
+	
+	heroku labs:enable http-session-affinity
+	heroku labs:enable http-end-to-end-continue
+
+This will ensure that the app's use of WebSockets will work smoothly
 
 Dependencies
 ---
