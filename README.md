@@ -41,10 +41,12 @@ This will ensure that the app's use of WebSockets will work smoothly.
 Installation (with Docker)
 ---
 
+The best way to install Dashku with Docker is by using Docker Compose:
+
     docker pull anephenix/dashku
     docker-compose up
 
-Note, this is experimental. If you find any issues, please let us know.
+We will be working on getting linked containers to work with Dashku's docker container, as well as updating the container with the latest version of Dashku.
 
 Manual installation (with Git)
 ---
