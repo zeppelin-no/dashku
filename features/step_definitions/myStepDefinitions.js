@@ -130,34 +130,34 @@ module.exports = function () {
 
 
 	this.After(function (callback) {
-		this.wrap(this.browser.chain.testComplete(), callback);
+		this.browser.chain.testComplete().andFinish(callback);
 	});
 
 
 
 	this.Given(/^I am on the homepage$/, function (callback) {
-		this.wrap(this.browser.chain.session().open('/').windowMaximize().setSpeed(100), callback);
+		this.browser.chain.session().open('/').windowMaximize().setSpeed(100).andFinish(callback);
 	});
 
 
 
 	this.Given(/^I follow "([^"]*)"$/, function (link, callback) {
 		var element = 'link='+link;
-		this.wrap(this.browser.chain.waitForElementPresent(element).click(element), callback);
+		this.browser.chain.waitForElementPresent(element).click(element).andFinish(callback);
 	});
 
 
 
 	this.Given(/^I fill in "([^"]*)" with "([^"]*)"$/, function (field, value, callback) {
 		var element = '//input[@name="' + field + '"]';
-		this.wrap(this.browser.chain.waitForElementPresent(element).fireEvent(element,'focus').type(element, value).fireEvent(element,'keyup').fireEvent(element,'blur'), callback);
+		this.browser.chain.waitForElementPresent(element).fireEvent(element,'focus').type(element, value).fireEvent(element,'keyup').fireEvent(element,'blur').andFinish(callback);
 	});
 
 
 
 	this.Given(/^I press "([^"]*)"$/, function (button, callback) {
 		var element = '//button[text()="' + button + '"]';
-		this.wrap(this.browser.chain.waitForElementPresent(element).fireEvent(element,'focus').click(element), callback);
+		this.browser.chain.waitForElementPresent(element).fireEvent(element,'focus').click(element).andFinish(callback);
 	});
 
 
@@ -166,7 +166,7 @@ module.exports = function () {
 	this.Given(/^the "([^"]*)" modal should appear$/, function (name, callback) {
 		var self = this;
 		detectModal(name, function (character) {
-			self.wrap(self.browser.chain.waitForElementPresent('css=' + character), callback);
+			self.browser.chain.waitForElementPresent('css=' + character).andFinish(callback);
 		});
 	});
 
@@ -175,7 +175,7 @@ module.exports = function () {
 	this.Given(/^the "([^"]*)" modal should disappear$/, function (name, callback) {
 		var self = this;
 		detectModal(name, function (character) {
-			self.wrap(self.browser.chain.waitForElementNotPresent('css=' + character), callback);
+			self.browser.chain.waitForElementNotPresent('css=' + character).andFinish(callback);
 		});
 	});
 
@@ -183,7 +183,7 @@ module.exports = function () {
 
 	this.Given(/^the "([^"]*)" modal should not disappear$/, function (name, callback) {
 		var character = name === 'login' ? '#loginModal' : '.signupModal';
-		this.wrap(this.browser.chain.waitForElementPresent('css=' + character), callback);
+		this.browser.chain.waitForElementPresent('css=' + character).andFinish(callback);
 	});
 
 
@@ -219,7 +219,7 @@ module.exports = function () {
 
 
 	this.Given(/^I reload the page$/, function (callback) {
-		this.wrap(this.browser.chain.refresh(), callback);
+		this.browser.chain.refresh().andFinish(callback);
 	});
 
 
@@ -263,13 +263,13 @@ module.exports = function () {
 
 
 	this.Then(/^the field "([^"]*)" should be "([^"]*)"$/, function (field, value, callback) {
-		this.wrap(this.browser.chain.waitForValue('//input[@name="' + field + '"]', value), callback);
+		this.browser.chain.waitForValue('//input[@name="' + field + '"]', value).andFinish(callback);
 	});
 
 
 
 	this.Then(/^the field "([^"]*)" placeholder should be "([^"]*)"$/, function (field, placeholder, callback) {
-		this.wrap(this.browser.chain.waitForAttribute('//input[@name="' + field + '"]@placeholder', placeholder), callback);
+		this.browser.chain.waitForAttribute('//input[@name="' + field + '"]@placeholder', placeholder).andFinish(callback);
 	});
 
 
@@ -306,26 +306,26 @@ module.exports = function () {
 
 	this.Given(/^I click on the "([^"]*)" menu item$/, function (item, callback) {
 		var element = '//span[contains(text(),\'' + item + '\')]';
-		this.wrap(this.browser.chain.waitForElementPresent(element).click(element), callback);
+		this.browser.chain.waitForElementPresent(element).click(element).andFinish(callback);
 	});
 
 
 
 	this.Then(/^I should see "([^"]*)"$/, function (content, callback) {
-		this.wrap(this.browser.chain.waitForTextPresent(content), callback);
+		this.browser.chain.waitForTextPresent(content).andFinish(callback);
 	});
 
 
 
 	this.Then(/^there should be an "([^"]*)" item in the Dashboards menu list$/, function (item, callback) {
-		this.wrap(this.browser.chain.waitForElementPresent('//span[contains(text(),\'' + item + '\')]'), callback);
+		this.browser.chain.waitForElementPresent('//span[contains(text(),\'' + item + '\')]').andFinish(callback);
 	});
 
 
 
 	this.Given(/^I type "([^"]*)" into "([^"]*)"$/, function (newText, oldText, callback) {
 		var element = '//h1[contains(text(),\'' + oldText + '\')]';
-		this.wrap(this.browser.chain.focus(element).type(element, newText+'\\13'), callback);
+		this.browser.chain.focus(element).type(element, newText+'\\13').andFinish(callback);
 	});
 
 
@@ -344,19 +344,19 @@ module.exports = function () {
 
 	this.Given(/^I click on the resize icon$/, function (callback) {
 		var element = '//a[@id="screenWidth"]';
-		this.wrap(this.browser.chain.waitForElementPresent(element).click(element), callback);
+		this.browser.chain.waitForElementPresent(element).click(element).andFinish(callback);
 	});
 
 
 
 	this.Given(/^the dashboard should be fluid length$/, function (callback) {
-		this.wrap(this.browser.chain.waitForElementPresent('css=.row-fluid'), callback);
+		this.browser.chain.waitForElementPresent('css=.row-fluid').andFinish(callback);
 	});
 
 
 
 	this.Given(/^the dashboard should be fixed length$/, function (callback) {
-		this.wrap(this.browser.chain.waitForElementPresent('css=.row'), callback);
+		this.browser.chain.waitForElementPresent('css=.row').andFinish(callback);
 	});
 
 
@@ -379,19 +379,19 @@ module.exports = function () {
 
 
 	this.Then(/^I click on the delete dashboard button$/, function (callback) {
-		this.wrap(this.browser.chain.click('//a[@id="deleteDashboard"]'), callback);
+		this.browser.chain.click('//a[@id="deleteDashboard"]').andFinish(callback);
 	});
 
 
 
 	this.Then(/^I will confirm the dialog box$/, function (callback) {
-		this.wrap(this.browser.chain.chooseOkOnNextConfirmation(), callback);
+		this.browser.chain.chooseOkOnNextConfirmation().andFinish(callback);
 	});
 
 
 
 	this.Then(/^I intercept the dialog$/, function (callback) {
-		this.wrap(this.browser.chain.getConfirmation(), callback);
+		this.browser.chain.getConfirmation().andFinish(callback);
 	});
 
 
@@ -412,26 +412,26 @@ module.exports = function () {
 	this.Given(/^I click on the "([^"]*)" button$/, function (name, callback) {
 		var self = this;
 		detectButton(name, function (selector) {
-			self.wrap(self.browser.chain.waitForElementPresent(selector).click(selector), callback);
+			self.browser.chain.waitForElementPresent(selector).click(selector).andFinish(callback);
 		});
 	});
 
 
 
 	this.When(/^I change the dashboard background colour to dark grey$/, function (callback) {
-		this.wrap(this.browser.chain.focus('//textarea').type('//textarea', '\n\nbody {background:#111;}'), callback);
+		this.browser.chain.focus('//textarea').type('//textarea', '\n\nbody {background:#111;}').andFinish(callback);
 	});
 
 
 
 	this.Then(/^the dashboard background should be dark grey$/, function (callback) {
-		this.wrap(this.browser.chain.waitForElementPresent('//style[@id="dashboardStyle" and contains(text(), "body {background:#111;}")]'), callback);
+		this.browser.chain.waitForElementPresent('//style[@id="dashboardStyle" and contains(text(), "body {background:#111;}")]').andFinish(callback);
 	});
 
 
 
 	this.When(/^I close the style editor$/, function (callback) {
-		this.wrap(this.browser.chain.click('//a[@class="close"]'), callback);
+		this.browser.chain.click('//a[@class="close"]').andFinish(callback);
 	});
 
 
@@ -456,7 +456,7 @@ module.exports = function () {
 
 	// TODO - review this step definition - I don't think that it works
 	this.Then(/^I should see (\d+) widget on the page$/, function (numberOfWidgets, callback) {
-		this.wrap(this.browser.chain.verifyElementPresent('//div[@class="widget"]'), callback);
+		this.browser.chain.verifyElementPresent('//div[@class="widget"]').andFinish(callback);
 	});
 
 
@@ -478,7 +478,7 @@ module.exports = function () {
 
 
 	this.Given(/^I should see (\d+) widgets on the page$/, function (numberOfWidgets, callback) {
-		this.wrap(this.browser.chain.verifyElementNotPresent('//div[@class="widget"]'), callback);
+		this.browser.chain.verifyElementNotPresent('//div[@class="widget"]').andFinish(callback);
 	});
 
 
@@ -524,8 +524,9 @@ module.exports = function () {
 
 
 	this.Given(/^I drag the widget resize handle (\d+) pixels right and (\d+) pixels down$/, function (pixelsRight, pixelsDown, callback) {
-		this.wrap(this.browser.chain
-			.dragAndDrop('//div[@class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"]","+' + pixelsRight + ',+' + pixelsDown), callback);
+		this.browser.chain
+			.dragAndDrop('//div[@class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se"]","+' + pixelsRight + ',+' + pixelsDown)
+			.andFinish(callback);
 	});
 
 
@@ -548,20 +549,20 @@ module.exports = function () {
 
 
 	this.Given(/^I click on the "([^"]*)" tab$/, function (tabName, callback) {
-		this.wrap(this.browser.chain.click('//li[@id="' + tabName + '"]'), callback);
+		this.browser.chain.click('//li[@id="' + tabName + '"]').andFinish(callback);
 	});
 
 
 
 	this.Given(/^I type "([^"]*)" into the editor$/, function (html, callback) {
-		this.wrap(this.browser.chain.focus('//textarea').type('//textarea',html), callback);
+		this.browser.chain.focus('//textarea').type('//textarea',html).andFinish(callback);
 	});
 
 
 
 	this.Given(/^I type some json into the editor$/, function (callback) {
 		var json  = '{"version":"2"}';
-		this.wrap(this.browser.chain.focus('//textarea').type('//textarea',json), callback);
+		this.browser.chain.focus('//textarea').type('//textarea',json).andFinish(callback);
 	});
 
 
@@ -584,7 +585,7 @@ module.exports = function () {
 
 
 	this.Given(/^I clear the editor$/, function (callback) {
-		this.wrap(this.browser.chain.getEval('window.editor2.editor.setValue("");'), callback);
+		this.browser.chain.getEval('window.editor2.editor.setValue("");').andFinish(callback);
 	});
 
 
@@ -615,7 +616,7 @@ module.exports = function () {
 				var widget = dashboard.widgets[i];
 				if (widget.name === element) {
 					var selector = '//div[@class="content"]';
-					self.wrap(self.browser.chain.waitForElementPresent(selector).dragAndDrop(selector,'+'+pixelsRight+',+0'), callback);
+					self.browser.chain.waitForElementPresent(selector).dragAndDrop(selector,'+'+pixelsRight+',+0').andFinish(callback);
 				}
 
 			}
@@ -644,7 +645,7 @@ module.exports = function () {
 
 
 	this.Given(/^the script tab should say "([^"]*)"$/, function (text, callback) {
-		this.wrap(this.browser.chain.waitForElementPresent('//li[@id="script" and contains(text(),"' + text + '")]'), callback);
+		this.browser.chain.waitForElementPresent('//li[@id="script" and contains(text(),"' + text + '")]').andFinish(callback);
 	});
 
 
@@ -652,7 +653,7 @@ module.exports = function () {
 	this.Given(/^I type in some coffeescript for the widget$/, function (callback) {
 		// type some CoffeeScript into the editor's textarea
 		var coffeescript = fs.readFileSync(__dirname + '/../../test/seed/newWidgetScript.coffee', 'utf-8');
-		this.wrap(this.browser.chain.focus('//textarea').type('//textarea',coffeescript), callback);
+		this.browser.chain.focus('//textarea').type('//textarea',coffeescript).andFinish(callback);
 	});
 
 
@@ -685,33 +686,33 @@ module.exports = function () {
 	this.Given(/^I load the editor with the modified script code$/, function (callback) {
 		// type some CoffeeScript into the editor's textarea
 		var coffeescript = fs.readFileSync(__dirname + '/../../test/seed/modifiedWidgetScript.coffee', 'utf-8');
-		this.wrap(this.browser.chain.focus('//textarea').type('//textarea',coffeescript), callback);
+		this.browser.chain.focus('//textarea').type('//textarea',coffeescript).andFinish(callback);
 	});
 
 
 
 	this.Given(/^the widget on the page should contain "([^"]*)" in its html$/, function (content, callback) {
-		this.wrap(this.browser.chain.waitForElementPresent('//div[@id=\"message\" and contains(text(),"' + content +'")]'), callback);
+		this.browser.chain.waitForElementPresent('//div[@id=\"message\" and contains(text(),"' + content +'")]').andFinish(callback);
 	});
 
 
 
 	this.Given(/^I type some special javascript into the editor$/, function (callback) {
 		var specialJavascript = fs.readFileSync(__dirname + '/../../test/seed/specialJavascript.js', 'utf-8');
-		this.wrap(this.browser.chain.focus('//textarea').type('//textarea',specialJavascript), callback);
+		this.browser.chain.focus('//textarea').type('//textarea',specialJavascript).andFinish(callback);
 	});
 
 
 
 	this.Given(/^I type some special json into the editor$/, function (callback) {
 		var json  = '{"data":"4"}';
-		this.wrap(this.browser.chain.focus('//textarea').type('//textarea',json), callback);
+		this.browser.chain.focus('//textarea').type('//textarea',json).andFinish(callback);
 	});
 
 
 
 	this.Given(/^the special widget on the page should contain "([^"]*)" in its html$/, function (content, callback) {
-		this.wrap(this.browser.chain.waitForElementPresent('//div[@class="content" and contains(text(),"' + content + '")]'), callback);
+		this.browser.chain.waitForElementPresent('//div[@class="content" and contains(text(),"' + content + '")]').andFinish(callback);
 	});
 
 

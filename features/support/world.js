@@ -12,6 +12,17 @@ var config                = require('../../server/config');
 require('../../app');
 
 
+soda.prototype.andFinish = function (callback) {
+	this.end(function (err) {
+		if (err) {
+			callback.fail(err);
+		} else {
+			callback();
+		}
+	});	
+};
+
+
 // Stub the output for now
 //
 ss.api.log.debug 	= function (){};
@@ -22,18 +33,8 @@ var browser = null;
 
 var World = function (callback) {
 
-	var wrap = function (funk, cb) {
-		funk.end(function (err) {
-			if (err) {
-				cb.fail(err);
-			} else {
-				cb();
-			}
-		});
-	};
-
 	var shouldBeOnThePage = function (browser, callback, selector) {
-		wrap(browser.chain.waitForElementPresent(selector), callback);
+		browser.chain.waitForElementPresent(selector).andFinish(callback);
 	};
 
 	if (browser === null) {
@@ -50,10 +51,10 @@ var World = function (callback) {
 
 			browser = newBrowser;
 
-			callback({browser: browser, wrap: wrap, shouldBeOnThePage: shouldBeOnThePage});
+			callback({browser: browser, shouldBeOnThePage: shouldBeOnThePage});
 		});
 	} else {
-		callback({browser:browser, wrap: wrap, shouldBeOnThePage: shouldBeOnThePage});
+		callback({browser:browser, shouldBeOnThePage: shouldBeOnThePage});
 	}
 };
 
