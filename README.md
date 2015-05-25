@@ -1,16 +1,16 @@
-[![Build Status](https://travis-ci.org/anephenix/dashku.svg)](https://travis-ci.org/anephenix/dashku)
-[![Coverage Status](https://coveralls.io/repos/anephenix/dashku/badge.svg?branch=master)](https://coveralls.io/r/anephenix/dashku?branch=master)
-[![Dependency Status](https://david-dm.org/anephenix/dashku.svg)](https://david-dm.org/anephenix/dashku)
-[![Dev Dependency Status](https://david-dm.org/anephenix/dashku/dev-status.svg)](https://david-dm.org/anephenix/dashku#info=devDependencies)
-[![Code Climate](https://codeclimate.com/github/Anephenix/dashku.svg)](https://codeclimate.com/github/Anephenix/dashku)
-[![Gitter chat](https://badges.gitter.im/Anephenix/dashku.svg)](https://gitter.im/Anephenix/dashku)
-[![Issue Stats](http://issuestats.com/github/Anephenix/dashku/badge/pr)](http://issuestats.com/github/Anephenix/dashku)
-[![Issue Stats](http://issuestats.com/github/Anephenix/dashku/badge/issue)](http://issuestats.com/github/Anephenix/dashku)
+[![Build Status](https://travis-ci.org/dashku/dashku.svg)](https://travis-ci.org/dashku/dashku)
+[![Coverage Status](https://coveralls.io/repos/dashku/dashku/badge.svg?branch=master)](https://coveralls.io/r/dashku/dashku?branch=master)
+[![Dependency Status](https://david-dm.org/dashku/dashku.svg)](https://david-dm.org/dashku/dashku)
+[![Dev Dependency Status](https://david-dm.org/dashku/dashku/dev-status.svg)](https://david-dm.org/dashku/dashku#info=devDependencies)
+[![Code Climate](https://codeclimate.com/github/dashku/dashku.svg)](https://codeclimate.com/github/dashku/dashku)
+[![Gitter chat](https://badges.gitter.im/dashku/dashku.svg)](https://gitter.im/dashku/dashku)
+[![Issue Stats](http://issuestats.com/github/dashku/dashku/badge/pr)](http://issuestats.com/github/dashku/dashku)
+[![Issue Stats](http://issuestats.com/github/dashku/dashku/badge/issue)](http://issuestats.com/github/dashku/dashku)
 
 Dashku (classic edition)
 ===
 
-![Dashku Screenshot](https://raw.github.com/Anephenix/dashku/master/dashku-screenshot.png)
+![Dashku Screenshot](https://raw.github.com/dashku/dashku/master/dashku-screenshot.png)
 
 Introduction
 ---
