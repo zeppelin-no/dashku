@@ -11,13 +11,13 @@
 // @return 	text 	String 		The scoped css
 //
 var scopeCSS = function (text,id) {
-	var lines = text.split('\n');
+	//var lines = text.split('\n');
 
-	lines.forEach(function (line) {
-		if (line.match(/{/) !== null) {
-			text = text.replace(line, '.widget[data-id=\''+ id +'\'] ' + line);
-		}
-	});
+	//lines.forEach(function (line) {
+	//	if (line.match(/{/) !== null) {
+	//		text = text.replace(line, '.widget[data-id=\''+ id +'\'] ' + line);
+	//	}
+	//});
 
 	return text;
 };
