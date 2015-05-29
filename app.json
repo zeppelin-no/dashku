@@ -9,8 +9,8 @@
     "mongodb",
     "redis"
   ],
-  "website": "https://github.com/Anephenix/dashku",
-  "repository": "https://github.com/Anephenix/dashku",
+  "website": "https://github.com/zeppelin-no/dashku",
+  "repository": "https://github.com/zeppelin-no/dashku",
   "logo": "https://pbs.twimg.com/profile_images/579271979515166720/Kfzusyjd_400x400.png",
   "env": {
     "APP_URL" : {
